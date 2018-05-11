@@ -1,10 +1,10 @@
-# Actions and controllers
+# アクションとコントローラ
 
-### Overview
+### 概要
 
-_Actions_ are the principal objects in your Sails application that are responsible for responding to *requests* from a web browser, mobile application or any other system capable of communicating with a server.  They often act as a middleman between your [models](https://sailsjs.com/documentation/concepts/models-and-orm) and [views](https://sailsjs.com/documentation/concepts/views). With rare exceptions, the actions will orchestrate the bulk of your project&rsquo;s [business logic](http://en.wikipedia.org/wiki/Business_logic).
+_アクション_ は、Webブラウザ、モバイルアプリケーション、またはサーバーと通信することができる他のシステムからの*要求*に応答するSailsアプリケーションの基礎的なオブジェクトです。しばしば[models](https://sailsjs.com/documentation/concepts/models-and-orm)と[views](https://sailsjs.com/documentation/concepts/views)の仲介者として動作します。例外的な場合を除き、アクションはプロジェクトの[business logic](http://en.wikipedia.org/wiki/Business_logic)の大部分を編成します。
 
-Actions are bound to [routes](https://sailsjs.com/documentation/concepts/Routes) in your application, so that when a user agent requests a particular URL, the bound action is executed to perform some business logic and send a response.  For example, the `GET /hello` route in your application could be bound to an action like:
+アクションはアプリケーションの[routes](https://sailsjs.com/documentation/concepts/Routes)にバインドされるため、ユーザーエージェントが特定のURLを要求すると、バインドされたアクションが実行されてビジネスロジックが実行され、応答が送信されます。例えば、`GET /hello`というルートをアプリケーションのアクションとして次のようにバインドできます。
 
 ```javascript
 async function (req, res) {
@@ -12,7 +12,7 @@ async function (req, res) {
 }
 ```
 
-Any time a web browser is pointed to the `/hello` URL on your app's server, the page will display the message: &ldquo;Hi there!&rdquo;.
+ウェブブラウザがアプリのサーバ上の`/hello`というURLを指し示すと、そのページには「Hi there!」というメッセージが表示されます。
 
 ### Where are actions defined?
 Actions are defined in the `api/controllers/` folder and subfolders (we&rsquo;ll talk more about _controllers_ in a bit). In order for a file to be recognized as an action, it must be _kebab-cased_ (containing only lowercase letters, numbers and dashes).  When referring to an action in Sails (for example, when [binding it to a route](https://sailsjs.com/documentation/concepts/routes/custom-routes#?action-target-syntax)), use its path relative to `api/controllers`, without any file extension.  For example, the `api/controllers/user/find.js` file represents an action with the identity `user/find`.
