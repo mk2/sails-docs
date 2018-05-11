@@ -22,13 +22,13 @@ async function (req, res) {
 
 アクションは、`.md`（マークダウン）と`.txt`（テキスト）以外のファイル拡張子を持つことができます。デフォルトでは、Sailsは`.js`ファイルの解釈方法しか知りませんが、[CoffeeScript](https://sailsjs.com/documentation/tutorials/using-coffee-script)や[TypeScript](https://sailsjs.com/documentation/tutorials/using-type-script)などを使用するようにアプリケーションをカスタマイズすることもできます。
 
-### What does an action file look like?
+### アクションファイルはどのようなものですか？
 
-Action files can use one of two formats: _classic_ or _actions2_.
+アクションファイルは、_classic_と_actions2_の2つの形式のいずれかを使用できます。
 
 ##### Classic actions
 
-The traditional way of getting started creating a Sails action is to declare it as a function.  When a client requests a route that is bound to that action, the function will be called using the [incoming request object](https://sailsjs.com/documentation/reference/request-req) as the first argument (typically named `req`), and the [outgoing response object](https://sailsjs.com/documentation/reference/response-res) as the second argument (typically named `res`).  Here's a sample action function that looks up a user by ID, and either displays a "welcome" view or redirects to a signup page if the user can't be found:
+Sailsアクションを作成する従来の方法は、関数として宣言することです。クライアントがそのアクションにバインドされたルートを要求すると、[incoming request object](https://sailsjs.com/documentation/reference/request-req)を第1引数（通常は名前`req`）として使用し、[outgoing response object](https://sailsjs.com/documentation/reference/response-res)を第2引数（通常は名前`res`）として使用して関数を呼び出します。以下は、ユーザーをIDで検索し、「ようこそ」ビューを表示するか、ユーザーが見つからない場合にサインアップページにリダイレクトするアクション関数の例です。
 
 ```javascript
 module.exports = async function welcomeUser (req, res) {
@@ -57,9 +57,9 @@ module.exports = async function welcomeUser (req, res) {
 }
 ```
 
-##### actions2
+##### action2
 
-Another, more structured way to create an action is by writing it in the more modern ("actions2") syntax.  In much the same way that Sails [helpers](https://sailsjs.com/documentation/concepts/helpers) work, by defining your action with a declarative definition ("_machine_"), it is essentially self-documenting and self-validating.  Here's the same action as above, rewritten using the actions2 format:
+アクションを作成するための、より構造化された別の方法は、より現代的な（action2）構文で記述することです。Sailsヘルパーと同じように、宣言的な定義（ machine）でアクションを定義することによって、それは基本的にセルフドキュメントで、セルフバリデーティングです。さきほどと同じアクションをactions2形式で書き直してみましょう。
 
 ```javascript
 module.exports = {
