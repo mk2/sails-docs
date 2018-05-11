@@ -1,28 +1,27 @@
-# Routing to actions
+# アクションへのルーティング
 
-### Manual routing
+### 手動ルーティング
 
-By default, controller actions in your Sails app will be inaccessible to users until you _bind_ them to a route in your [`config/routes.js` file](https://sailsjs.com/documentation/reference/configuration/sails-config-routes).  When you bind a route, you specify a URL that users can access the action at, along with options like [CORS security settings](https://sailsjs.com/documentation/concepts/security/cors#?configuring-cors-for-individual-routes).
+デフォルトでは、[`config/routes.js`ファイル](https://sailsjs.com/documentation/reference/configuration/sails-config-routes)でコントローラーアクションをルートにバインドするまでユーザーはアクセスできません。ルートをバインドするときは、ユーザーがアクションにアクセスできるURLと、[CORSセキュリティ設定](https://sailsjs.com/documentation/concepts/security/cors#?configuring-cors-for-individual-routes)などのオプションを指定します。
 
-To bind a route to an action in the `config/routes.js` file, you can use the HTTP verb and path (i.e. the **route address**) as the key, and the action identity as the value (i.e. the **route target**).
+`config/routes.js`ファイルでルートをアクションにバインドするために、HTTPメソッドとパス（**ルートアドレス**）をキーとして使用し、アクションを値として設定します（**ルートターゲット**）。
 
-For example, the following manual route will cause your app to trigger the `make` action in `api/controllers/SandwichController.js` whenever it receives a POST request to `/make/a/sandwich`:
+例えば、次の手動ルートを使用すると、`/make/a/sandwich`へのPOSTリクエストを受信するたびにアプリが`api/controllers/SandwichController.js`にある`make`アクションをトリガーします。
 
 ```js
   'POST /make/a/sandwich': 'SandwichController.make'
 ```
 
-If you&rsquo;re using standalone actions, so that you had an `api/controllers/sandwich/make.js` file, a more intuitive syntax exists which uses the path to the action (relative to `api/controllers`):
+もしスタンドアロンアクションを使用している場合は、`api/controllers/sandwich/make.js`のファイルが存在するので、アクションから`api/controllers`への相対的なパスを使う、より直感的な構文が存在します。
 
 ```js
   'POST /make/a/sandwich': 'sandwich/make'
 ```
 
-For a full discussion of routing, please see the [routes documentation](https://sailsjs.com/documentation/concepts/Routes).
+ルーティングの詳細については、[ルートのドキュメント](https://sailsjs.com/documentation/concepts/Routes)を参照してください。
 
-### Automatic routing
+### 自動ルーティング
 
-Sails can also automatically bind routes to your controller actions so that a `GET` request to `/:actionIdentity` will trigger the action.  This is called _blueprint action routing_, and it can be activated by setting `actions` to `true` in the [`config/blueprints.js`](https://sailsjs.com/documentation/reference/configuration/sails-config-blueprints) file.  For example, with blueprint action routing turned on, a `signup` action saved in `api/controllers/UserController.js` or `api/controllers/user/signup.js` would be bound to a `/user/signup` route.  See the [blueprints documentation](https://sailsjs.com/documentation/reference/blueprint-api) for more information about Sails&rsquo; automatic route binding.
-
+Sailsは`/:actionIdentity`への`GET`リクエストのルートを、自動でコントローラーアクションにバインドすることもできます。これはBlueprintアクションルーティングと呼ばれ、[`config/blueprints.js`](https://sailsjs.com/documentation/reference/configuration/sails-config-blueprints)ファイルの`actoins`を`true`に設定することで有効化できます。例えば、Blueprintアクションルーティングを有効化すると、`api/controllers/UserController.js`にある`signup`か`api/controllers/user/signup.js`のアクションは、`/user/signup`のルートにバインドされます。Sailsの自動ルートバインディングについては、[blueprintsドキュメント](https://sailsjs.com/documentation/reference/blueprint-api)を参照してください。
 
 <docmeta name="displayName" value="Routing to actions">
