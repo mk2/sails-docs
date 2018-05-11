@@ -120,7 +120,7 @@ and to the Sails application object (in case you don&rsquo;t have [globals](http
 
 classic actionsで実装を行う場合は、厳密にはタイピングが少なくなります。しかし、actions2はいくつかの利点があります。
 
- * あなたが書いたコートは`req`や`res`に直接依存しません。再利用したり、[helper](https://sailsjs.com/documentation/concepts/helpers)として抽象化したりするのが簡単になります。
+ * コードは`req`や`res`に直接依存しません。再利用したり、[helper](https://sailsjs.com/documentation/concepts/helpers)として抽象化したりするのが簡単になります。
  * アクションが想定するリクエストパラメータの名前と型を、すばやく特定できることを保証します。そして、アクションが実行される前に自動的にリクエストパラメータに対する検証が行われます。
  * コードを読み解くことなく、起こりうるアクションの全実行結果を見ることができます。
 
@@ -148,9 +148,10 @@ throw { hasConflictingCourses: ['CS 301', 'M 402'] };
 
 わかりやすい省略表現に加えて、Exitシグナルは`for`ループや`forEach`や他の途中の場合でも、特定のexitから抜け出したいというような時に特に便利です。
 
-### Controllers
+### コントローラー
 
-The quickest way to get started writing Sails apps is to organize your actions into _controller files_.  A controller file is a [_PascalCased_](https://en.wikipedia.org/wiki/PascalCase) file whose name must end in `Controller`, containing a dictionary of actions.  For example, a  "User controller" could be created at `api/controllers/UserController.js` file containing:
+Sailsアプリケーションの作成を開始する最も簡単な方法は、あなたのアクションをコントローラファイルに編成することです。コントローラファイルは[パスカルケース](https://en.wikipedia.org/wiki/PascalCase)で命名されたファイルで、ファイル名は`Controller`で終わっている必要があります。またそのファイルはアクションのディクショナリ構造を含んでいる必要があります。
+例えば、「ユーザーコントローラー」を`api/controllers/UserController.js`として作った場合、そのファイルは下記の内容を含んでいます。
 
 ```javascript
 module.exports = {
@@ -160,16 +161,15 @@ module.exports = {
 };
 ```
 
-You can use [`sails generate controller`](https://sailsjs.com/documentation/reference/command-line-interface/sails-generate#?sails-generate-controller-foo-action-1-action-2) to quickly create a controller file.
+また、[`sails generate controller`](https://sailsjs.com/documentation/reference/command-line-interface/sails-generate#?sails-generate-controller-foo-action-1-action-2)を使うことで、すばやくコントローラーファイルを作成することができます。
 
-##### File extensions for controllers
+##### コントローラーのファイル拡張子
 
-A controller can have any file extension besides `.md` (Markdown) and `.txt` (text).  By default, Sails only knows how to interpret `.js` files, but you can customize your app to use things like [CoffeeScript](https://sailsjs.com/documentation/tutorials/using-coffee-script) or [TypeScript](https://sailsjs.com/documentation/tutorials/using-type-script) as well.
+コントローラは、`.md`（マークダウン）と`.txt`（テキスト）以外のファイル拡張子を持つことができます。デフォルトでは、Sailsは`.js`ファイルの解釈方法しか知りませんが、[CoffeeScript](https://sailsjs.com/documentation/tutorials/using-coffee-script)や[TypeScript](https://sailsjs.com/documentation/tutorials/using-type-script)などを使用するようにアプリケーションをカスタマイズすることもできます。
 
+### スタンドアロンアクション
 
-### Standalone actions
-
-For larger, more mature apps, _standalone actions_ may be a better approach than controller files.  In this scheme, rather than having multiple actions living in a single file, each action is in its own file in an appropriate subfolder of `api/controllers`.  For example, the following file structure would be equivalent to the  `UserController.js` file:
+大規模で成熟したアプリの場合、スタンドアロンアクションはコントローラファイルよりも優れたアプローチです。この方法では、1つのファイルに複数のアクションが存在するのではなく、それぞれのファイルが`api/controllers`のサブフォルダ内のファイルとして存在します。例えば、次のファイル構造は`UserController.js`ファイルと同じ意味合いを持ちます。
 
 ```
 api/
@@ -180,26 +180,24 @@ api/
    signup.js
 ```
 
-where each of the three Javascript files exports a `req, res` function or an actions2 definition.
+3つのJavascriptファイルのそれぞれが`req, res`関数またはactions2の定義をエクスポートします。
 
-Using standalone actions has several advantages over controller files:
+スタンドアロンアクションを使用すると、コントローラーファイルに比べていくつかの利点があります。
 
-* It's easier to keep track of the actions that your app contains, by simply looking at the files contained in a folder rather than scanning through the code in a controller file.
-* Each action file is small and easy to maintain, whereas controller files tend to grow as your app grows.
-* [Routing to standalone actions](https://sailsjs.com/documentation/concepts/routes/custom-routes#?action-target-syntax) in nested subfolders is more intuitive than with nested controller files (`foo/bar/baz.js` vs. `foo/BarController.baz`).
+* コントローラーファイル内のコードを読み解くのではなく、フォルダに含まれるファイルを調べるだけで、アプリケーションのアクションを調べる方が簡単です。
+* 各アクションファイルは小さく、保守が簡単ですが、コントローラーファイルはアプリの成長に伴って大きくなる傾向があります。
+* [スタンドアロンアクションへのルーティング](https://sailsjs.com/documentation/concepts/routes/custom-routes#?action-target-syntax)は、ネストされたコントローラファイルよりも直観的です（`foo/bar/baz.js` 対 `foo/BarController.baz`）。
+* Blueprintインデックスルートはトップレベルのスタンドアロンアクションに適用されるため、`api/controllers/index.js`ファイルを作成してアプリの`/`ルートに自動的にバインドさせることができます（rootアクションを保持するコントローラーファイルを作成する必要がありません）。
 
-* Blueprint index routes apply to top-level standalone actions, so you can create an `api/controllers/index.js` file and have it automatically bound to your app&rsquo;s `/` route (as opposed to having to create an arbitrary controller file to hold the root action).
+### leanを保つ
 
+MVCフレームワークの伝統に従えば、成熟したSailsアプリケーションはたいてい「薄い」コントローラを持ちます。つまり、再利用可能なコードが[ヘルパー](https://sailsjs.com/documentation/concepts/helpers)に移動されたり、別のノードモジュールに抽出されたりすることがあります。このアプローチでは、複雑さが増すにつれてアプリケーションをより簡単に保守することができます。
 
-### Keeping it lean
+しかし同時に、再利用可能なヘルパーにコードを外挿することは、時間と生産性を犠牲にする保守の問題をあまりに早く引き起こす可能性があります。そのため正しい答えは真ん中のどこかにあります。
 
-In the tradition of most MVC frameworks, mature Sails apps usually have "thin" controllers -- that is, your action code ends up lean, because reusable code has been moved into [helpers](https://sailsjs.com/documentation/concepts/helpers) or occasionally even extracted into separate node modules.  This approach can definitely make your app easier to maintain as it grows in complexity.
+Sailsは、次の一般的な経験則をお勧めします。**別のヘルパーにコードを外挿する前に、同じコードが3回出てくることを待つ。** しかし、どんなドグマと同様に、自分の判断で行うようにしてください！問題のコードが非常に長く複雑な場合は、それをヘルパーのヘルパーにもっと早く引き出すことが理にかなっているかもしれません。逆に、構築しているものが素早く使い捨てのプロトタイプであることが分かっている場合は、コードをコピーして貼り付けて時間を節約できます。
 
-But at the same time, extrapolating code into reusable helpers _too early_ can cause maintainence issues that waste time and productivity.  So the right answer lies somewhere in the middle.
-
-Sails recommends this general rule of thumb:  **Wait until you're about to use the same piece of code for the _third_ time before you extrapolate it into a separate helper.**  But as with any dogma, use your judgement!  If the code in question is very long or complex, then it might make sense to pull it out into helper a helper much sooner.  Conversely, if you know what you're building is a quick, throwaway prototype, you might just copy and paste the code to save time.
-
-> Whether you're developing for passion or profit, at the end of the day, the goal is to make the best possible use of your time as an engineer.  Some days that means getting more code written, and other days it means looking out for the long-term maintainability of the project.  If you're not sure which of these goals is more important at your current stage of development, you might take a step back and give it some thought.  (Better yet, have a chat with the rest of your team or [other folks building apps on Node.js/Sails](https://sailsjs.com/support).)
+> あなたが情熱や利益のために開発しているかどうかにかかわらず、最終目標は、エンジニアとしての時間を最大限に活用することです。ある日はたくさんのコードを書くことになるかもしれないし、また別の日はプロジェクトの長期的な保守性に気を配ることになるかもしれません。現在の開発段階でこれらの目標のどれが重要かわからない場合は、一歩退いて考えてみてください。（チームの他の人たちや[Node.js / Sails上のアプリケーションを構築している人たち](https://sailsjs.com/support)とチャットをするのは良いことです。）
 
 <docmeta name="displayName" value="Actions and controllers">
 <docmeta name="nextUpLink" value="/documentation/concepts/views">
