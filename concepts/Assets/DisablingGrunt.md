@@ -1,6 +1,6 @@
-# Disabling Grunt
+# Gruntの無効化
 
-To disable Grunt integration in Sails, simply delete your Gruntfile (and/or [`tasks/`](https://sailsjs.com/documentation/anatomy/tasks) folder). You can also disable the Grunt hook. Just set the `grunt` property to `false` in `.sailsrc` hooks like this:
+SailsでGrunt統合を無効化するには、単にGruntfileを削除（そして[`tasks/`](https://sailsjs.com/documentation/anatomy/tasks)フォルダを削除）するだけです。また、Gruntフックも無効化することができます。次のように`.sailsrc`のフックで、`grunt`プロパティを`false`に設定するだけです。
 
 ```json
 {
@@ -10,19 +10,18 @@ To disable Grunt integration in Sails, simply delete your Gruntfile (and/or [`ta
 }
 ```
 
-### Can I customize this for SASS, Angular, client-side Jade templates, etc?
+### SASSやAngular、クライアントサイドのJadeテンプレートなどのために、カスタマイズすることはできますか？
 
-Yep! Just replace the relevant grunt task in your `tasks/` directory, or add a new one.  Like [SASS](https://github.com/sails101/using-sass) for example.
+はい！`tasks/`ディレクトリにある適切なgruntタスクを置き換えるか、新しいタスクを追加するだけです。例として、[SASS](https://github.com/sails101/using-sass)のようにします。
 
-If you still want to use Grunt for other purposes, but don't want any of the default web front-end stuff, just delete your project's assets folder and remove the front-end oriented tasks from the `tasks/register/` and `tasks/config/` folders.  You can also run `sails new myCoolApi --no-frontend` to omit the assets folder and front-end-oriented Grunt tasks for future projects.  You can also replace your `sails-generate-frontend` module with alternative community generators, or [create your own](https://github.com/balderdashy/sails-generate-generator).  This allows `sails new` to create the boilerplate for native iOS apps, Android apps, Cordova apps, SteroidsJS apps, etc.
-
+デフォルトのWebフロントエンドは必要でないが、もし他の目的でGruntを使用したい場合は、プロジェクトのアセットフォルダを削除し`tasks/register/`と`tasks/config/`フォルダからフロントエンド向けのタスクを取り除くだけです。また`sails new myCoolApi --no-frontend`を実行することで、アセットフォルダとフロントエンド向けのGruntタスクを省略したプロジェクトを生成することもできます。`sails-generate-frontend`モジュールをコミュニティの代替ジェネレータと置き換えるか、[自分独自のジェネレーター](https://github.com/balderdashy/sails-generate-generator)を作ることもできます。これにより、ネイティブiOSアプリ、Androidアプリ、Cordovaパウリ、SteroidsJSアプリのボイラープレートを`sails new`によって作成することができます。
 
 
 <docmeta name="displayName" value="Disabling Grunt">
 
-### NOTE:
+### 注意
 
-When removing the grunt hook above you must also specify the following in `.sailsrc` in order for your assets to be served, otherwise all assets will return a `404`.
+上記のおgruntフックを取り除く場合、アセットを提供するために`.sailsrc`の中で次のように指定する必要があります。そうしないとすべてのアセットは`404`を返してしまいます。
 
 ```json
 {
