@@ -12,14 +12,16 @@ async function (req, res) {
 }
 ```
 
-ウェブブラウザがアプリのサーバ上の`/hello`というURLを指し示すと、そのページには「Hi there!」というメッセージが表示されます。
+ウェブブラウザでサーバー上で動いているアプリの`/hello`というURLを開くと、そのページには「Hi there!」というメッセージが表示されます。
 
-### Where are actions defined?
+### アクションはどこに定義されていますか？
+
+アクションは、`api/controllers/`フォルダとサブフォルダで定義されます（コントローラについては少し詳しく説明します）。ファイルがアクションとして認識されるためには、ファイルは_ケバブケース_（小文字の英字、数字、およびダッシュのみ）でなければなりません。Sailsのアクションを参照する場合（たとえば、[ルートにバインドする場合](https://sailsjs.com/documentation/concepts/routes/custom-routes#?action-target-syntax)）、`api/controllers`への相対パスを、ファイル拡張子なしで使用します。例えば、`api/controllers/user/find.js`というファイルは、`user/find`というアクションを示します。
 Actions are defined in the `api/controllers/` folder and subfolders (we&rsquo;ll talk more about _controllers_ in a bit). In order for a file to be recognized as an action, it must be _kebab-cased_ (containing only lowercase letters, numbers and dashes).  When referring to an action in Sails (for example, when [binding it to a route](https://sailsjs.com/documentation/concepts/routes/custom-routes#?action-target-syntax)), use its path relative to `api/controllers`, without any file extension.  For example, the `api/controllers/user/find.js` file represents an action with the identity `user/find`.
 
-##### File extensions for actions
+##### アクションのファイル拡張子
 
-An action can have any file extension besides `.md` (Markdown) and `.txt` (text).  By default, Sails only knows how to interpret `.js` files, but you can customize your app to use things like [CoffeeScript](https://sailsjs.com/documentation/tutorials/using-coffee-script) or [TypeScript](https://sailsjs.com/documentation/tutorials/using-type-script) as well.
+アクションは、`.md`（マークダウン）と`.txt`（テキスト）以外のファイル拡張子を持つことができます。デフォルトでは、Sailsは`.js`ファイルの解釈方法しか知りませんが、[CoffeeScript](https://sailsjs.com/documentation/tutorials/using-coffee-script)や[TypeScript](https://sailsjs.com/documentation/tutorials/using-type-script)などを使用するようにアプリケーションをカスタマイズすることもできます。
 
 ### What does an action file look like?
 
