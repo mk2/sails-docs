@@ -1,17 +1,17 @@
-# Generating controllers or standalone actions
+# コントローラーまたはスタンドアロンアクションの生成
 
-You can use [`sails-generate`](https://sailsjs.com/documentation/reference/command-line-interface/sails-generate) from the Sails command line tool to quickly generate a controller, or even just an individual action.
+[`sails-generate`](https://sailsjs.com/documentation/reference/command-line-interface/sails-generate)をSailsのコマンドラインツールから使うと、コントローラーもしくは個別のアクションだけをすばやく生成できます。
 
 
-### Generating controllers
+### コントローラーの生成
 
-For example, to generate a controller:
+例えば、コントローラーを生成するには次のようにします。
 
 ```sh
 $ sails generate controller user
 ```
 
-Sails will generate `api/controllers/UserController.js`:
+Sailsは`api/controllers/UserController.js`を次の内容で生成します。
 
 ```javascript
 /**
@@ -25,9 +25,9 @@ module.exports = {
 }
 ```
 
-### Generating standalone actions
+### スタンドアロンアクションの生成
 
-Run the following command to generate a standalone action:
+スタンドアロンアクションを生成するには、次のコマンドを実行します。
 
 ```sh
 $ sails generate action user/signup
@@ -36,7 +36,7 @@ Using "actions2"...
 [?] https://sailsjs.com/docs/concepts/actions
 ```
 
-Sails will create `api/controllers/user/sign-up.js`:
+Sailsは`api/controllers/user/sign-up.js`を次の内容で生成します。
 
 ```javascript
 /**
@@ -75,8 +75,7 @@ module.exports = {
 
 ```
 
-
-Or, using the [classic actions](https://sailsjs.com/documentation/concepts/actions-and-controllers#?classic-actions) interface:
+もしくは、[classic actions](https://sailsjs.com/documentation/concepts/actions-and-controllers#?classic-actions)のインターフェースを使用します。
 
 
 ```sh
@@ -84,7 +83,7 @@ $ sails generate action user/signup --no-actions2
 info: Created a traditional (req,res) controller action, but as a standalone file
 ```
 
-Sails will create `api/controllers/user/sign-up.js`:
+Sailsは`api/controllers/user/sign-up.js`を次の内容で生成します。
 
 ```javascript
 /**
