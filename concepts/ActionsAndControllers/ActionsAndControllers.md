@@ -110,7 +110,7 @@ module.exports = {
 
 Sailsは[machine-as-action](https://github.com/treelinehq/machine-as-action)を利用して、上記の例のようにmachineからルート処理機能を自動的に作成します。詳細については、[machine-as-actionドキュメント](https://github.com/treelinehq/machine-as-action#customizing-the-response)を参照してください。
 
-> machine-as-actionは[request object](https://sailsjs.com/documentation/reference/request-req)へのアクセスを`this.req`として提供することに注してください。
+> machine-as-actionは[request object](https://sailsjs.com/documentation/reference/request-req)へのアクセスを`this.req`として提供することに注意してください。
 
 <!--
 Removed in order to reduce the amount of information:  (Mike nov 14, 2017)
