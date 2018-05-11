@@ -2,7 +2,7 @@
 
 ### 概要
 
-_アクション_ は、Webブラウザ、モバイルアプリケーション、またはサーバーと通信することができる他のシステムからの*要求*に応答するSailsアプリケーションの基礎的なオブジェクトです。しばしば[models](https://sailsjs.com/documentation/concepts/models-and-orm)と[views](https://sailsjs.com/documentation/concepts/views)の仲介者として動作します。例外的な場合を除き、アクションはプロジェクトの[business logic](http://en.wikipedia.org/wiki/Business_logic)の大部分を編成します。
+_アクション_ は、Webブラウザ、モバイルアプリケーション、またはサーバーと通信することができる他のシステムからの*要求*に応答するSailsアプリケーションの基礎的なオブジェクトです。しばしば[モデル](https://sailsjs.com/documentation/concepts/models-and-orm)と[ビュー](https://sailsjs.com/documentation/concepts/views)の仲介者として動作します。例外的な場合を除き、アクションはプロジェクトの[ビジネスロジック](http://en.wikipedia.org/wiki/Business_logic)の大部分を編成します。
 
 アクションはアプリケーションの[routes](https://sailsjs.com/documentation/concepts/Routes)にバインドされるため、ユーザーエージェントが特定のURLを要求すると、バインドされたアクションが実行されてビジネスロジックが実行され、応答が送信されます。例えば、`GET /hello`というルートをアプリケーションのアクションとして次のようにバインドできます。
 
@@ -24,7 +24,7 @@ async function (req, res) {
 
 ### アクションファイルはどのようなものですか？
 
-アクションファイルは、_classic_と_actions2_の2つの形式のいずれかを使用できます。
+アクションファイルは、_classic_ と _actions2_ の2つの形式のいずれかを使用できます。
 
 ##### Classic actions
 
@@ -59,7 +59,7 @@ module.exports = async function welcomeUser (req, res) {
 
 ##### action2
 
-アクションを作成するための、より構造化された別の方法は、より現代的な（action2）構文で記述することです。Sailsヘルパーと同じように、宣言的な定義（ machine）でアクションを定義することによって、それは基本的にセルフドキュメントで、セルフバリデーティングです。さきほどと同じアクションをactions2形式で書き直してみましょう。
+アクションを作成するための、より構造化された別の方法は、より現代的な（action2）構文で記述することです。Sailsヘルパーと同じように、宣言的な定義（machine）でアクションを定義することができます。それは基本的にセルフドキュメントで、セルフバリデーティングです。さきほどと同じアクションをactions2形式で書き直してみましょう。
 
 ```javascript
 module.exports = {
@@ -108,9 +108,9 @@ module.exports = {
 };
 ```
 
-Sails uses the [machine-as-action](https://github.com/treelinehq/machine-as-action) module to automatically create route-handling functions out of machines like the example above.  See the [machine-as-action docs](https://github.com/treelinehq/machine-as-action#customizing-the-response) for more information.
+Sailsは[machine-as-action](https://github.com/treelinehq/machine-as-action)を利用して、上記の例のようにmachineからルート処理機能を自動的に作成します。詳細については、[machine-as-actionドキュメント](https://github.com/treelinehq/machine-as-action#customizing-the-response)を参照してください。
 
-> Note that machine-as-action provides actions with access to the [request object](https://sailsjs.com/documentation/reference/request-req) as `this.req`.
+> machine-as-actionは[request object](https://sailsjs.com/documentation/reference/request-req)へのアクセスを`this.req`として提供することに注してください。
 
 <!--
 Removed in order to reduce the amount of information:  (Mike nov 14, 2017)
@@ -118,36 +118,35 @@ Removed in order to reduce the amount of information:  (Mike nov 14, 2017)
 and to the Sails application object (in case you don&rsquo;t have [globals](https://sailsjs.com/documentation/concepts/globals) turned on) as `this.sails`.
 -->
 
-Using classic `req, res` functions for your actions is technically less typing.  However, using actions2 provides several advantages:
+classic actionsで実装を行う場合は、厳密にはタイピングが少なくなります。しかし、actions2はいくつかの利点があります。
 
- * The code you write is not directly dependent on `req` and `res`, making it easier to re-use or abstract into a [helper](https://sailsjs.com/documentation/concepts/helpers).
- * You guarantee that you&rsquo;ll be able to quickly determine the names and types of the request parameters the action expects, and you'll know that they will be automatically validated before the action is run.
- * You&rsquo;ll be able to see all of the possible outcomes from running the action without having to dissect the code.
+ * あなたが書いたコートは`req`や`res`に直接依存しません。再利用したり、[helper](https://sailsjs.com/documentation/concepts/helpers)として抽象化したりするのが簡単になります。
+ * アクションが想定するリクエストパラメータの名前と型を、すばやく特定できることを保証します。そして、アクションが実行される前に自動的にリクエストパラメータに対する検証が行われます。
+ * コードを読み解くことなく、起こりうるアクションの全実行結果を見ることができます。
 
-In a nutshell, your code will be standardized in a way that makes it easier to re-use and modify later.  And since you'll declare the action's parameters ahead of time, you'll be much less likely to expose edge cases and security holes.
+簡単に言えば、コードは後で再利用して変更するのが容易になるように標準化されます。また、アクションのパラメータを事前に宣言するので、特別な問題やセキュリティホールが発生する可能性は非常に低くなります。
 
-###### Exit signals
+###### Exitシグナル
 
-In an action, helper, or script, throwing anything will trigger the `error` exit by default. If you want to trigger any other exit, you can do so by throwing a "special exit signal". This will either be a string (the name of the exit), or an object with the name of the exit as the key and the output data as the value.
-For example, instead of the usual syntax:
+アクション、ヘルパー、またはスクリプトでは、何かをスローすると`error` exitがデフォルトでトリガーされます。他のexitをトリガーしたい場合は、「特別なexitシグナル」を出すことで可能です。これは、文字列（exitの名前）か、キーとしてexitの名前を持ち値として出力データを持つオブジェクト、のいずれかになります。例えば通常構文の代わりに下記のように書けます。
 
 ```javascript
 return exits.hasConflictingCourses();
 ```
 
-You could use the shorthand:
+省略表現を使うことができます。
 
 ```javascript
 throw 'hasConflictingCourses';
 ```
 
-Or, to include output data:
+もしくは、出力データを含める場合は次のようになります。
 
 ```javascript
 throw { hasConflictingCourses: ['CS 301', 'M 402'] };
 ```
 
-Aside from being an easy-to-read shorthand, exit signals are especially useful if you're inside of a `for` loop, `forEach`, etc., but still want to exit through a particular exit.
+わかりやすい省略表現に加えて、Exitシグナルは`for`ループや`forEach`や他の途中の場合でも、特定のexitから抜け出したいというような時に特に便利です。
 
 ### Controllers
 
