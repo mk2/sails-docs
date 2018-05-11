@@ -17,7 +17,6 @@ async function (req, res) {
 ### アクションはどこに定義されていますか？
 
 アクションは、`api/controllers/`フォルダとサブフォルダで定義されます（コントローラについては少し詳しく説明します）。ファイルがアクションとして認識されるためには、ファイルは_ケバブケース_（小文字の英字、数字、およびダッシュのみ）でなければなりません。Sailsのアクションを参照する場合（たとえば、[ルートにバインドする場合](https://sailsjs.com/documentation/concepts/routes/custom-routes#?action-target-syntax)）、`api/controllers`への相対パスを、ファイル拡張子なしで使用します。例えば、`api/controllers/user/find.js`というファイルは、`user/find`というアクションを示します。
-Actions are defined in the `api/controllers/` folder and subfolders (we&rsquo;ll talk more about _controllers_ in a bit). In order for a file to be recognized as an action, it must be _kebab-cased_ (containing only lowercase letters, numbers and dashes).  When referring to an action in Sails (for example, when [binding it to a route](https://sailsjs.com/documentation/concepts/routes/custom-routes#?action-target-syntax)), use its path relative to `api/controllers`, without any file extension.  For example, the `api/controllers/user/find.js` file represents an action with the identity `user/find`.
 
 ##### アクションのファイル拡張子
 
