@@ -1,10 +1,11 @@
-# Blueprint actions
+# Blueprintアクション
 
-Blueprint actions (not to be confused with implicit [blueprint "action" _routes_](https://sailsjs.com/documentation/concepts/blueprints/blueprint-routes#?action-routes)) are generic actions designed to work with your models.  Think of them as the default behavior for your application.  For instance, if you have a `User.js` model then `find`, `create`, `update`, `destroy`, `populate`, `add` and `remove` actions exist implicitly, without you having to write them.
+Blueprintアクション（暗黙の[blueprint「アクション」_ルート_](https://sailsjs.com/documentation/concepts/blueprints/blueprint-routes#?action-routes)と混同しないでください）は、モデルとともに動作するように設計された一般的なアクションです。アプリケーションのデフォルトの動作であると考えてください。例えば、`User.js`モデルがあれば、`find`、`create`、`update`、`destroy`、`populate`、`add`および`remove`アクションについては記述することなく暗黙的に存在します。
 
-By default, the blueprint [RESTful routes](https://sailsjs.com/documentation/concepts/blueprints/blueprint-routes#?restful-routes) and [shortcut routes](https://sailsjs.com/documentation/concepts/blueprints/blueprint-routes#?shortcut-routes) are bound to their corresponding blueprint actions.  However, any blueprint action can be overridden for a particular controller by creating a custom action in that controller file (e.g. `ParrotController.find`).
+デフォルトでは、blueprintの[RESTfulルート](https://sailsjs.com/documentation/concepts/blueprints/blueprint-routes#?restful-routes)と[ショートカットルート](https://sailsjs.com/documentation/concepts/blueprints/blueprint-routes#?shortcut-routes)は、それぞれの対応するblueprintのアクションにバインドされています。しかし、特定のコントローラーではそのファイルにカスタムアクションを作成すること（例として`ParrotController.find`）で、blueprintのアクションを上書きすることができます。
 
-The current version of Sails ships with the following blueprint actions:
+
+現在のバージョンのSailsには、次のblueprinntアクションが含まれています。
 
 + [find](https://sailsjs.com/documentation/reference/blueprint-api/find-where)
 + [findOne](https://sailsjs.com/documentation/reference/blueprint-api/find-one)
@@ -16,19 +17,19 @@ The current version of Sails ships with the following blueprint actions:
 + [remove](https://sailsjs.com/documentation/reference/blueprint-api/remove-from)
 + [replace](https://sailsjs.com/documentation/reference/blueprint-api/replace)
 
-### Socket notifications
+### ソケット通知
 
-Most blueprint actions have realtime features that take effect if your app has WebSockets enabled.  For example, if the **find** blueprint action receives a request from a socket client, it will [subscribe](https://sailsjs.com/documentation/reference/web-sockets/resourceful-pub-sub/subscribe) that socket to future notifications.  Then, any time records are changed using blueprint actions like **update**, Sails will [publish](https://sailsjs.com/documentation/reference/web-sockets/resourceful-pub-sub/publish) certain notifications.
+ほとんどのblueprintアクションには、アプリがWebsocketを有効化している場合に使用可能になる機能を持っています。例えば、blueprintの**find**アクションがソケットクライアントからリクエストを受け取ると、そのソケットは将来の通知のために[subscribe](https://sailsjs.com/documentation/reference/web-sockets/resourceful-pub-sub/subscribe)を行います。それから、**update**のようなblueprintアクションを使って任意のタイミングでレコードが変更されたとき、Sailsは特定の通知を[publish](https://sailsjs.com/documentation/reference/web-sockets/resourceful-pub-sub/publish)します。
 
-The best way to understand the behavior of a particular blueprint action is to read its [reference page](https://sailsjs.com/documentation/reference/blueprint-api) (or see the list above).  But if you're looking for more of a birds-eye view of how realtime features work in Sails's blueprint API, see [**Concepts > Realtime**](https://sailsjs.com/documentation/concepts/realtime).  (If you're OK with some details being out of date, you might even want to check out the [original "Intro to Sails.js" video from 2013](https://www.youtube.com/watch?v=GK-tFvpIR7c).)
+個々のblueprintアクションの動作を理解する最も良い方法は、[リファレンスページ](https://sailsjs.com/documentation/reference/blueprint-api)（または上記のリスト）を読むことです。しかしSailsのblueprint APIでリアルタイム機能がどのように動作するかの全体像を知りたい場合は、[**Concepts > Realtime**](https://sailsjs.com/documentation/concepts/realtime)を参照してください。（詳細が古くても問題ない場合は、[2013年の「Intro to Sails.js」の動画](https://www.youtube.com/watch?v=GK-tFvpIR7c)をチェックしてください。）
 
-> For a more advanced breakdown of all notifications published by blueprint actions in Sails, see:
+> Sailsのblueprintアクションがpublishするすべての通知に対する、より進んだ詳細については、次を参照してください。
 > + [Chart A (scenarios vs. notification types)](https://docs.google.com/spreadsheets/d/10FV9plyHR4gE9xIomIZlF-YS1S54oHEdvH8ZmTC1Fnc/edit#gid=0)
 > + [Chart B (actions vs. recipients)](https://docs.google.com/spreadsheets/d/1B6i8aOoLNLtxJ4aeiA8GQ2lUQSvLOrP89RSLr7IAImw/edit#gid=0)
 
-### Overriding blueprint actions
+### blueprintアクションを上書きする
 
-You may also override any of the blueprint actions for a controller by defining a [custom action](https://sailsjs.com/documentation/concepts/actions-and-controllers) with the same name.
+同名の[カスタムアクション](https://sailsjs.com/documentation/concepts/actions-and-controllers)を定義することで、任意のblueprintアクションを上書きすることもできます。
 
 ```javascript
 // api/controllers/user/UserController.js
@@ -72,6 +73,6 @@ module.exports = {
 }
 ```
 
-> Alternatively, we could have created this as a standalone action at `api/controllers/user/find-one.js` or used [actions2](https://sailsjs.com/documentation/concepts/actions-and-controllers#?actions-2).
+> [actions2](https://sailsjs.com/documentation/concepts/actions-and-controllers#?actions-2)を使用し、スタンドアロンアクションを`api/controllers/user/find-one.js`として作成することでも、同じことを行うことができます。
 
 <docmeta name="displayName" value="Blueprint actions">
