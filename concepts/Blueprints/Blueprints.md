@@ -1,18 +1,18 @@
 # Blueprints
 
-### Overview
+### 概要
 
-Like any good web framework, Sails aims to reduce both the amount of code you write and the time it takes to get a functional app up and running.  _Blueprints_ are Sails&rsquo;s way of quickly generating API [routes](https://sailsjs.com/documentation/concepts/routes) and [actions](https://sailsjs.com/documentation/concepts/controllers#?actions) based on your application design.
+他の優れたWebフレームワークと同様に、Sailsは、書くコードの量と機能的なアプリケーションを起動して実行するのにかかる時間の両方を削減することを目指しています。 Blueprintsは、アプリケーション設計に基づいてAPI[ルート](https://sailsjs.com/documentation/concepts/routes)と[アクション](https://sailsjs.com/documentation/concepts/controllers#?actions)を迅速に生成するSailsの方法です。
 
-Together, [blueprint routes](https://sailsjs.com/documentation/concepts/blueprints/blueprint-routes) and [blueprint actions](https://sailsjs.com/documentation/concepts/blueprints/blueprint-actions) constitute the **blueprint API**, the built-in logic that powers the [RESTful JSON API](http://en.wikipedia.org/wiki/Representational_state_transfer) you get every time you create a model and controller.
+[blueprintルート](https://sailsjs.com/documentation/concepts/blueprints/blueprint-routes)と[blueprintアクション](https://sailsjs.com/documentation/concepts/blueprints/blueprint-actions)は一緒に**blueprint API**を構成し、組み込みのロジックは[RESTful JSON API](http://en.wikipedia.org/wiki/Representational_state_transfer)を強化し、モデルとコントローラーを作成するたびにその恩恵を受けることができます。
 
-For example, if you create a `User.js` model file in your project, then with blueprints enabled you will be able to immediately visit `/user/create?name=joe` to create a user, and visit `/user` to see an array of your app's users.  All without writing a single line of code!
+例えば、プロジェクトに`User.js`モデルファイルを作成したとき、blueprintがあれば、`/user/create?name=joe`をリクエストするとユーザーを作成したり、`/user`をリクエストするとアプリのユーザーを配列としてみることができる、というようなことをすばやく有効化することができます。1行のコードも書くことなく！
 
-Blueprints are a powerful tool for prototyping, but in many cases can be used in production as well, since they can be overridden, protected, extended or disabled entirely.
+Blueprintは強力なプロトタイピングツールですが、上書きしたり保護したり拡張したり、完全に無効化できるため、本番環境でも多くの場合同様に使用できます。
 
-### Up next
+### 次に
 
-+ [Read more](https://sailsjs.com/documentation/concepts/blueprints/blueprint-actions) about built-in blueprint actions
-+ [Read more](https://sailsjs.com/documentation/concepts/blueprints/blueprint-routes) about implicit "shadow" routes and how to configure or override them
++ 組み込みのblueprintアクションについて[詳細を読む](https://sailsjs.com/documentation/concepts/blueprints/blueprint-actions)。
++ 暗黙の「シャドウ」ルートについて、それをどのように設定したり上書きしたりするのか、[詳細を読む](https://sailsjs.com/documentation/concepts/blueprints/blueprint-routes)。
 
 <docmeta name="displayName" value="Blueprints">
