@@ -1,10 +1,10 @@
-# Using .sailsrc files
+# .sailsrcファイルを使う
 
-In addition to the other methods of configuring your app, you can also specify configuration for one or more apps in `.sailsrc` file(s).  These files are useful for configuring the Sails command-line, and especially for generators.  They also allow you to apply _global_ configuration settings for generators in ANY of the Sails apps you run on your computer, if desired.
+アプリを設定する他の方法に加えて、`.sailsrc`ファイルで複数のアプリの設定を行うこともできます。このファイルは、Sailsのコマンドライン、特にジェネレータの設定に役立ちます。また、必要に応じて、コンピュータ上で実行するSailsアプリケーションにジェネレータの _グローバル_ な構成設定を適用することもできます。
 
-When the Sails CLI runs a command, it first looks for  `.sailsrc` files (in either JSON or [.ini](http://en.wikipedia.org/wiki/INI_file) format) in the current directory and in your home folder (i.e. `~/.sailsrc`) (every newly generated Sails app comes with a boilerplate `.sailsrc` file).  Then it merges them in to its existing configuration.
+Sails CLIがコマンドを実行すると、現在のディレクトリとホームフォルダ（いいかえると`~/.sailsrc`、新しく生成されたすべてのSailsアプリケーションには定型の`.sailsrc`ファイルが付属しています）の`.sailsrc`ファイル（JSON 形式または[.ini](http://en.wikipedia.org/wiki/INI_file)形式のファイル）が最初に検索され ます。次に、それらを既存の構成にマージします。
 
-> Actually, Sails looks for `.sailsrc` files in a few other places (following [rc conventions](https://github.com/dominictarr/rc#standards)).  You can put a `.sailsrc` file at any of those paths, if you want it to apply globally to all Sails apps.  That said, stick to convention when you can- the best place to put a global `.sailsrc` file is in your home directory (i.e. `~/.sailsrc`).
+> 実際には、Sailsはいくつかの場所で`.sailsrc`ファイルを探します（[rcの規約](https://github.com/dominictarr/rc#standards)に従って）。すべてのSailsアプリケーションにグローバルに適用するには、これらのパスのいずれかに`.sailsrc`ファイルを置くことができます。つまり、グローバルな`.sailsrc`ファイルを置くのに最適な場所はホームディレクトリ（すなわち、ホームディレクトリ`~/.sailsrc`）です。
 
 
 
