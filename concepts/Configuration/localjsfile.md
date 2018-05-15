@@ -1,14 +1,14 @@
-# The `config/local.js` file
+# `config/local.js`ファイル
 
-The config/local.js file is useful for configuring a Sails app for your local environment (your laptop, for example). This would be a good place to store settings like database or email passwords that apply only to you, and shouldn't be shared with others in your organization.
+config/local.jsファイルは、あなたのローカル環境（例えばあなたのラップトップなど）用にSailsアプリケーションを設定するのに便利です。これは、自分だけに適用されるデータベースや電子メールのパスワードのような設定を保存するのに適しており、組織内の他の人と共有するべきではありません。
 
-These settings take precedence over all other files in `config/`, including those in the `env/` subfolder.
+これらの設定は、`env/`サブフォルダを含む`config/`内のすべてのファイルより優先されます。
+
+注釈：
+> デフォルトで`config/local.js`は.gitignoreに含まれています。あなたのSailsアプリケーションのバージョン管理システムとしてgitを使用している場合は、このファイルがリポジトリにコミットされないことに注意してください！
+>
+> つまり、個人情報（データベースのパスワードなど）をリポジトリに誤ってコミットすることなく、このファイル内のローカルマシンの構成を指定できるということです。さらに、これにより、チームの他のメンバーが自分のローカル設定の変更をコミットするのを防ぐことができます。
+>
+> 本番環境では、このファイルを残して、`env/production.js`、環境変数、または両方の組み合わせを使用してすべての本番環境の上書きを構成することをお勧めします。
  
-Note:
-> By default, `config/local.js` is included in your `.gitignore`, so if you're using git as a version control solution for your Sails app, keep in mind that this file won't be committed to your repository!
->
-> Good news is, that means you can specify configuration for your local machine in this file without inadvertently committing personal information (like database passwords) to the repo.  Plus, this prevents other members of your team from commiting their local configuration changes on top of yours.
->
-> In a production environment, you'll probably want to leave this file out entirely and configure all of your production overrides using `env/production.js`, or environment variables, or a combination of both.
-
 <docmeta name="displayName" value="The local.js file">
