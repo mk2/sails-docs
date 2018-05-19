@@ -171,4 +171,4 @@ npm uninstall grunt-contrib-jst --save-dev
 
 NODE_ENVを設定し、同じ名前でtasks/register/にタスクリストを作成することで、他のタスクを実行できます。たとえば、NODE_ENVがQAの場合、sailsはtasks/register/QA.jsがあれば実行します。
 
-<docmeta name="displayName" value="Task automation">
+<docmeta name="displayName" value="タスクの自動化">
