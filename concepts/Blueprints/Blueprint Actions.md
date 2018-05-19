@@ -75,4 +75,4 @@ module.exports = {
 
 > [actions2](https://sailsjs.com/documentation/concepts/actions-and-controllers#?actions-2)を使用し、スタンドアロンアクションを`api/controllers/user/find-one.js`として作成することでも、同じことを行うことができます。
 
-<docmeta name="displayName" value="Blueprint actions">
+<docmeta name="displayName" value="Blueprintアクション">
