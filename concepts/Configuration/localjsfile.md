@@ -11,4 +11,4 @@ config/local.jsファイルは、あなたのローカル環境（例えばあ�
 >
 > 本番環境では、このファイルを残して、`env/production.js`、環境変数、または両方の組み合わせを使用してすべての本番環境の上書きを構成することをお勧めします。
  
-<docmeta name="displayName" value="The local.js file">
+<docmeta name="displayName" value="local.jsファイル">
