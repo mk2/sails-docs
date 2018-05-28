@@ -1,25 +1,24 @@
-# FAQ
+# よくある質問
 
 
-### Can I use environment variables?
+### 環境変数を使えますか？
 
-Yes! Like any Node app, your environment variables are available as `process.env`.
+はい！任意のNodeアプリケーションと同様に、環境変数は`process.env`から使用できます。
 
-Sails also comes with built-in support for creating your own custom configuration settings that will be exposed directly on `sails.config`.  And whether custom or built-in, any of the configuration properties in `sails.config` can be overridden using environment variables.  See the conceptual documentation on [Configuration](https://sailsjs.com/documentation/concepts/configuration) for details.
+Sailsには、`sails.config`に直接公開される独自のカスタム設定を作成するための、組み込みのサポートも付属しています。また、カスタムもしくは組み込みのいずれであっても、環境変数を使用して、`sails.config`のすべての設定プロパティを上書きできます。詳細については、[設定](https://sailsjs.com/documentation/concepts/configuration)のドキュメントを参照してください。
 
+### 本番データベースの認証情報はどこに置くのですか？その他の設定は？
 
-### Where do I put my production database credentials?  Other settings?
+Sailsアプリケーションに設定を追加する最も簡単な方法は、`config/`にあるファイルを変更するか、新しいファイルを追加することです。Sailsは環境固有の設定をサポートしているので、`config/env/production.js`のようなファイルを使用することができます。繰り返しますが、詳細については、[設定](https://sailsjs.com/documentation/concepts/configuration)のドキュメントを参照してください。
 
-The easiest way to add configuration to your Sails app is by modifying the files in `config/` or adding new ones. Sails supports environment-specific configuration loading out of the box, so you can use `config/env/production.js`.  Again, see the conceptual documentation on [Configuration](https://sailsjs.com/documentation/concepts/configuration) for details.
+しかし、ある特定の設定情報をリポジトリにチェックインしたくない場合もあります。**この手の設定を行うべき場所は、環境変数です。**
 
-But sometimes, you don't want to check certain configuration information in to your repository.  **The best place to put this kind of configuration is in environment variables.**
-
-That said, for development (e.g. on your laptop) using environment variables can sometimes be kind of awkward.  So for your other deployment/machine-specific settings, namely any kind of credentials you want to keep private, you can also use your `config/local.js` file.  This file is included in your `.gitignore` file by default-- this helps prevent you from inadvertently commiting your credentials to your code repository.
+とはいえ、環境変数を使用した開発（ラップトップなど）では、時には厄介なことがあります。他のデプロイ/マシン固有の設定にとっては、つまり非公開にしたい様々な認証情報については、`config/local.js`ファイルを使用することもできます。このファイルは、デフォルトで`.gitignore`ファイルに含まれています。これにより、うっかり認証情報をコードリポジトリにコミットすることを防ぎます。
 
 **config/local.js**
 ```javascript
 // Local configuration
-// 
+//
 // Included in the .gitignore by default,
 // this is where you include configuration overrides for your local system
 // or for a production deployment.
@@ -39,25 +38,26 @@ module.exports = {
 
 
 
-### How do I get my Sails app on the server?
+### サーバーへSailsアプリケーションを配置するにはどうすればよいですか？
 
-If you are using a Paas like Heroku or Modulus, this is easy:  just follow their instructions.
+HerokuやModulusのようなPaasを使用している場合、簡単です。Paasの指示に従ってください。
 
-Otherwise get the IP address of your server and `ssh` onto it.  Then `npm install -g sails` and `npm install -g forever` to install Sails and `forever` globally from NPM for the first time on the server. Finally `git clone` your project (or `scp` it onto the server if it's not in a git repo) into a new folder on the server, `cd` into it, and then run `forever start app.js`.
-
-
-### What should I expect as far as performance?
-
-Baseline performance in Sails is comparable to what you'd expect from a standard Node.js/Express application.  In other words, fast!  We've done some optimizations ourselves in Sails core, but primarily our focus is not messing up what we get for free from our dependencies.  For a quick and dirty benchmark, see [http://serdardogruyol.com/sails-vs-rails-a-quick-and-dirty-benchmark](http://serdardogruyol.com/sails-vs-rails-a-quick-and-dirty-benchmark).
-
-The most common performance bottleneck in production Sails applications is the database.  Over the lifetime of an application with a growing user base, it becomes increasingly important to set up good indexes on your tables/collections, and to use queries which return paginated results.  Eventually as your production database grows to contain tens of millions of records, you will start to locate and optimize slow queries by hand (either by calling [`.query()`](https://sailsjs.com/documentation/reference/waterline-orm/models/query) or [`.native()`](https://sailsjs.com/documentation/reference/waterline-orm/models/native), or by using the underlying database driver from NPM).  
+それ以外の場合は、サーバーのIPアドレスを取得し、`ssh`でサーバーに入ってください。次に、NPMから`npm install -g sails`と`npm install -g forever`を実行し、Sailsと`forever`をグローバルにインストールします。最後にプロジェクトを`git clone`でサーバー上の新しいフォルダに入れてから（gitリポジトリがない倍は、`scp`でサーバーに入れます）、`forever start app.js`を実行します。
 
 
-### What's this warning about the connect session memory store?
+### パフォーマンスに関しては、何を想定すべきですか？
 
-If you are using sessions in your Sails app, you should not use the built-in memory store in production.  The memory session store is a development-only tool that does not scale to multiple servers; and even if you only have one server it is not particularly performant (see [#3099](https://github.com/balderdashy/sails/issues/3099) and [#2779](https://github.com/balderdashy/sails/issues/2779)).
+Sailsのパフォーマンスのベースラインは、標準のNode.js/Expressアプリケーションから期待されるパフォーマンスに匹敵します。言い換えれば、速いのです！私たちはSailsのコアでいくつかの最適化を行ってきましたが、重要視しているのは、依存関係をなくしてめちゃくちゃにすることではありません。簡単なベンチマークについては、[http: //serdardogruyol.com/sails-vs-rails-a-quick-and-dirty-benchmark](http: //serdardogruyol.com/sails-vs-rails-a-quick-and-dirty-benchmark)を参照してください。
 
-For instructions on configuring a production session store, see [sails.config.session](https://sailsjs.com/documentation/reference/configuration/sails-config-session).  If you want to disable session support altogether, turn off the `session` hook in your app's `.sailsrc` file:
+本番のSailsアプリケーションで最も一般的なパフォーマンスボトルネックは、データベースです。アプリケーションが存続するうちにユーザーが増えていくので、テーブル/コレクションに適切なインデックスを設定し、ページ単位の結果を返すクエリを使用することがますます重要になります。最終的に本番データベースが膨大になり、数千万のレコードが格納されるようになると、スロークエリの検索と最適化を手作業で開始するでしょう（または[`.query()`](https://sailsjs.com/documentation/reference/waterline-orm/models/query)か[`.native()`](https://sailsjs.com/documentation/reference/waterline-orm/models/native)を呼び出すか、もしくはより低レイヤーなデータベースドライバを使うかも）。
+
+
+### コネクトセッションメモリストアに関する警告は何ですか？
+
+Sailsアプリケーションでセッションを使用している場合は、本番環境では組み込みのメモリストアを使用しないでください。このメモリセッションストアは、複数のサーバーでスケールしない開発専用のツールです。1台のサーバしかないとしても、パフォーマンスはあまり良いものではありません（[#3099](https://github.com/balderdashy/sails/issues/3099)と[#2779](https://github.com/balderdashy/sails/issues/2779)を参照してください）。
+
+本番でのセッションストアの設定手順については、[sails.config.session](https://sailsjs.com/documentation/reference/configuration/sails-config-session)を参照してください。セッションのサポートを完全に無効にする場合は、アプリの`.sailsrc`ファイルの`session`フックをオフにします。
+
 ```javascript
 "hooks": {
   "session": false
@@ -65,5 +65,4 @@ For instructions on configuring a production session store, see [sails.config.se
 ```
 
 
-<docmeta name="displayName" value="FAQ">
-
+<docmeta name="displayName" value="よくある質問">
