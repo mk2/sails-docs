@@ -19,7 +19,7 @@
 
 ##### 優先
 
-静的[ミドルウェア](http://stephensugden.com/middleware_guide/)は、Sailsルーターの**後に**インストールされることが重要です。したがって、[カスタムルート](https://sailsjs.com/documentation/concepts/Routes?q=custom-routes)を定義し、競合するパスを持つファイルがアセットディレクトリにある場合、カスタムルートは静的ミドルウェアに到達する前にリクエストをインターセプトします。たとえば、`assets/index.html`を作成し、[`config/routes.js`](https://sailsjs.com/documentation/reference/configuration/sails-config-routes)ファイルに何もルート定義がない場合、ホームページとして提供されます。しかし、`'/': 'FooController.bar'`というカスタムルートを定義した場合、そのルートが優先されます。
+静的[ミドルウェア](http://stephensugden.com/middleware_guide/)は、Sailsルーターの**後に**インストールされることが重要です。したがって、[カスタムルート](https://sailsjs.com/documentation/concepts/Routes?q=custom-routes)を定義し、競合するパスを持つファイルがアセットディレクトリにある場合、カスタムルートは静的ミドルウェアに到達する前にリクエストを横取りします。たとえば、`assets/index.html`を作成し、[`config/routes.js`](https://sailsjs.com/documentation/reference/configuration/sails-config-routes)ファイルに何もルート定義がない場合、ホームページとして提供されます。しかし、`'/': 'FooController.bar'`というカスタムルートを定義した場合、そのルートが優先されます。
 
 
 <docmeta name="displayName" value="アセット">
