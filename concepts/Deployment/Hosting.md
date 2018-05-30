@@ -1,11 +1,21 @@
-# Hosting
+# ホスティング
 
-Here is a non-comprehensive list of Node/Sails hosting providers and a few available community tutorials.  Keep in mind that, most of the time, the process for deploying your Sails app is exactly the same as it would be for any other Node.js app.  Just be sure to take a look at the [other pages](https://sailsjs.com/documentation/concepts/deployment) in this section of the docs (as well as your app's [`config/env/production.js` file](https://sailsjs.com/documentation/anatomy/config/env/production-js)) and make any necessary adjustments before you actually deploy to production.
+Node/Sailsホスティングプロバイダと、いくつかのコミュニティチュートリアルリストがあります。ほとんどの場合、Sailsアプリケーションをデプロイするプロセスは、他のNode.jsアプリケーションとまったく同じです。実際に本番環境にデプロイする前に、念のためこのドキュメントの[他のページ](https://sailsjs.com/documentation/concepts/deployment)（[`config/env/production.js` file](https://sailsjs.com/documentation/anatomy/config/env/production-js)も）を見たり、必要な調整を行ってください。
 
 
 ### Heroku
 
 <a title="Deploy your Sails/Node.js app on Heroku" href="http://heroku.com"><img style="width:285px;" src="https://sailsjs.com/images/deployment_heroku.png" alt="Heroku logo"/></a>
+
+"Web App"テンプレートを使用して生成されたSailsプロジェクトを展開する、最も簡単な（そして無料の）方法はおそらくHeroku経由です。
+
+1. GitHubリポジトリを作成し、コードを`master`ブランチまでプッシュします。
+2. Herokuのパイプラインを作成し、そのパイプライン内のステージングアプリを作成する（例えば`my-cool-site-staging`）
+3. ポイントアンドクリックインターフェースを使用して、Herokuアプリをステージングしてdeploy、GitHubリポジトリのブランチから自動デプロイするように設定します。
+4. "Add-ons"では、Papertrailをロギング用に、Redis2Goをプロダクションセッションストアとして（関連する場合はソケットメッセージを配信する5. ために+）、スケジュールされたジョブ用のHeroku Scheduler（関連する場合）、MySQL、PostgreSQL、またはMongoDBホストあなたのデータベースのために（任意のものを選ぶ）。
+5. プロジェクトを通して実行しconfig/production.js、config/staging.jsセットアップします。Herokuのユーザーインターフェイスでは、リポジトリ内のファイル（データベースの資格情報など）のハードコードに敏感すぎると感じる情報は、 "Config Variables"として設定できます。（例についてはバンドルされた設定ファイルを参照してください）。
+6. 端末では、すべてがプル/プッシュされていて、GitHubのリモートマスターブランチと同期して100％であることを確認してください。
+7. 次に`sails run deploy`をタイプします。
 
 The easiest (and free) way to deploy any Sails project generated using the "Web App" template is probably via Heroku:
 1. Create a GitHub repo and push your code up to the `master` branch.
