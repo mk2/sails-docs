@@ -1,15 +1,14 @@
-# Scaling
+# スケーリング
 
-If you have the immediate expectation of lots of traffic to your application (or better yet, you already have the traffic),
-you'll want to set up a scalable architecture that will allow you to add servers as more and more requests hit your app.
-
-### Performance
-
-In production, Sails performs like any Connect, Express or Socket.io app ([example](http://serdardogruyol.com/?p=111)).  If you have your own benchmark you'd like to share, please write a blog post or article and tweet [@sailsjs](http://twitter.com/sailsjs).  But benchmarks aside, keep in mind that most performance and scalability metrics are application-specific.  The actual performance of your app will have a lot more to do with the way you implement your business logic and model calls than it will about the underlying framework you are using.
+アプリケーションに多くのトラフィックがあることがすぐに分かっている場合（またはトラフィックが既にある場合）、スケーラブルなアーキテクチャを設定して、アプリケーションに来るリクエストが増えるにつれてサーバーを追加することができます。
 
 
+### パフォーマンス
 
-### Example architecture
+本番環境では、SailsはConnect、Express、Socket.ioのように動作します（[例](http://serdardogruyol.com/?p=111)）。あなたが共有したいベンチマークを持っているなら、ブログの投稿や記事を書いて[@sailsjs](http://twitter.com/sailsjs)をつけてください。しかし、ベンチマークはさておき、ほとんどのパフォーマンスとスケーラビリティのメトリックはアプリケーション固有であることに注意してください。アプリケーションの実際のパフォーマンスは、使用している基盤となるフレームワークよりも、ビジネスロジックとモデル呼び出しをどのように実装するかに、より関係しています。
+
+
+### アーキテクチャの例
 
 ```
                              ....
@@ -20,50 +19,48 @@ Load Balancer  <-->    Sails.js server    <-->    Socket.io message queue (Redis
 ```
 
 
-### Preparing your app for a clustered deployment
+### クラスタ化されたデプロイのために、アプリケーションを用意する
 
-Node.js (and consequently Sails.js) apps scale horizontally. It's a powerful, efficient approach, but it involves a tiny bit of planning. At scale, you'll want to be able to copy your app onto multiple Sails.js servers and throw them behind a load balancer.
+Node.js（Sails.jsも）のアプリケーションは水平方向にスケーリングします。パワフルで効率的なアプローチですが、これには多少の計画が必要です。スケーリングという観点では、アプリケーションを複数のSails.jsサーバにコピーして、ロードバランサの背後に投げたいと思うでしょう。
 
-One of the big challenges of scaling an application is that these sorts of clustered deployments cannot share memory, since they are on physically different machines. On top of that, there is no guarantee that a user will "stick" with the same server between requests (whether HTTP or sockets), since the load balancer will route each request to the Sails server with the most available resources. The most important thing to remember about scaling a server-side application is that it should be **stateless**.  That means you should be able to deploy the same code to _n_ different servers, expecting any given incoming request handled by any given server, and everything should still work.  Luckily, Sails apps come ready for this kind of deployment almost right out of the box.  But before deploying your app to multiple servers, there are a few things you need to do:
+このアプリケーションをスケーリングする大きな課題の1つは、これらのクラスタ化されたデプロイメントは、物理的に異なるマシン上にあるため、メモリを共有できないことです。さらに、ロードバランサは、利用可能なリソースが最も多いSailsサーバーに各リクエストをルーティングするため、ユーザーがリクエスト同士（HTTPまたはソケットのいずれか）を同じサーバーに「固定」する保証はありません。サーバーサイドアプリケーションのスケーリングについて覚えておくべき最も重要なことは、ステートレスでなければならないということです。つまり、同じコードをn台の違うサーバーにデプロイできなければいけないということです。あるサーバーに来たリクエストは、ほかのすべてのサーバーで同じように処理できなければいけないということです。幸いなことに、Sailsアプリケーションは、こういったデプロイの準備が何もすることなくすぐにできるようになっています。しかし、複数のサーバーにアプリをデプロイする前に、いくつかのことをする必要があります。
 
-+ Ensure none of the other dependencies you might be using in your app rely on shared memory.
-+ Make sure the database(s) for your models (e.g. MySQL, Postgres, Mongo) are scalable (e.g. sharding/cluster)
-+ **If your app uses sessions:**
-  + Configure your app to use a shared session store such as Redis (simply uncomment the `adapter` option in `config/session.js`) and install the "@sailshq/connect-redis" session adapter as a dependency of your app (e.g. `npm install @sailshq/connect-redis --save`). For more information about configuring your session store for production, see the [sails.config.session](https://sailsjs.com/documentation/reference/configuration/sails-config-session#?production-config) docs.
-+ **If your app uses sockets:**
-  + Configure your app to use Redis as a shared message queue for delivering socket.io messages. Socket.io (and consequently Sails.js) apps support Redis for sockets by default, so to enable a remote redis pubsub server, uncomment the relevant lines in `config/env/production.js`.
-  + Install the "@sailshq/socket.io-redis" adapter as a dependency of your app (e.g. `npm install @sailshq/socket.io-redis`)
-+ **If your cluster is on a single server (for instance, using [pm2 cluster mode](http://pm2.keymetrics.io/docs/usage/cluster-mode/))**
-  + To avoid file conflict issues due to Grunt tasks, always start your apps in `production` environment, and/or consider [turning Grunt off completely](https://sailsjs.com/documentation/concepts/assets/disabling-grunt).  See [here](https://github.com/balderdashy/sails/issues/3577#issuecomment-184786535) for more details on Grunt issues in single-server clusters
-  + Be careful with [`config/bootstrap.js` code](https://sailsjs.com/documentation/reference/configuration/sails-config-bootstrap) that persists data in a database, to avoid conflicts when the bootstrap runs multiple times (once per node in the cluster)
++ アプリケーションで使用している他の依存関係が、共有メモリに依存していないことを確認してください。
++ モデルで使用しているデータベース（MySQL、Postgres、Mongoなど）がスケーラブルであることを確認してください（例：シャーディング/クラスタ）
++ **アプリでセッションを使用している場合：**
+  + Redisなどの共有セッションストアを使用するようにアプリケーションを設定し（単に`config/session.js`内の`adapter`オプションのコメントを外します）、"@sailshq/connect-redis"セッションアダプターをアプリケーションの依存ライブラリとしてインストールします（例：`npm install @sailshq/connect-redis --save`）。本番用のセッションストアの設定の詳細については、[sails.config.sessionドキュメント](https://sailsjs.com/documentation/reference/configuration/sails-config-session#?production-config)を参照してください。
++ **アプリがソケットを使用する場合：**
+  + socket.ioメッセージを配信するための共有メッセージキューとしてRedisを使用するようにアプリケーションを設定します。Socket.io（Sails.jsも）のアプリケーションはデフォルトでソケット用のRedisをサポートしているので、リモートのredis pubsubサーバを有効にするには、`config/env/production.js`の該当する行のコメントを外します。
+  + "@sailshq/socket.io-redis"アダプターをアプリケーションの依存ライブラリとしてインストールします（例：`npm install @sailshq/socket.io-redis`）。
++ **クラスタが単一のサーバー上にある場合（たとえば、[pm2クラスタモード](http://pm2.keymetrics.io/docs/usage/cluster-mode/)を使用）**
+  + Gruntタスクによるファイルの競合の問題を回避するには、常に`production`環境でアプリケーションを起動したり、[Gruntを完全にオフにすること](https://sailsjs.com/documentation/concepts/assets/disabling-grunt)を検討してください。シングルサーバクラスタにおけるGruntの問題の詳細は、[こちら](https://github.com/balderdashy/sails/issues/3577#issuecomment-184786535)を参照してください。
+  + ブートストラップが複数回実行されたとき（クラスタ内のノードごとに1回）に競合が発生しないように、データをデータベースに永続するためには、[`config/bootstrap.js`](https://sailsjs.com/documentation/reference/configuration/sails-config-bootstrap)に注意してください。
 
-### Deploying a Node/Sails app to a PaaS
+### PaaSにNode/Sailsアプリケーションをデプロイする
 
-Deploying your app to a PaaS like Heroku or Modulus is dead simple. Depending on your situation, there may still be a few devils in the details, but Node support with hosting providers has gotten _really good_ over the last couple of years.  Take a look at [Hosting](https://sailsjs.com/documentation/concepts/deployment/Hosting) for more platform-specific information.
+HerokuやModulusのようなPaaSにアプリケーションをデプロイするのは簡単です。状況によっては、細部にいくつかの悪魔が残っているかもしれませんが、ホスティングプロバイダのNodeサポートはここ数年で本当に良くなってきました。より多くのプラットフォーム固有の情報については、[ホスティング](https://sailsjs.com/documentation/concepts/deployment/Hosting)を見てください。
 
-### Deploying your own cluster
+### 独自にクラスタをデプロイする
 
-+ Deploy multiple instances (aka servers running a copy of your app) behind a [load balancer](https://en.wikipedia.org/wiki/Load_balancing_(computing)) (e.g. nginx)
-  + Configure your load balancer to terminate SSL requests
-  + But remember that you won't need to use the SSL configuration in Sails-- the traffic will already be decrypted by the time it reaches Sails.
-  + Lift your app on each instance using a daemon like `forever` or `pm2` (see https://sailsjs.com/documentation/concepts/deployment for more about daemonology)
++ [ロードバランサ](https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B9)の背後にある複数のインスタンス（アプリケーションのコピーを実行しているサーバ）をデプロイする（例：nginx）
+  + SSLリクエストを終端させるようにロードバランサを構成する
+  + ただし、SailsにSSL設定を適用する必要はありません。Sailsに到達するまでにトラフィックはすでに復号化されています。
+  + `forever`または`pm2`のようなデーモンを使用して各インスタンスでアプリケーションを立ち上げます（デモの詳細については、[https://sailsjs.com/documentation/concepts/deployment](https://sailsjs.com/documentation/concepts/deployment)を参照してください）。
 
+### 最適化
 
-### Optimization
+Node/Sailsアプリケーションのエンドポイントの最適化は、他のサーバーサイドアプリケーションのエンドポイントの最適化とまったく同じです。たとえば、遅いクエリを特定して手動で最適化したり、クエリの数を減らしたりするなどです。Nodeアプリケーションの場合、CPUを浪費しているトラフィックが多いエンドポイントがある場合は、同期的な（つまりブロッキングしている）モデルのメソッド、サービス、またはmachineが、ループや再帰的な呼び出しで繰り返し呼び出されているかもしれません。
 
-Optimizing an endpoint in your Node/Sails app is exactly like optimizing an endpoint in any other server-side application; e.g. identifying and manually optimizing slow queries, reducing the number of queries, etc.  Specifically for Node apps, if you find you have a heavily trafficked endpoint that is eating up CPU, look for synchronous (blocking) model methods, services, or machines that might be getting called over and over again in a loop or recursive dive.
+でも覚えておいて欲しいことがあります。
 
-But remember:
+> 早すぎる最適化は諸悪の根源である -[ドナルド・クヌース](http://c2.com/cgi/wiki?PrematureOptimization)
 
-> Premature optimization is the root of all evil.  -[Donald Knuth](http://c2.com/cgi/wiki?PrematureOptimization)
-
-No matter what tool you're using, it is important to spend your focus and time on writing high quality, well documented, readable code.  That way, if/when you are forced to optimize a code path in your application, you'll find it is much easier to do so.
-
+どのツールを使用していても、質の高い文書化された読みやすいコードを書くことに集中して時間を費やすことが重要です。そうすれば、アプリケーションでコードパスを最適化することを余儀なくされた場合、そうするのがずっと簡単になるでしょう。
 
 
-### Notes
+### ノート
 
-> + You don't have to use Redis for your sessions-- you can actually use any Connect or Express-compatible session store.  See [sails.config.session](sailsjs.com/documentation/reference/configuration/sails-config-session) for more information.
-> + Some hosted Redis providers (such as <a href="https://elements.heroku.com/addons/redistogo" target="_blank">Redis To Go</a>) set a <a href="https://redis.io/topics/clients#client-timeouts" target="_blank">timeout for idle connections</a>.  In most cases you&rsquo;ll want to turn this off to avoid unexpected behavior in your app.  Details on how to turn off the timoeout vary depending on provider (you may have to contact their support team).
+> + セッションにRedisを使用する必要はありません。実際には、ConnectまたはExpress互換のセッションストアを使用できます。詳細については、[sails.config.session](sailsjs.com/documentation/reference/configuration/sails-config-session)を参照してください。
+> + 一部のホストされたRedisプロバイダ（<a href="https://elements.heroku.com/addons/redistogo" target="_blank">Redis To Go</a>など）は、<a href="https://redis.io/topics/clients#client-timeouts">アイドル状態の接続に対してタイムアウトを設定</a>します。ほとんどの場合、アプリの予期しない動作を避けるため、この機能をオフにします。タイムアウトを無効にする方法の詳細は、プロバイダによって異なります（サポートチームに連絡する必要があります）。
 
-<docmeta name="displayName" value="Scaling">
+<docmeta name="displayName" value="スケーリング">
