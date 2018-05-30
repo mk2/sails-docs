@@ -11,28 +11,19 @@ Node/Sailsホスティングプロバイダと、いくつかのコミュニテ�
 
 1. GitHubリポジトリを作成し、コードを`master`ブランチまでプッシュします。
 2. Herokuのパイプラインを作成し、そのパイプライン内のステージングアプリを作成する（例えば`my-cool-site-staging`）
-3. ポイントアンドクリックインターフェースを使用して、Herokuアプリをステージングしてdeploy、GitHubリポジトリのブランチから自動デプロイするように設定します。
-4. "Add-ons"では、Papertrailをロギング用に、Redis2Goをプロダクションセッションストアとして（関連する場合はソケットメッセージを配信する5. ために+）、スケジュールされたジョブ用のHeroku Scheduler（関連する場合）、MySQL、PostgreSQL、またはMongoDBホストあなたのデータベースのために（任意のものを選ぶ）。
-5. プロジェクトを通して実行しconfig/production.js、config/staging.jsセットアップします。Herokuのユーザーインターフェイスでは、リポジトリ内のファイル（データベースの資格情報など）のハードコードに敏感すぎると感じる情報は、 "Config Variables"として設定できます。（例についてはバンドルされた設定ファイルを参照してください）。
-6. 端末では、すべてがプル/プッシュされていて、GitHubのリモートマスターブランチと同期して100％であることを確認してください。
+3. ポイントアンドクリックインターフェースを使用して、Herokuアプリをステージングして、GitHubリポジトリの`deploy`ブランチから自動デプロイするように設定します。
+4. "Add-ons"では、Papertrailをロギング用に、Redis2Goを本番用セッションストアとして（該当する場合はソケットメッセージを配信するために）、スケジュールされたジョブ用のHeroku Scheduler（該当する場合）、データベースにはMySQLかPostgreSQL、またはMongoDB（任意のものを選ぶ）。
+5. プロジェクトの`config/production.js`と`config/staging.js`にざっと目を通り、設定します。Herokuのインターフェース上で、リポジトリにあるハードコードするにはあまりにも機密であるような情報（たとえばデータベースの認証情報）などを"Config Variables"として設定することができます。（例については、バンドルされた設定ファイルを参照してください。）
+6. ターミナルで、すべてがプル/プッシュされていて、GitHubのリモートマスターブランチと100％同期していることを確認してください。
 7. 次に`sails run deploy`をタイプします。
 
-The easiest (and free) way to deploy any Sails project generated using the "Web App" template is probably via Heroku:
-1. Create a GitHub repo and push your code up to the `master` branch.
-2. Create a Heroku pipeline, and create a staging app within that pipeline (e.g. `my-cool-site-staging`)
-3. Using the point-and-click interface, set up that staging Heroku app to auto-deploy from the `deploy` branch of your GitHub repo.
-4. Under "Add-ons", set up Papertrail for logging, Redis2Go as your production session store (+ for delivering socket messages, if relevant), Heroku Scheduler for scheduled jobs (if relevant), and either MySQL, PostgreSQL, or a MongoDB host for your database (pick any).
-5. Run through `config/production.js` and `config/staging.js` in your project and set it up.  Any information you feel is too sensitive to hard-code in those files in your repo (like database credentials) can be set up as "Config Variables" in Heroku's user interface.  (See bundled config files for examples.)
-6. In the terminal, make sure you've got everything pulled/pushed and are 100% in sync with the remote master branch on GitHub.
-7. Then type `sails run deploy`.
+[ここ](https://platzi.com/cursos/javascript-pro/)で実際のデモンストレーションを見ることができます。
 
-You can see a demonstration of that in action [here](https://platzi.com/cursos/javascript-pro/).
-
-##### More resources for using Heroku with Node.js/Sails.js:
+##### HerokuをNode.js/Sails.jsで使用するためのその他のリソース：
 
 + [Platzi: Full Stack JavaScript: Pt 5 (2018)](https://platzi.com/cursos/javascript-pro/)
 + [Hello Sails.js: Hosting your Sails.js application on Heroku (2016-2017)](https://hellosails.com/hosting-your-sails-js-application-heroku/)
-+ [Platzi: Develop Apps with Sails.js: Pt 2 (2015)](https://courses.platzi.com/classes/develop-apps-sails-js/)  _(see part 2)_
++ [Platzi: Develop Apps with Sails.js: Pt 2 (2015)](https://courses.platzi.com/classes/develop-apps-sails-js/)  _（パート2を見てください）_
 + [Sails.js on Heroku (2015)](http://vort3x.me/sailsjs-heroku/)
 + [SailsCasts: Deploying a Sails App to Heroku (2013)](http://irlnathan.github.io/sailscasts/blog/2013/11/05/building-a-sails-application-ep26-deploying-a-sails-app-to-heroku/)
 
@@ -55,7 +46,7 @@ More 2013:
 
 <a title="Deploy your Sails/Node.js app to Google Cloud Platform" href="https://cloud.google.com/nodejs/resources/frameworks/sails"><img style="width:350px;" src="https://sailsjs.com/images/deployment_googlecloud.png" alt="Google Cloud Platform logo"/></a>
 
-> It's easy to get enterprise-grade Sails.js apps running on Google Cloud Platform. And because the apps you create will be running on the same infrastructure that powers all of Google's products, you can be confident that they will scale to serve all of your users, whether there are a few or millions of them.
+> Google Cloud PlatformでエンタープライズグレードのSails.jsアプリケーションを実行するのは簡単です。作成したアプリケーションはGoogleのすべての製品に使用されるインフラストラクチャと同じインフラストラクチャ上で実行されるため、数百人にも数百万人にもわたって、すべてのユーザーにサービスを提供できると確信できます。
 
 + [Run Sails.js on Google Cloud Platform (2016)](https://cloud.google.com/nodejs/resources/frameworks/sails)
 + [Deploying Sails.js to Google Cloud (2016)](http://www.mot.la/2016-06-04-deploying-sails-js-to-google-cloud.html)
@@ -81,7 +72,7 @@ More 2013:
 <a title="Amazon Web Services (AWS)" href="https://aws.amazon.com/"><img style="width:275px;" src="https://sailsjs.com/images/deployment_aws.png" alt="AWS logo"/></a>
 
 
-+ [Creating a Sails.js application on AWS (2017)](http://bussing-dharaharsh.blogspot.com/2013/08/creating-sailsjs-application-on-aws-ami.html) _(see also [this question on ServerFault](http://serverfault.com/questions/531560/creating-an-sails-js-application-on-aws-ami-instance))_
++ [Creating a Sails.js application on AWS (2017)](http://bussing-dharaharsh.blogspot.com/2013/08/creating-sailsjs-application-on-aws-ami.html) _（[ServerFaultに関するこの質問も参照してください](http://serverfault.com/questions/531560/creating-an-sails-js-application-on-aws-ami-instance)）_
 + [Deploy a Sails app to AWS](https://www.distelli.com/docs/tutorials/build-and-deploy-sails-angular-application)
 + [Your own mini-Heroku on AWS (2014)](http://blog.grio.com/2014/01/your-own-mini-heroku-on-aws.html)
 + [Deploying Sails/Node.js apps to AWS (2012)](http://cloud.dzone.com/articles/how-deploy-nodejs-apps-aws-mac)
@@ -92,9 +83,9 @@ More 2013:
 
 <a title="About PM2" href="http://pm2.keymetrics.io/"><img style="width:285px;" src="https://sailsjs.com/images/deployment_pm2.png" alt="PM2 logo"/></a>
 
-+ [Deploying with PM2](http://devo.ps/blog/goodbye-node-forever-hello-pm2/)
++ [PM2によるデプロイ](http://devo.ps/blog/goodbye-node-forever-hello-pm2/)
 
-> Note: PM2 isn't really a hosting platform, but it's worth mentioning in this section just so you're aware of it.
+> 注：PM2は実際にはホスティングプラットフォームではありませんが、このセクションでは、知ることで十分です。
 
 
 ### OpenShift (Red Hat)
@@ -102,8 +93,8 @@ More 2013:
 <a href="https://www.openshift.com/"><img style="width:350px;" alt="Red Hat™ OpenShift logo" src="https://sailsjs.com/images/deployment_openshift.png"/></a>
 
 + [Deploying a Sails / Node.js application to OpenShift (2017)](https://gist.github.com/mikermcneil/b6136aa219f6d15b01a05b14cc681fcb)
-+ [Listening to a different IP address on OpenShift (2017-2018)](https://coderwall.com/p/dhhfcw/sailsjs-listening-on-a-different-ip-address) _(courtesy [@otupman](https://github.com/otupman))_
-+ [Get Sails/Node.js running on OpenShift (2017)](https://gist.github.com/mdunisch/4a56bdf972c2f708ccc6) _(Warning: quite out of date, but still useful for context.  Courtesy [@mdunisch](https://github.com/mdunisch).)_
++ [Listening to a different IP address on OpenShift (2017-2018)](https://coderwall.com/p/dhhfcw/sailsjs-listening-on-a-different-ip-address) _（ありがとう、[@otupman](https://github.com/otupman)）_
++ [Get Sails/Node.js running on OpenShift (2017)](https://gist.github.com/mdunisch/4a56bdf972c2f708ccc6) _（かなり古いですが、まだ参考になります。ありがとう、[@mdunisch](https://github.com/mdunisch)。）_
 
 <!--
 ### Xervo (formerly Modulus)
@@ -124,21 +115,21 @@ More 2013:
 
 ### exoscale / CloudControl
 
-+ [Deploying a Sails.js application to exoscale / CloudControl](https://github.com/exoscale/apps-documentation/blob/88d9f157093f0690f139337ff934c027482d4727/Guides/NodeJS/Sailsjs.md) _([rendered version of tutorial](https://webcache.googleusercontent.com/search?q=cache:gq8UZXarNq8J:https://community.exoscale.ch/documentation/apps/nodejs-app-sailsjs/+&cd=1&hl=en&ct=clnk&gl=us))_
++ [Deploying a Sails.js application to exoscale / CloudControl](https://github.com/exoscale/apps-documentation/blob/88d9f157093f0690f139337ff934c027482d4727/Guides/NodeJS/Sailsjs.md) _（[チュートリアルの描画されたバージョン](https://webcache.googleusercontent.com/search?q=cache:gq8UZXarNq8J:https://community.exoscale.ch/documentation/apps/nodejs-app-sailsjs/+&cd=1&hl=en&ct=clnk&gl=us)）_
 
 
 ### RoseHosting
 
-> All hosting plans from RoseHosting are fully-managed with free 24/7 support, so you can contact their [support team](https://www.rosehosting.com/support.html) and they will install and configure Sails.js for you.
+> RoseHostingのホスティングプランはすべて無料で24時間年中無休でサポートされているため、[サポートチーム](https://www.rosehosting.com/support.html)に連絡してSails.jsをインストールして設定します。
 
  + [Install Sails.js with Apache as a reverse proxy on CentOS 7 (2016)](https://www.rosehosting.com/blog/install-sails-js-with-apache-as-a-reverse-proxy-on-centos-7/)
  + [Install Sails.js on Ubuntu (2014)](https://www.rosehosting.com/blog/install-the-sails-js-framework-on-an-ubuntu-vps/)
 
 
-### More options
+### 他の選択肢
 
-+ Like [Heroku](https://stackshare.io/heroku), there are many [other Platform as a Service (PaaS) solutions that support Node.js/Sails.js](https://stackshare.io/heroku/alternatives)
-+ Like [Microsoft Azure](https://stackshare.io/microsoft-azure) and [EC2](https://stackshare.io/amazon-ec2), there are many [other Node.js/Sails.js-compatible "bare-metal"/IaaS cloud servers](https://stackshare.io/amazon-ec2/alternatives)
-+ Like [Cloudflare](https://stackshare.io/cloudflare), there are [other great CDNs for optimized hosting of your static assets](https://stackshare.io/cloudflare/alternatives)
++ [Heroku](https://stackshare.io/heroku)のようなものであれば、ほかにたくさんの[Node.js/Sails.jsをサポートしているPaaSがあります](https://stackshare.io/heroku/alternatives)
++ [Microsoft Azure](https://stackshare.io/microsoft-azure)や[EC2](https://stackshare.io/amazon-ec2)のようなものであれば、ほかにたくさんの[Node.js/Sails.jsが動く"ベアメタル"もしくはIaaSなサーバーがあります](https://stackshare.io/amazon-ec2/alternatives)
++ [Cloudflare](https://stackshare.io/cloudflare)のようなものであれば、ほかに[静的なあアセットをホストするのに最適化された、優れたCDNがあります](https://stackshare.io/cloudflare/alternatives)
 
-<docmeta name="displayName" value="Hosting">
+<docmeta name="displayName" value="ホスティング">
