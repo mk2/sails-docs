@@ -1,25 +1,23 @@
-# Adapters
+# アダプター
 
-### What is an adapter?
+### アダプターとは？
 
-In Sails and Waterline, database adapters (often simply called "adapters", for short) allow the models in your Sails app to communicate with your database(s). In other words, when your code in a controller action or helper calls a model method like `User.find()`, what happens next is determined by the [configured adapter](https://sailsjs.com/documentation/reference/configuration/sails-config-datastores).
+SailsとWaterlineでは、データベースアダプター（「アダプター」とも呼ばれます）は、Sailsアプリケーションのモデルがデータベースと通信できるようにします。言い換えれば、コントローラアクションまたはヘルパーのコードが`User.find()`のようなモデルメソッドを呼び出すと、実行されるのは[設定されたアダプター](https://sailsjs.com/documentation/reference/configuration/sails-config-datastores)によって決まります。
 
-An adapter is defined as a dictionary (aka JavaScript object, like `{}`) with methods like `find`, `create`, etc.  Based on which methods it implements, and the completeness with which they are implemented, adapters are said to implement one or more **interface layers**.  Each interface layer implies a contract to implement certain functionality.  This allows Sails and Waterline to guarantee conventional usage patterns across multiple models, developers, apps, and even companies, making app code more maintainable, efficient, and reliable.
+アダプターは、`find`や`create`などのメソッドを持つ辞書（Javasctipのオブジェクト、`{}`のようなものです）として定義されます。実装しているメソッドやその完全性に基づいて、アダプターは一つ以上の**インターフェースレイヤ**を実装するのが良いといわれています。各インターフェイスレイヤは、ある機能を実装するための約定を意味します。これにより、SailsとWaterlineは、複数のモデルや開発者やアプリ、さらには企業まで、従来のパターン化された使用方法を保証し、アプリケーションコードのメンテナンス性や効率性、信頼性を向上させます。
 
-> In previous versions of Sails, adapters were sometimes used for other purposes, like communicating with certain kinds of RESTful web APIs, internal/proprietary web services, or even hardware.  But _truly_ RESTful APIs are very rare, and so, in most cases, writing a database adapter to integrate with a _non-database API_ can be limiting.  Luckily, there is now a [more straightforward way](https://sailsjs.com/documentation/concepts/helpers) to build these types of integrations.
+> Sailsの以前のバージョンでは、ある種のRESTful Web APIや内部/独自Webサービス、またはハードウェアとの通信など、他の目的でアダプターが使用されることがありました。しかし、本当にRESTfulなAPIは非常にまれであるため、たいていの場合、データベースではないAPIとの統合のためにデータベース・アダプターを作成することは制限されるているかもしれません。幸いにも、こういった統合を構築するための[より素直な方法](https://sailsjs.com/documentation/concepts/helpers)があります。
 
+### アダプターではどんなことができますか？
 
-### What kind of things can I do in an adapter?
+アダプターは、主に、モデル・コンテキスト化されたCRUDメソッドを提供することに重点を置いています。CRUDは、作成、読み取り、更新、および削除を表します。Sails/Waterlineでは、`create()`や`find()`や`update()`、そして`destroy()`というメソッドを呼び出します。
 
-Adapters are mainly focused on providing model-contextualized CRUD methods.  CRUD stands for create, read, update, and delete.  In Sails/Waterline, we call these methods `create()`, `find()`, `update()`, and `destroy()`.
-
-For example, a `MySQLAdapter` implements a `create()` method which, internally, calls out to a MySQL database using the specified table name and connection information and runs an `INSERT ...` SQL query.
-
-
-### Next steps
-
-Read about [available adapters](https://sailsjs.com/documentation/concepts/extending-sails/adapters/available-adapters), or how to make your own [custom adapter](https://sailsjs.com/documentation/concepts/extending-sails/adapters/custom-adapters).
+例えば、`MySQLAdapter`は`create()`という、MySQLデータベースを指定されたテーブル名とコネクション情報で呼び出し、`INSERT ...`というSQLクエリを内部的に実行するようなメソッドを実装しています。
 
 
-<docmeta name="displayName" value="Adapters">
+### 次のステップ
+
+[有効なアダプター](https://sailsjs.com/documentation/concepts/extending-sails/adapters/available-adapters)を読むか、[カスタムアダプター](https://sailsjs.com/documentation/concepts/extending-sails/adapters/custom-adapters)を作成する方法を読みます。
+
+<docmeta name="displayName" value="アダプター">
 <docmeta name="stabilityIndex" value="3">
