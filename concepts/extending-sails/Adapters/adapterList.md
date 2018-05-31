@@ -34,6 +34,11 @@ adapter: 'sails-mysql',
 url: 'mysql://user:password@host:port/database',
 ```
 
+> + MySQLのデフォルトポートは`3306`です。
+> + データに絵文字などの特殊文字を保存する予定がある場合は、データストアの[`charset`](https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html)設定オプションを設定する必要があります。絵文字を許可するには、`charset: 'utf8mb4'`を使います。モデル属性で文字セットを設定するために、[`columnType` 設定](https://sailsjs.com/documentation/concepts/models-and-orm/attributes#?columntype)を使うかもしれません。
+> + MySQLやPostgreSQLのようなリレーショナルデータベースサーバでは、まず最初に[SequelPro](https://www.sequelpro.com/)やmysqlのコマンドラインREPL（SQLの経験者の場合）を使って「データベース」を作成するとこから行うかもしれません。アプリケーションで使う専用のデータベースを作成するのが慣例です。
+> + sails-mysqlアダプターは、[Amazon Aurora](https://aws.amazon.com/rds/aurora/)データベースと100％の互換性があります。
+
 > + The default port for MySQL is `3306`.
 > + If you plan on saving special characters like emojis in your data, you may need to set the [`charset`](https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html) configuration option for your datastore.  To allow emojis, use `charset: 'utf8mb4'`.  You may use the [`columnType` setting](https://sailsjs.com/documentation/concepts/models-and-orm/attributes#?columntype) in a model attribute to set the character set.
 > + For relational database servers like MySQL and PostgreSQL, you may have to create a "database" first using a free tool like [SequelPro](https://www.sequelpro.com/) or in the mysql REPL on the command-line (if you're an experience SQL user). It's customary to make a database specifically for your app to use.
