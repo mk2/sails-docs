@@ -15,14 +15,13 @@
 |  MySQL                  | [require('sails-mysql')](http://npmjs.com/package/sails-mysql)            | `mysql://user:password@host:port/database`      | はい
 |  PostgreSQL             | [require('sails-postgresql')](http://npmjs.com/package/sails-postgresql)  | `postgresql://user:password@host:port/database` | はい
 |  MongoDB                | [require('sails-mongo')](http://npmjs.com/package/sails-mongo)            | `mongodb://user:password@host:port/database`      | はい
-|  ローカルディスク/メモリー           | _(built-in, see [sails-disk](http://npmjs.com/package/sails-disk))_          | _n/a_                                         | **ダメです！**
+|  ローカルディスク/メモリー           | _（組み込み済み、[sails-disk](http://npmjs.com/package/sails-disk)を見てください）_          | _利用不可_                                         | **ダメです！**
 
 
 
 ### sails-mysql
 
-[MySQL](http://en.wikipedia.org/wiki/MySQL) is the world's most popular relational database.
-
+[MySQL](http://en.wikipedia.org/wiki/MySQL)は世界で最も普及しているリレーショナルデータベースです。
 
 [![NPM package info for sails-mysql](https://img.shields.io/npm/dm/sails-mysql.svg?style=plastic)](http://npmjs.com/package/sails-mysql) &nbsp; [![License info](https://img.shields.io/npm/l/sails-mysql.svg?style=plastic)](http://npmjs.com/package/sails-mysql)
 
