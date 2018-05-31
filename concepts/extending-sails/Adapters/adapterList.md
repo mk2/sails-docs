@@ -1,23 +1,21 @@
-# Available database adapters
+# 利用可能なデータベースアダプタ
 
-This page is meant to be an up to date, comprehensive list of all of the core adapters available for the Sails.js framework, and a reference of a few of the most robust community adapters out there.
+このページは、Sails.jsフレームワークで利用可能なコアアダプターの最新の一覧と、最も堅牢なコミュニティアダプターのリファレンスです。サポートされているすべてのアダプタは、Sails/Waterlineアダプタ（`adapter`）と接続URL（`url`）として渡すことによって、ほぼ同じ方法で設定できます。データストアの設定の詳細については、[sails.config.datastores](https://sailsjs.com/documentation/reference/configuration/sails-config-datastores)を見てください。
 
-All supported adapters can be configured in roughly the same way: by passing in a Sails/Waterline adapter (`adapter`), as well as a connection URL (`url`).  For more information on configuring datastores, see [sails.config.datastores](https://sailsjs.com/documentation/reference/configuration/sails-config-datastores).
+> 接続に問題がありますか？接続URLに入力ミスがないかどうか確認してください。それでも問題が解決しない場合は、データベースプロバイダのマニュアルを参照するか、[ヘルプを参照](https://sailsjs.com/support)してください。
 
-> Having trouble connecting?  Be sure to check your connection URL for typos.  If that doesn't work, review the documentation for your database provider, or [get help](https://sailsjs.com/support).
+### 公式にサポートしているデータベースアダプタ
 
-### Officially-supported database adapters
+以下のコアアダプターは、Sails.jsコアチームによって維持やテスト、そして使われています。
 
-The following core adapters are maintained, tested, and used by the Sails.js core team.
+> コアアダプターを手伝いたいですか？[Sailsプロジェクトの貢献ガイド](https://sailsjs.com/contributing)を読んで始めましょう。
 
-> Want to help out with a core adapter?  Get started by reading [the Sails project contribution guide](https://sailsjs.com/contributing).
-
-|  Database technology    | Adapter                                                        | Connection URL structure                      | For production?     |
+|  データベース    | アダプター                                                        | 接続URLの構造                      | 本番利用は大丈夫？     |
 |:------------------------|:---------------------------------------------------------------|:----------------------------------------------|:--------------------|
-|  MySQL                  | [require('sails-mysql')](http://npmjs.com/package/sails-mysql)            | `mysql://user:password@host:port/database`      | Yes
-|  PostgreSQL             | [require('sails-postgresql')](http://npmjs.com/package/sails-postgresql)  | `postgresql://user:password@host:port/database` | Yes
-|  MongoDB                | [require('sails-mongo')](http://npmjs.com/package/sails-mongo)            | `mongodb://user:password@host:port/database`      | Yes
-|  Local disk / memory           | _(built-in, see [sails-disk](http://npmjs.com/package/sails-disk))_          | _n/a_                                         | **No!**
+|  MySQL                  | [require('sails-mysql')](http://npmjs.com/package/sails-mysql)            | `mysql://user:password@host:port/database`      | はい
+|  PostgreSQL             | [require('sails-postgresql')](http://npmjs.com/package/sails-postgresql)  | `postgresql://user:password@host:port/database` | はい
+|  MongoDB                | [require('sails-mongo')](http://npmjs.com/package/sails-mongo)            | `mongodb://user:password@host:port/database`      | はい
+|  ローカルディスク/メモリー           | _(built-in, see [sails-disk](http://npmjs.com/package/sails-disk))_          | _n/a_                                         | **ダメです！**
 
 
 
