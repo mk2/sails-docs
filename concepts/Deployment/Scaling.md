@@ -10,7 +10,7 @@
 
 ### アーキテクチャの例
 
-```
+```txt
                              ....
                     /  Sails.js server  \      /  Database (e.g. Mongo, Postgres, etc)
 Load Balancer  <-->    Sails.js server    <-->    Socket.io message queue (Redis)
