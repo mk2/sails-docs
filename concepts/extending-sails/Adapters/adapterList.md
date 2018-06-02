@@ -39,15 +39,11 @@ url: 'mysql://user:password@host:port/database',
 > + MySQLやPostgreSQLのようなリレーショナルデータベースサーバでは、まず最初に[SequelPro](https://www.sequelpro.com/)やmysqlのコマンドラインREPL（SQLの経験者の場合）を使って「データベース」を作成するとこから行うかもしれません。アプリケーションで使う専用のデータベースを作成するのが慣例です。
 > + sails-mysqlアダプターは、[Amazon Aurora](https://aws.amazon.com/rds/aurora/)データベースと100％の互換性があります。
 
-> + The default port for MySQL is `3306`.
-> + If you plan on saving special characters like emojis in your data, you may need to set the [`charset`](https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html) configuration option for your datastore.  To allow emojis, use `charset: 'utf8mb4'`.  You may use the [`columnType` setting](https://sailsjs.com/documentation/concepts/models-and-orm/attributes#?columntype) in a model attribute to set the character set.
-> + For relational database servers like MySQL and PostgreSQL, you may have to create a "database" first using a free tool like [SequelPro](https://www.sequelpro.com/) or in the mysql REPL on the command-line (if you're an experience SQL user). It's customary to make a database specifically for your app to use.
-> + The sails-mysql adapter is also 100% compatible with [Amazon Aurora](https://aws.amazon.com/rds/aurora/) databases.
 
-##### Handshake inactivity timeout errors
-If you find yourself encountering a "Handshake inactivity timeout" error when your Sails app interacts with MySQL, you can increase the timeout using the `connectTimeout` option.  This is [usually only necessary](https://github.com/mysqljs/mysql/issues/1434) when queries are running side-by-side with computationally expensive operations (for example, compiling client-side typescript files or running webpack during development).
+##### ハンドシェイクが非アクティブになることによる、タイムアウトエラー
+SailsアプリケーションがMySQLと情報のやり取りをしているときに、「ハンドシェイクが非アクティブになりタイムアウトする」エラーが発生した場合は、`connectTimeout`オプションを使用してタイムアウトを増やすことができます。これは通常、クエリが高負荷な処理（たとえばクライアント側のtypescriptファイルのコンパイルや開発中のwebpackの実行）と並んで実行されている[場合にのみ必要](https://github.com/mysqljs/mysql/issues/1434)です。
 
-For example, you might extend the timeout to 20 seconds:
+例として、タイムアウトを20秒に延長することができます。
 
 ```javascript
 adapter: 'sails-mysql',
@@ -58,7 +54,7 @@ connectTimeout: 20000
 
 ### sails-postgresql
 
-[PostgreSQL](http://en.wikipedia.org/wiki/postgresql) is a modern relational database with powerful features.
+[PostgreSQL](http://en.wikipedia.org/wiki/postgresql)は強力な機能を備えた最新のリレーショナルデータベースです。
 
 [![NPM package info for sails-postgresql](https://img.shields.io/npm/dm/sails-postgresql.svg?style=plastic)](http://npmjs.com/package/sails-postgresql) &nbsp; [![License info](https://img.shields.io/npm/l/sails-postgresql.svg?style=plastic)](http://npmjs.com/package/sails-postgresql)
 
@@ -71,12 +67,13 @@ adapter: 'sails-postgresql',
 url: 'postgresql://user:password@host:port/database',
 ```
 
-> + The default port for PostgreSQL is `5432`.
-> + In addition to `adapter` and `url`, you might also need to set `ssl: true`.  (This depends on where your PostgreSQL database server is hosted.  For example, `ssl: true` is required when connecting to Heroku's hosted PostgreSQL service.)
+> + PostgreSQLのデフォルトのポートは`5432`です。
+> + `adapter`と`url`に加えて、`ssl: true`も設定する必要があるかもしれません。（これは使用するPostgreSQLデータベースサーバがどこにほすとされているかによって変わります。例えば、HerokuでホストされているPostgreSQLサービスに接続する場合は、`ssl: true`が必要になります。）
+
 
 ### sails-mongo
 
-[MongoDB](http://en.wikipedia.org/wiki/MongoDB) is the leading NoSQL database.
+[MongoDB](http://en.wikipedia.org/wiki/MongoDB)は主要なNoSQLデータベースです。
 
 [![NPM package info for sails-mongo](https://img.shields.io/npm/dm/sails-mongo.svg?style=plastic)](http://npmjs.com/package/sails-mongo) &nbsp; [![License info](https://img.shields.io/npm/l/sails-mongo.svg?style=plastic)](http://npmjs.com/package/sails-mongo)
 
@@ -89,15 +86,16 @@ adapter: 'sails-mongo',
 url: 'mongodb://user:password@host:port/database',
 ```
 
-> + The default port for MongoDB is `27017`.
-> + If your Mongo depoyment keeps track of its internal credentials in a separate database, then you may need to name that database by tacking on [`?authSource=theotherdb`](https://stackoverflow.com/a/40608735/486547) to the end of the connection URL.
+> + MongoDBのデフォルトポートは`27017`です。
+> + MongoDBのデプロイにおいて、内部の資格情報を別のデータベースに記録している場合、接続URLの末尾に[`?authSource=theotherdb`](https://stackoverflow.com/a/40608735/486547)のように名前を付加する必要があるかもしれません。
+
 
 
 ### sails-disk
 
-Write to your computer's hard disk, or a mounted network drive.  Not suitable for at-scale production deployments, but great for a small project, and essential for developing in environments where you may not always have a database set up.  This adapter is bundled with Sails and works out of the box with zero configuration.
+コンピュータのハードディスクまたはマウントされたネットワークドライブに書き込みます。大規模な本番環境でのデプロイには適していませんが、小規模のプロジェクトには適しており、データベースをセットアップしていない環境での開発には不可欠です。このアダプタはSailsにバンドルされており、何も設定することなく、そのまま使用できます。
 
-You can also operate `sails-disk` in _memory-only mode_.  See the settings table below for details.
+メモリオンリーモードでも`sails-disk`を使用できます。詳細については、下記の設定票を参照してください。
 
 [![NPM package info for sails-disk](https://img.shields.io/npm/dm/sails-disk.svg?style=plastic)](http://npmjs.com/package/sails-disk) &nbsp; [![License info](https://img.shields.io/npm/l/sails-disk.svg?style=plastic)](http://npmjs.com/package/sails-disk)
 
@@ -107,54 +105,53 @@ _Configured as the default database, by default._
 
 ##### Optional datastore settings for `sails-disk`
 
-| Setting | Description | Type  | Default |
+| 設定 | 説明 | タイプ  | デフォルト |
 |:--------|:------------|:------|:--------|
-| `dir`   | The directory to place database files in.  The adapter creates one file per model. | ((string)) | `.tmp/localDiskDb` |
-| `inMemoryOnly` | If `true`, no database files will be written to disk.  Instead, all data will be stored in memory (and will be lost when the app stops running). | ((boolean)) | `false` |
+| `dir`   | 	データベースファイルを格納するディレクトリ。アダプタはモデルごとに1つのファイルを作成します。 | ((string)) | `.tmp/localDiskDb` |
+| `inMemoryOnly` | `true`の場合、データベースファイルはディスクに書き込まれません。代わりに、すべてのデータがメモリに保存されます（アプリケーションが停止すると失われます）。 | ((boolean)) | `false` |
 
-> + You can configure the default `sails-disk` adapter by adding settings to the `default` datastore in `config/datastores.js`.
-
-
-### Community-supported database adapters
-
-Is your database not supported by one of the core adapters?  Good news!  There are many different community database adapters for Sails.js and Waterline [available on NPM](https://www.npmjs.com/search?q=sails+adapter).
-
-Here are a few highlights:
+> + `config/datastores.js`の、`default`データストアにデフォルトの`sails-disk`アダプターを追加することで設定できます。
 
 
-| Database technology             | Adapter                | Maintainer | Interfaces implemented | Stable release |
+### コミュニティがサポートしている、データベースアダプタ
+
+使いたいデータベースが、コアアダプタでサポートされていない？良いニュースがあります！Sails.jsとWaterlineには、[NPMで利用可能な](https://www.npmjs.com/search?q=sails+adapter)、多種多様なコミュニティデータベースアダプターがあります。
+
+ここに主要なものを記します。
+
+
+| データベース技術             | アダプター                | メンテナー | 実装されたインターフェース | リリースの安定性 |
 |:--------------------------------|:-----------------------|:-----------|:-----------------------|-----------------------|
-| **Redis**                       | [sails-redis](https://npmjs.com/package/sails-redis) | [Ryan Clough / Solnet Solutions](https://github.com/Ryanc1256) | Semantic, Queryable                                               | [![NPM package info for sails-redis](https://img.shields.io/npm/dm/sails-redis.svg?style=plastic)](http://npmjs.com/package/sails-redis) |
-| **MS SQL Server**               | [sails-MSSQLserver](https://github.com/misterGF/sails-mssqlserver) | [misterGF](https://github.com/misterGF) | Semantic, Queryable                  | [![NPM package info for sails-sqlserver](https://img.shields.io/npm/dm/sails-sqlserver.svg?style=plastic)](http://npmjs.com/package/sails-sqlserver)
-| **OrientDB**                    | [sails-orientDB](https://github.com/appscot/sails-orientdb) | [appscot](https://github.com/appscot) | Semantic, Queryable, Associations, Migratable | [![NPM package info for sails-orientdb](https://img.shields.io/npm/dm/sails-orientdb.svg?style=plastic)](http://npmjs.com/package/sails-orientdb)
-| **Oracle**                      | [sails-oracleDB](https://npmjs.com/package/sails-oracledb) | [atiertant](https://github.com/atiertant) | Semantic, Queryable | [![NPM package info for sails-oracledb](https://img.shields.io/npm/dm/sails-oracledb.svg?style=plastic)](http://npmjs.com/package/sails-oracledb) |
-| **Oracle (AnyPresence)**        | [waterline-oracle-adapter](https://github.com/AnyPresence/waterline-oracle-adapter) | [AnyPresence](http://anypresence.com) | Semantic, Queryable     | [![Release info for AnyPresence/waterline-oracle-adapter](https://img.shields.io/github/tag/AnyPresence/waterline-oracle-adapter.svg?style=plastic)](https://github.com/AnyPresence/waterline-oracle-adapter)
-| **Oracle (stored procedures)**  | [sails-oracle-SP](https://npmjs.com/sails-oracle-sp) | [Buto](http://github.com/buto) and [nethoncho](http://github.com/nethoncho) | Semantic, Queryable     | [![NPM package info for sails-oracle-sp](https://img.shields.io/npm/dm/sails-oracle-sp.svg?style=plastic)](http://npmjs.com/package/sails-oracle-sp)
-| **SAP HANA DB**                 | [sails-HANA](https://npmjs.com/sails-hana) | [Digital Rockers](http://www.digitalrockers.it/) &amp; [Enrico Battistella](http://github.com/battishaar) | Semantic, Queryable     | [![NPM package info for sails-hana](https://img.shields.io/npm/dm/sails-hana.svg?style=plastic)](http://npmjs.com/package/sails-hana)
-| **SAP HANA (AnyPresence)**      | [waterline-SAP-HANA-adapter](https://github.com/AnyPresence/waterline-sap-hana-adapter) | [AnyPresence](http://anypresence.com) | Semantic, Queryable     | [![Release info for AnyPresence/waterline-sap-hana-adapter](https://img.shields.io/github/tag/AnyPresence/waterline-sap-hana-adapter.svg?style=plastic)](https://github.com/AnyPresence/waterline-sap-hana-adapter)
-| **IBM DB2**                     | [sails-DB2](https://npmjs.com/sails-db2) | [ibuildings Italia](https://github.com/IbuildingsItaly) &amp; [Vincenzo Ferrari](https://github.com/wilk) | Semantic, Queryable     | [![NPM package info for sails-db2](https://img.shields.io/npm/dm/sails-db2.svg?style=plastic)](http://npmjs.com/package/sails-db2)
-| **ServiceNow SOAP**             | [waterline-ServiceNow-SOAP](https://npmjs.com/waterline-servicenow-soap) | [Sungard Availability Services](http://www.sungardas.com/) | Semantic, Queryable     | [![NPM package info for waterline-servicenow-soap](https://img.shields.io/npm/dm/waterline-servicenow-soap.svg?style=plastic)](http://npmjs.com/package/waterline-servicenow-soap)
-| **Cassandra**                   | [sails-cassandra](https://github.com/dtoubelis/sails-cassandra) | [dtoubelis](https://github.com/dtoubelis) | Semantic, Migratable, Iterable | [![NPM package info for sails-cassandra](https://img.shields.io/npm/dm/sails-cassandra.svg?style=plastic)](http://npmjs.com/package/sails-cassandra)
-| **Solr**                        | [sails-solr](https://github.com/sajov/sails-solr) | [sajov](https://github.com/sajov) | Semantic, Migratable, Queryable | [![NPM package info for sails-solr](https://img.shields.io/npm/dm/sails-solr.svg?style=plastic)](http://npmjs.com/package/sails-solr)
-| **FileMaker Database**          | [sails-FileMaker](https://github.com/geistinteractive/sails-filemaker) | [Geist Interactive](https://www.geistinteractive.com/) | Semantic | [![NPM package info for sails-filemaker](https://img.shields.io/npm/dm/sails-filemaker.svg?style=plastic)](http://npmjs.com/package/sails-filemaker)
-| **Apache Derby**                | [sails-derby](https://github.com/dash-/node-sails-derby) | [dash-](https://github.com/dash-) | Semantic, Queryable, Associations, SQL | [![NPM package info for sails-derby](https://img.shields.io/npm/dm/sails-derby.svg?style=plastic)](http://npmjs.com/package/sails-derby)
-| **REST API (Generic)**          | [sails-REST](https://github.com/zohararad/sails-rest) | [zohararad](https://github.com/zohararad) | Semantic                                        | [![NPM package info for sails-rest](https://img.shields.io/npm/dm/sails-rest.svg?style=plastic)](http://npmjs.com/package/sails-rest)
+| **Redis**                       | [sails-redis](https://npmjs.com/package/sails-redis) | [Ryan Clough / Solnet Solutions](https://github.com/Ryanc1256) | セマンティック、クエリ可能                                               | [![NPM package info for sails-redis](https://img.shields.io/npm/dm/sails-redis.svg?style=plastic)](http://npmjs.com/package/sails-redis) |
+| **MS SQL Server**               | [sails-MSSQLserver](https://github.com/misterGF/sails-mssqlserver) | [misterGF](https://github.com/misterGF) | セマンティック、クエリ可能                  | [![NPM package info for sails-sqlserver](https://img.shields.io/npm/dm/sails-sqlserver.svg?style=plastic)](http://npmjs.com/package/sails-sqlserver)
+| **OrientDB**                    | [sails-orientDB](https://github.com/appscot/sails-orientdb) | [appscot](https://github.com/appscot) | セマンティック、クエリ可能、アソシエーション、マイグレーション可能 | [![NPM package info for sails-orientdb](https://img.shields.io/npm/dm/sails-orientdb.svg?style=plastic)](http://npmjs.com/package/sails-orientdb)
+| **Oracle**                      | [sails-oracleDB](https://npmjs.com/package/sails-oracledb) | [atiertant](https://github.com/atiertant) | セマンティック、クエリ可能 | [![NPM package info for sails-oracledb](https://img.shields.io/npm/dm/sails-oracledb.svg?style=plastic)](http://npmjs.com/package/sails-oracledb) |
+| **Oracle (AnyPresence)**        | [waterline-oracle-adapter](https://github.com/AnyPresence/waterline-oracle-adapter) | [AnyPresence](http://anypresence.com) | セマンティック、クエリ可能     | [![Release info for AnyPresence/waterline-oracle-adapter](https://img.shields.io/github/tag/AnyPresence/waterline-oracle-adapter.svg?style=plastic)](https://github.com/AnyPresence/waterline-oracle-adapter)
+| **Oracle (stored procedures)**  | [sails-oracle-SP](https://npmjs.com/sails-oracle-sp) | [Buto](http://github.com/buto) and [nethoncho](http://github.com/nethoncho) | セマンティック、クエリ可能     | [![NPM package info for sails-oracle-sp](https://img.shields.io/npm/dm/sails-oracle-sp.svg?style=plastic)](http://npmjs.com/package/sails-oracle-sp)
+| **SAP HANA DB**                 | [sails-HANA](https://npmjs.com/sails-hana) | [Digital Rockers](http://www.digitalrockers.it/) &amp; [Enrico Battistella](http://github.com/battishaar) | セマンティック、クエリ可能     | [![NPM package info for sails-hana](https://img.shields.io/npm/dm/sails-hana.svg?style=plastic)](http://npmjs.com/package/sails-hana)
+| **SAP HANA (AnyPresence)**      | [waterline-SAP-HANA-adapter](https://github.com/AnyPresence/waterline-sap-hana-adapter) | [AnyPresence](http://anypresence.com) | セマンティック、クエリ可能     | [![Release info for AnyPresence/waterline-sap-hana-adapter](https://img.shields.io/github/tag/AnyPresence/waterline-sap-hana-adapter.svg?style=plastic)](https://github.com/AnyPresence/waterline-sap-hana-adapter)
+| **IBM DB2**                     | [sails-DB2](https://npmjs.com/sails-db2) | [ibuildings Italia](https://github.com/IbuildingsItaly) &amp; [Vincenzo Ferrari](https://github.com/wilk) | セマンティック、クエリ可能    | [![NPM package info for sails-db2](https://img.shields.io/npm/dm/sails-db2.svg?style=plastic)](http://npmjs.com/package/sails-db2)
+| **ServiceNow SOAP**             | [waterline-ServiceNow-SOAP](https://npmjs.com/waterline-servicenow-soap) | [Sungard Availability Services](http://www.sungardas.com/) | セマンティック、クエリ可能     | [![NPM package info for waterline-servicenow-soap](https://img.shields.io/npm/dm/waterline-servicenow-soap.svg?style=plastic)](http://npmjs.com/package/waterline-servicenow-soap)
+| **Cassandra**                   | [sails-cassandra](https://github.com/dtoubelis/sails-cassandra) | [dtoubelis](https://github.com/dtoubelis) | セマンティック、マイグレーション可能、イテラブル | [![NPM package info for sails-cassandra](https://img.shields.io/npm/dm/sails-cassandra.svg?style=plastic)](http://npmjs.com/package/sails-cassandra)
+| **Solr**                        | [sails-solr](https://github.com/sajov/sails-solr) | [sajov](https://github.com/sajov) | セマンティック、マイグレーション可能、イテラブル | [![NPM package info for sails-solr](https://img.shields.io/npm/dm/sails-solr.svg?style=plastic)](http://npmjs.com/package/sails-solr)
+| **FileMaker Database**          | [sails-FileMaker](https://github.com/geistinteractive/sails-filemaker) | [Geist Interactive](https://www.geistinteractive.com/) | セマンティック | [![NPM package info for sails-filemaker](https://img.shields.io/npm/dm/sails-filemaker.svg?style=plastic)](http://npmjs.com/package/sails-filemaker)
+| **Apache Derby**                | [sails-derby](https://github.com/dash-/node-sails-derby) | [dash-](https://github.com/dash-) | セマンティック、クエリ可能、アソシエーション、SQL | [![NPM package info for sails-derby](https://img.shields.io/npm/dm/sails-derby.svg?style=plastic)](http://npmjs.com/package/sails-derby)
+| **REST API (Generic)**          | [sails-REST](https://github.com/zohararad/sails-rest) | [zohararad](https://github.com/zohararad) | セマンティック                                        | [![NPM package info for sails-rest](https://img.shields.io/npm/dm/sails-rest.svg?style=plastic)](http://npmjs.com/package/sails-rest)
 
 
 
-##### Add your custom adapter to this list
+##### 自分のカスタムアダプターをこのリストに追加する
 
-If you see out of date information on this page, or if you want to add an adapter you made, please submit a pull request to this file updating the table of community adapters above.
+このページの古い情報が表示された場合や作成したアダプターを追加する場合は、上記のコミュニティアダプターのテーブルを更新してプルリクエストを送信してください。
 
-Note that, to be listed on this page, an adapter must:
+このページに記載されているアダプタは、次の条件を満たす必要があります。
 
-1. Be free and open-source (_libre_ and _gratis_), preferably under the MIT license.
-2. Pass all of the Waterline adapter tests for the interface layers declared in its package.json file.
-3. Support configuration via a connection URL, as `url` (if applicable)
+1. フリーでオープンソース（libre and gratis）として公開してください。MITライセンスが望ましいです。
+2. package.jsonで宣言されているインターフェースレイヤー向けの、すべてのWaterlineのアダプターテストに合格してください。
+3. `url`として接続URLの設定をサポートしてください（該当する場合）。
 
-
-If you find that any of these conventions are not true for any of the community adapters above (i.e. for latest stable release published on NPM, not for the code on GitHub), then please reach out to the maintainer of the adapter.  If you can't reach them or need further assistance, then please [get in touch](https://sailsjs.com/contact) with a member of the Sails core team.
-
+上記のコミュニティアダプターにこれらの規約のいずれかが当てはまらないことが判明した場合（言い換えると、Githubのコードではなく、NPMへ公開された最新の安定板）、アダプターのメンテナに問い合わせてください。連絡が取れない場合や、さらなる支援が必要な場合は、Sailsのコアチームのメンバーに[連絡](https://sailsjs.com/contact)してください。
 
 
-<docmeta name="displayName" value="Available adapters">
+
+<docmeta name="displayName" value="利用可能なアダプター">
