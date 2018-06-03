@@ -95,13 +95,13 @@ url: 'mongodb://user:password@host:port/database',
 
 コンピュータのハードディスクまたはマウントされたネットワークドライブに書き込みます。大規模な本番環境でのデプロイには適していませんが、小規模のプロジェクトには適しており、データベースをセットアップしていない環境での開発には不可欠です。このアダプタはSailsにバンドルされており、何も設定することなく、そのまま使用できます。
 
-メモリオンリーモードでも`sails-disk`を使用できます。詳細については、下記の設定票を参照してください。
+メモリオンリーモードでも`sails-disk`を使用できます。詳細については、下記の設定表を参照してください。
 
 [![NPM package info for sails-disk](https://img.shields.io/npm/dm/sails-disk.svg?style=plastic)](http://npmjs.com/package/sails-disk) &nbsp; [![License info](https://img.shields.io/npm/l/sails-disk.svg?style=plastic)](http://npmjs.com/package/sails-disk)
 
-_Available out of the box in every Sails app._
+_すべてのSailsアプリケーションで、何も設定することなく利用可能です。_
 
-_Configured as the default database, by default._
+_デフォルトで、標準で使うデータベースとして設定されています。_
 
 ##### Optional datastore settings for `sails-disk`
 
