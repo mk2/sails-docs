@@ -1,23 +1,24 @@
-# Custom adapters
+# カスタムアダプター
 
-Sails makes it fairly easy to write your own database adapter.  Custom adapters can be built directly in your app (`api/adapters/`) or published as NPM packages.  Check out [Intro to Custom Adapters](https://github.com/balderdashy/sails-docs/blob/master/contributing/intro-to-custom-adapters.md), the [Adapter Interface Reference](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md), and [sails-adapter-boilerplate](https://github.com/balderdashy/sails-adapter-boilerplate) for more information about creating your own adapter.
-
-
-### Where does my adapter go?
-
-There are two different places you can build an adapter:
-
-##### In your app's `api/adapters/` folder
-
-If an adapter is only going to be used in one app (e.g. a short-term fork of an existing adapter) you can put it in `api/adapters/`.  This is what you get out of the box when you run `sails generate adapter`.  In this case, the name of the adapter is determined by the name of the folder inside `api/adapters/`.  (By convention, the entry point for your adapter should be `index.js`.)
-
-##### In a separate repo
-
-Go with this option if you plan to share your adapter between multiple Sails apps, whether that's within your organization or as an open-source package for other members of the Sails/Node.js community at large.  To use an externalized adapter like this, you'll need to do `npm install your-adapter-package-name` or `npm link your-adapter-package-name`.
-
-> Before you start on an open-source adapter, we recommend you search GitHub for `sails-databasename` and `waterline-databasename` to check if a project already exists. If it does, it's generally a good idea to approach the author of an existing adapter and offer to contribute instead of starting a new project. Most developers will welcome your help, and the combined efforts will likely result in a better quality adapter. If one doesn't exist, we recommend you create a new project and name it following the convention: `sails-databasename`.
+Sailsでは、独自のデータベースアダプターを簡単に作成できます。カスタムアダプターは、あなたのアプリ（`api/adapters/`）に直接作成することも、NPMパッケージとして公開することもできます。[カスタムアダプターの導入](https://github.com/balderdashy/sails-docs/blob/master/contributing/intro-to-custom-adapters.md)と[アダプターインターフェースのリファレンス](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md)、それから[sails-adapter-boilerplate](https://github.com/balderdashy/sails-adapter-boilerplate)で、独自のアダプターを作成するための詳細情報をチェックしましょう。
 
 
+### アダプターはどこにあるのですか？
+
+2つの違う場所にアダプターを作成できます。
+
+##### アプリケーションの`api/adapters/`フォルダ
+
+アダプターが1つのアプリケーション（たとえば、既存のアダプターの短期間のフォーク）でのみ使用される場合は、そのアダプターを`api/adapters/`に入れることができます。`sails generate adapter`を実行すればすぐに生成されるものです。この場合、アダプターの名前は、`api/adapter/`内のフォルダの名前によってきます。（規約により、アダプターのエントリーポイントが`index.js`となる必要があります。）
+
+##### 別のリポジトリ
+
+複数のSailsアプリケーションでアダプターを共有する場合は、組織内に使うものかどうか、Sails/Node.jsコミュニティの他のメンバーのためのオープンソースパッケージかどうかに関係なく、このオプションを使用することをお勧めします。このような外部のアダプターを使用するには、`npm install your-adapter-package-name`または`npm link your-adapter-package-name`を実行する必要があります。
+
+> オープンソースのアダプターを始める前に、プロジェクトがすでに存在しているか調べるために、`sails-databasename`と`waterline-databasename`でGithubを検索してみることをお勧めします、もしあるのであれば、既存のアダプターの作成者に連絡を取り、新しいプロジェクトを始める代わりにコントリビュートするのが、一般的には良い考え方です。ほとんどの開発者は助けを歓迎するでしょうし、その結果より良い品質のアダプターが得られるかもしれません。存在しない場合は、`sails-databasename`という規約に従った名前で新しいプロジェクトを作成することをお勧めします。
+
+
+### カスタムアダプターには何が入っていますか？
 ### What goes in a custom adapter?
 
 In Sails, database adapters expose **interfaces**, which imply a conract to implemnt certain functionality.  This allows us to guarantee conventional usage patterns across multiple models, developers, apps, and even companies, making app code more maintainable, efficient, and reliable.  Adapters are primarily useful for integrating with databases, but they can also be used to support any open API or internal/proprietary web service that is _purely_ RESTful.
