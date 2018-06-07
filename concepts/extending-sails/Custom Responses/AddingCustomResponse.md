@@ -1,6 +1,6 @@
-# Adding a custom response
+# カスタムレスポンスの追加
 
-To add your own custom response method, simply add a file to `/api/responses` with the same name as the method you would like to create.  The file should export a function, which can take any parameters you like.
+独自のカスタムレスポンスを追加するには、単に`/api/responses`に作成したいメソッドと同名のファイルを追加してください。そのファイルは関数をエクスポートする必要があり、任意のパラメーターを受け取ることができます。
 
 ```javascript
 /**
@@ -48,4 +48,4 @@ module.exports = function(message) {
   });
 }
 ```
-<docmeta name="displayName" value="Adding a custom response">
+<docmeta name="displayName" value="カスタムレスポンスの追加">
