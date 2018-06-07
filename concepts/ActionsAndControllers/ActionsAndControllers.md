@@ -2,7 +2,7 @@
 
 ### 概要
 
-_アクション_ は、Webブラウザ、モバイルアプリケーション、またはサーバーと通信することができる他のシステムからの*要求*に応答するSailsアプリケーションの基礎的なオブジェクトです。しばしば[モデル](https://sailsguides.jp/doc/concepts/models-and-orm)と[ビュー](https://sailsguides.jp/doc/concepts/views)の仲介者として動作します。例外的な場合を除き、アクションはプロジェクトの[ビジネスロジック](https://ja.wikipedia.org/wiki/%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%AD%E3%82%B8%E3%83%83%E3%82%AF)の大部分を編成します。
+_アクション_ は、Webブラウザ、モバイルアプリケーション、またはサーバーと通信することができる他のシステムからの*要求*に応答するSailsアプリケーションの基礎的なオブジェクトです。しばしば[モデル](https://sailsguides.jp/doc/concepts/orm)と[ビュー](https://sailsguides.jp/doc/concepts/views)の仲介者として動作します。例外的な場合を除き、アクションはプロジェクトの[ビジネスロジック](https://ja.wikipedia.org/wiki/%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%AD%E3%82%B8%E3%83%83%E3%82%AF)の大部分を編成します。
 
 アクションはアプリケーションの[routes](https://sailsguides.jp/doc/concepts/Routes)にバインドされるため、ユーザーエージェントが特定のURLを要求すると、バインドされたアクションが実行されてビジネスロジックが実行され、応答が送信されます。例えば、`GET /hello`というルートをアプリケーションのアクションとして次のようにバインドできます。
 
