@@ -2,7 +2,7 @@
 
 ## 全体的な流れ
 
-- [sails-docs/master(以降原著マスタと呼ぶ)](https://github.com/balderdashy/sails-docs/tree/master)
+- [sails-docs/master（以降原著マスタと呼ぶ）](https://github.com/balderdashy/sails-docs/tree/master)
 - [sails-docs-ja/master（以降コピーマスタと呼ぶ）](https://github.com/mk2/sails-docs-ja/tree/master)
 - [sails-docs-ja/ja/1_0（以降日本語マスタと呼ぶ）](https://github.com/mk2/sails-docs-ja/tree/ja/1_0)
 
