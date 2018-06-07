@@ -1,4 +1,4 @@
-# Generators
+# ジェネレーター
 
 A big part of Sails, like any framework, is to automate repetitive tasks.  **Generators** are no exception-- they're what power the Sails command-line interface any time it generates new files for your Sails projects.  In fact, you or someone on your team probably used a _generator_ to create your latest Sails project.
 
