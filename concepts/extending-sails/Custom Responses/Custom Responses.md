@@ -2,7 +2,7 @@
 
 ### 概要
 
-Sailsアプリケーションには、[アクションコード](https://sailsguides.jp/doc/concepts/actions-and-controllers)から呼び出すことのできる、予め設定されたいくつかのレスポンスが同梱されています。これらのデフォルトのレスポンスは"resource not found"（[`notfound`レスポンス](https://sailsguides.jp/doc/reference/res/res-not-found)）や"internal server error"（[`serverError`レスポンス](https://sailsguides.jp/doc/reference/response-res/res-server-error)）のような状況に対処することができます。もしアプリケーションがデフォルトのレスポンスの仕方を変更がする必要がある場合や、全く新しい応答を作成したい場合は、`api/responses`フォルダーにファイルを追加してください。
+Sailsアプリケーションには、[アクションコード](https://sailsguides.jp/doc/concepts/actions-and-controllers)から呼び出すことのできる、予め設定されたいくつかのレスポンスが同梱されています。これらのデフォルトのレスポンスは"resource not found"（[`notfound`レスポンス](https://sailsguides.jp/doc/reference/res/res-not-found)）や"internal server error"（[`serverError`レスポンス](https://sailsguides.jp/doc/reference/res/res-server-error)）のような状況に対処することができます。もしアプリケーションがデフォルトのレスポンスの仕方を変更がする必要がある場合や、全く新しい応答を作成したい場合は、`api/responses`フォルダーにファイルを追加してください。
 
 > 注意：`api/responses`はSailsアプリケーションを新しく生成した場合にデフォルトで作成されないため、レスポンスを追加・カスタマイズしたい場合は自分で追加する必要があります。
 
