@@ -28,24 +28,24 @@ Node.js（Sails.jsも）のアプリケーションは水平方向にスケー�
 + アプリケーションで使用している他の依存関係が、共有メモリに依存していないことを確認してください。
 + モデルで使用しているデータベース（MySQL、Postgres、Mongoなど）がスケーラブルであることを確認してください（例：シャーディング/クラスタ）
 + **アプリでセッションを使用している場合：**
-  + Redisなどの共有セッションストアを使用するようにアプリケーションを設定し（単に`config/session.js`内の`adapter`オプションのコメントを外します）、"@sailshq/connect-redis"セッションアダプターをアプリケーションの依存ライブラリとしてインストールします（例：`npm install @sailshq/connect-redis --save`）。本番用のセッションストアの設定の詳細については、[sails.config.sessionドキュメント](https://sailsjs.com/documentation/reference/configuration/sails-config-session#?production-config)を参照してください。
+  + Redisなどの共有セッションストアを使用するようにアプリケーションを設定し（単に`config/session.js`内の`adapter`オプションのコメントを外します）、"@sailshq/connect-redis"セッションアダプターをアプリケーションの依存ライブラリとしてインストールします（例：`npm install @sailshq/connect-redis --save`）。本番用のセッションストアの設定の詳細については、[sails.config.sessionドキュメント](https://sailsguides.jp/doc/reference/configuration/sails-config-session#?production-config)を参照してください。
 + **アプリがソケットを使用する場合：**
   + socket.ioメッセージを配信するための共有メッセージキューとしてRedisを使用するようにアプリケーションを設定します。Socket.io（Sails.jsも）のアプリケーションはデフォルトでソケット用のRedisをサポートしているので、リモートのredis pubsubサーバを有効にするには、`config/env/production.js`の該当する行のコメントを外します。
   + "@sailshq/socket.io-redis"アダプターをアプリケーションの依存ライブラリとしてインストールします（例：`npm install @sailshq/socket.io-redis`）。
 + **クラスタが単一のサーバー上にある場合（たとえば、[pm2クラスタモード](http://pm2.keymetrics.io/docs/usage/cluster-mode/)を使用）**
-  + Gruntタスクによるファイルの競合の問題を回避するには、常に`production`環境でアプリケーションを起動したり、[Gruntを完全にオフにすること](https://sailsjs.com/documentation/concepts/assets/disabling-grunt)を検討してください。シングルサーバクラスタにおけるGruntの問題の詳細は、[こちら](https://github.com/balderdashy/sails/issues/3577#issuecomment-184786535)を参照してください。
-  + ブートストラップが複数回実行されたとき（クラスタ内のノードごとに1回）に競合が発生しないように、データをデータベースに永続するためには、[`config/bootstrap.js`](https://sailsjs.com/documentation/reference/configuration/sails-config-bootstrap)に注意してください。
+  + Gruntタスクによるファイルの競合の問題を回避するには、常に`production`環境でアプリケーションを起動したり、[Gruntを完全にオフにすること](https://sailsguides.jp/doc/concepts/assets/disabling-grunt)を検討してください。シングルサーバクラスタにおけるGruntの問題の詳細は、[こちら](https://github.com/balderdashy/sails/issues/3577#issuecomment-184786535)を参照してください。
+  + ブートストラップが複数回実行されたとき（クラスタ内のノードごとに1回）に競合が発生しないように、データをデータベースに永続するためには、[`config/bootstrap.js`](https://sailsguides.jp/doc/reference/configuration/sails-config-bootstrap)に注意してください。
 
 ### PaaSにNode/Sailsアプリケーションをデプロイする
 
-HerokuやModulusのようなPaaSにアプリケーションをデプロイするのは簡単です。状況によっては、細部にいくつかの悪魔が残っているかもしれませんが、ホスティングプロバイダのNodeサポートはここ数年で本当に良くなってきました。より多くのプラットフォーム固有の情報については、[ホスティング](https://sailsjs.com/documentation/concepts/deployment/Hosting)を見てください。
+HerokuやModulusのようなPaaSにアプリケーションをデプロイするのは簡単です。状況によっては、細部にいくつかの悪魔が残っているかもしれませんが、ホスティングプロバイダのNodeサポートはここ数年で本当に良くなってきました。より多くのプラットフォーム固有の情報については、[ホスティング](https://sailsguides.jp/doc/concepts/deployment/Hosting)を見てください。
 
 ### 独自にクラスタをデプロイする
 
 + [ロードバランサ](https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%BC%E3%83%90%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B9)の背後にある複数のインスタンス（アプリケーションのコピーを実行しているサーバ）をデプロイする（例：nginx）
   + SSLリクエストを終端させるようにロードバランサを構成する
   + ただし、SailsにSSL設定を適用する必要はありません。Sailsに到達するまでにトラフィックはすでに復号化されています。
-  + `forever`または`pm2`のようなデーモンを使用して各インスタンスでアプリケーションを立ち上げます（デモの詳細については、[https://sailsjs.com/documentation/concepts/deployment](https://sailsjs.com/documentation/concepts/deployment)を参照してください）。
+  + `forever`または`pm2`のようなデーモンを使用して各インスタンスでアプリケーションを立ち上げます（デモの詳細については、[https://sailsguides.jp/doc/concepts/deployment](https://sailsguides.jp/doc/concepts/deployment)を参照してください）。
 
 ### 最適化
 

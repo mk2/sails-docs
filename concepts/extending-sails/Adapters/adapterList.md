@@ -1,6 +1,6 @@
 # 利用可能なデータベースアダプタ
 
-このページは、Sails.jsフレームワークで利用可能なコアアダプターの最新の一覧と、最も堅牢なコミュニティアダプターのリファレンスです。サポートされているすべてのアダプタは、Sails/Waterlineアダプタ（`adapter`）と接続URL（`url`）として渡すことによって、ほぼ同じ方法で設定できます。データストアの設定の詳細については、[sails.config.datastores](https://sailsjs.com/documentation/reference/configuration/sails-config-datastores)を見てください。
+このページは、Sails.jsフレームワークで利用可能なコアアダプターの最新の一覧と、最も堅牢なコミュニティアダプターのリファレンスです。サポートされているすべてのアダプタは、Sails/Waterlineアダプタ（`adapter`）と接続URL（`url`）として渡すことによって、ほぼ同じ方法で設定できます。データストアの設定の詳細については、[sails.config.datastores](https://sailsguides.jp/doc/reference/configuration/sails-config-datastores)を見てください。
 
 > 接続に問題がありますか？接続URLに入力ミスがないかどうか確認してください。それでも問題が解決しない場合は、データベースプロバイダのマニュアルを参照するか、[ヘルプを参照](https://sailsjs.com/support)してください。
 
@@ -35,7 +35,7 @@ url: 'mysql://user:password@host:port/database',
 ```
 
 > + MySQLのデフォルトポートは`3306`です。
-> + データに絵文字などの特殊文字を保存する予定がある場合は、データストアの[`charset`](https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html)設定オプションを設定する必要があります。絵文字を許可するには、`charset: 'utf8mb4'`を使います。モデル属性で文字セットを設定するために、[`columnType` 設定](https://sailsjs.com/documentation/concepts/models-and-orm/attributes#?columntype)を使うかもしれません。
+> + データに絵文字などの特殊文字を保存する予定がある場合は、データストアの[`charset`](https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html)設定オプションを設定する必要があります。絵文字を許可するには、`charset: 'utf8mb4'`を使います。モデル属性で文字セットを設定するために、[`columnType` 設定](https://sailsguides.jp/doc/concepts/models-and-orm/attributes#?columntype)を使うかもしれません。
 > + MySQLやPostgreSQLのようなリレーショナルデータベースサーバでは、まず最初に[SequelPro](https://www.sequelpro.com/)やmysqlのコマンドラインREPL（SQLの経験者の場合）を使って「データベース」を作成するとこから行うかもしれません。アプリケーションで使う専用のデータベースを作成するのが慣例です。
 > + sails-mysqlアダプターは、[Amazon Aurora](https://aws.amazon.com/rds/aurora/)データベースと100％の互換性があります。
 

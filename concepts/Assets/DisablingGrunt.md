@@ -1,6 +1,6 @@
 # Gruntの無効化
 
-SailsでGrunt統合を無効化するには、単にGruntfileを削除（そして[`tasks/`](https://sailsjs.com/documentation/anatomy/tasks)フォルダを削除）するだけです。また、Gruntフックも無効化することができます。次のように`.sailsrc`のフックで、`grunt`プロパティを`false`に設定するだけです。
+SailsでGrunt統合を無効化するには、単にGruntfileを削除（そして[`tasks/`](https://sailsguides.jp/doc/anatomy/tasks)フォルダを削除）するだけです。また、Gruntフックも無効化することができます。次のように`.sailsrc`のフックで、`grunt`プロパティを`false`に設定するだけです。
 
 ```json
 {

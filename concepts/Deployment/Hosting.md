@@ -1,6 +1,6 @@
 # ホスティング
 
-Node/Sailsホスティングプロバイダと、いくつかのコミュニティチュートリアルリストがあります。ほとんどの場合、Sailsアプリケーションをデプロイするプロセスは、他のNode.jsアプリケーションとまったく同じです。実際に本番環境にデプロイする前に、念のためこのドキュメントの[他のページ](https://sailsjs.com/documentation/concepts/deployment)（[`config/env/production.js` file](https://sailsjs.com/documentation/anatomy/config/env/production-js)も）を見たり、必要な調整を行ってください。
+Node/Sailsホスティングプロバイダと、いくつかのコミュニティチュートリアルリストがあります。ほとんどの場合、Sailsアプリケーションをデプロイするプロセスは、他のNode.jsアプリケーションとまったく同じです。実際に本番環境にデプロイする前に、念のためこのドキュメントの[他のページ](https://sailsguides.jp/doc/concepts/deployment)（[`config/env/production.js` file](https://sailsguides.jp/doc/anatomy/config/env/production-js)も）を見たり、必要な調整を行ってください。
 
 
 ### Heroku

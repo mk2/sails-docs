@@ -2,7 +2,7 @@
 
 ### 概要
 
-Sailsにバンドルされているアセットパイプラインは、プロジェクトの一貫性と生産性を高めるために設計された従来のデフォルトで設定されたGruntタスクのセットです。フロントエンドのアセットワークフロー全体は完全にカスタマイズ可能ですが、一方既定のタスクもそのまま利用できます。Sailsは必要に応じて、簡単に[新しいタスクを設定する](https://sailsjs.com/documentation/concepts/assets/task-automation#?task-configuration)ことができます。
+Sailsにバンドルされているアセットパイプラインは、プロジェクトの一貫性と生産性を高めるために設計された従来のデフォルトで設定されたGruntタスクのセットです。フロントエンドのアセットワークフロー全体は完全にカスタマイズ可能ですが、一方既定のタスクもそのまま利用できます。Sailsは必要に応じて、簡単に[新しいタスクを設定する](https://sailsguides.jp/doc/concepts/assets/task-automation#?task-configuration)ことができます。
 
 次の項目は、デフォルトでSailsに存在するGruntの設定です。
 - 自動LESSコンパイル

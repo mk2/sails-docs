@@ -2,9 +2,9 @@
 
 ### 概要
 
-_アクション_ は、Webブラウザ、モバイルアプリケーション、またはサーバーと通信することができる他のシステムからの*要求*に応答するSailsアプリケーションの基礎的なオブジェクトです。しばしば[モデル](https://sailsjs.com/documentation/concepts/models-and-orm)と[ビュー](https://sailsjs.com/documentation/concepts/views)の仲介者として動作します。例外的な場合を除き、アクションはプロジェクトの[ビジネスロジック](http://en.wikipedia.org/wiki/Business_logic)の大部分を編成します。
+_アクション_ は、Webブラウザ、モバイルアプリケーション、またはサーバーと通信することができる他のシステムからの*要求*に応答するSailsアプリケーションの基礎的なオブジェクトです。しばしば[モデル](https://sailsguides.jp/doc/concepts/models-and-orm)と[ビュー](https://sailsguides.jp/doc/concepts/views)の仲介者として動作します。例外的な場合を除き、アクションはプロジェクトの[ビジネスロジック](https://ja.wikipedia.org/wiki/%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%AD%E3%82%B8%E3%83%83%E3%82%AF)の大部分を編成します。
 
-アクションはアプリケーションの[routes](https://sailsjs.com/documentation/concepts/Routes)にバインドされるため、ユーザーエージェントが特定のURLを要求すると、バインドされたアクションが実行されてビジネスロジックが実行され、応答が送信されます。例えば、`GET /hello`というルートをアプリケーションのアクションとして次のようにバインドできます。
+アクションはアプリケーションの[routes](https://sailsguides.jp/doc/concepts/Routes)にバインドされるため、ユーザーエージェントが特定のURLを要求すると、バインドされたアクションが実行されてビジネスロジックが実行され、応答が送信されます。例えば、`GET /hello`というルートをアプリケーションのアクションとして次のようにバインドできます。
 
 ```javascript
 async function (req, res) {
@@ -16,11 +16,11 @@ async function (req, res) {
 
 ### アクションはどこに定義されていますか？
 
-アクションは、`api/controllers/`フォルダとサブフォルダで定義されます（コントローラについては少し詳しく説明します）。ファイルがアクションとして認識されるためには、ファイルは_ケバブケース_（小文字の英字、数字、およびダッシュのみ）でなければなりません。Sailsのアクションを参照する場合（たとえば、[ルートにバインドする場合](https://sailsjs.com/documentation/concepts/routes/custom-routes#?action-target-syntax)）、`api/controllers`への相対パスを、ファイル拡張子なしで使用します。例えば、`api/controllers/user/find.js`というファイルは、`user/find`というアクションを示します。
+アクションは、`api/controllers/`フォルダとサブフォルダで定義されます（コントローラについては少し詳しく説明します）。ファイルがアクションとして認識されるためには、ファイルは_ケバブケース_（小文字の英字、数字、およびダッシュのみ）でなければなりません。Sailsのアクションを参照する場合（たとえば、[ルートにバインドする場合](https://sailsguides.jp/doc/concepts/routes/custom-routes#?action-target-syntax)）、`api/controllers`への相対パスを、ファイル拡張子なしで使用します。例えば、`api/controllers/user/find.js`というファイルは、`user/find`というアクションを示します。
 
 ##### アクションのファイル拡張子
 
-アクションは、`.md`（マークダウン）と`.txt`（テキスト）以外のファイル拡張子を持つことができます。デフォルトでは、Sailsは`.js`ファイルの解釈方法しか知りませんが、[CoffeeScript](https://sailsjs.com/documentation/tutorials/using-coffee-script)や[TypeScript](https://sailsjs.com/documentation/tutorials/using-type-script)などを使用するようにアプリケーションをカスタマイズすることもできます。
+アクションは、`.md`（マークダウン）と`.txt`（テキスト）以外のファイル拡張子を持つことができます。デフォルトでは、Sailsは`.js`ファイルの解釈方法しか知りませんが、[CoffeeScript](https://sailsguides.jp/doc/tutorials/using-coffee-script)や[TypeScript](https://sailsguides.jp/doc/tutorials/using-type-script)などを使用するようにアプリケーションをカスタマイズすることもできます。
 
 ### アクションファイルはどのようなものですか？
 
@@ -28,7 +28,7 @@ async function (req, res) {
 
 ##### Classic actions
 
-Sailsアクションを作成する従来の方法は、関数として宣言することです。クライアントがそのアクションにバインドされたルートを要求すると、[incoming request object](https://sailsjs.com/documentation/reference/request-req)を第1引数（通常は名前`req`）として使用し、[outgoing response object](https://sailsjs.com/documentation/reference/response-res)を第2引数（通常は名前`res`）として使用して関数を呼び出します。以下は、ユーザーをIDで検索し、「ようこそ」ビューを表示するか、ユーザーが見つからない場合にサインアップページにリダイレクトするアクション関数の例です。
+Sailsアクションを作成する従来の方法は、関数として宣言することです。クライアントがそのアクションにバインドされたルートを要求すると、[incoming request object](https://sailsguides.jp/doc/reference/request-req)を第1引数（通常は名前`req`）として使用し、[outgoing response object](https://sailsguides.jp/doc/reference/response-res)を第2引数（通常は名前`res`）として使用して関数を呼び出します。以下は、ユーザーをIDで検索し、「ようこそ」ビューを表示するか、ユーザーが見つからない場合にサインアップページにリダイレクトするアクション関数の例です。
 
 ```javascript
 module.exports = async function welcomeUser (req, res) {
@@ -110,17 +110,17 @@ module.exports = {
 
 Sailsは[machine-as-action](https://github.com/treelinehq/machine-as-action)を利用して、上記の例のようにmachineからルート処理機能を自動的に作成します。詳細については、[machine-as-actionドキュメント](https://github.com/treelinehq/machine-as-action#customizing-the-response)を参照してください。
 
-> machine-as-actionは[request object](https://sailsjs.com/documentation/reference/request-req)へのアクセスを`this.req`として提供することに注意してください。
+> machine-as-actionは[request object](https://sailsguides.jp/doc/reference/request-req)へのアクセスを`this.req`として提供することに注意してください。
 
 <!--
 Removed in order to reduce the amount of information:  (Mike nov 14, 2017)
 
-and to the Sails application object (in case you don&rsquo;t have [globals](https://sailsjs.com/documentation/concepts/globals) turned on) as `this.sails`.
+and to the Sails application object (in case you don&rsquo;t have [globals](https://sailsguides.jp/doc/concepts/globals) turned on) as `this.sails`.
 -->
 
 classic actionsで実装を行う場合は、厳密にはタイピングが少なくなります。しかし、actions2はいくつかの利点があります。
 
- * コードは`req`や`res`に直接依存しません。再利用したり、[helper](https://sailsjs.com/documentation/concepts/helpers)として抽象化したりするのが簡単になります。
+ * コードは`req`や`res`に直接依存しません。再利用したり、[helper](https://sailsguides.jp/doc/concepts/helpers)として抽象化したりするのが簡単になります。
  * アクションが想定するリクエストパラメータの名前と型を、すばやく特定できることを保証します。そして、アクションが実行される前に自動的にリクエストパラメータに対する検証が行われます。
  * コードを読み解くことなく、起こりうるアクションの全実行結果を見ることができます。
 
@@ -161,11 +161,11 @@ module.exports = {
 };
 ```
 
-また、[`sails generate controller`](https://sailsjs.com/documentation/reference/command-line-interface/sails-generate#?sails-generate-controller-foo-action-1-action-2)を使うことで、すばやくコントローラーファイルを作成することができます。
+また、[`sails generate controller`](https://sailsguides.jp/doc/reference/command-line-interface/sails-generate#?sails-generate-controller-foo-action-1-action-2)を使うことで、すばやくコントローラーファイルを作成することができます。
 
 ##### コントローラーのファイル拡張子
 
-コントローラは、`.md`（マークダウン）と`.txt`（テキスト）以外のファイル拡張子を持つことができます。デフォルトでは、Sailsは`.js`ファイルの解釈方法しか知りませんが、[CoffeeScript](https://sailsjs.com/documentation/tutorials/using-coffee-script)や[TypeScript](https://sailsjs.com/documentation/tutorials/using-type-script)などを使用するようにアプリケーションをカスタマイズすることもできます。
+コントローラは、`.md`（マークダウン）と`.txt`（テキスト）以外のファイル拡張子を持つことができます。デフォルトでは、Sailsは`.js`ファイルの解釈方法しか知りませんが、[CoffeeScript](https://sailsguides.jp/doc/tutorials/using-coffee-script)や[TypeScript](https://sailsguides.jp/doc/tutorials/using-type-script)などを使用するようにアプリケーションをカスタマイズすることもできます。
 
 ### スタンドアロンアクション
 
@@ -186,12 +186,12 @@ api/
 
 * コントローラーファイル内のコードを読み解くのではなく、フォルダに含まれるファイルを調べるだけで、アプリケーションのアクションを調べる方が簡単です。
 * 各アクションファイルは小さく、保守が簡単ですが、コントローラーファイルはアプリの成長に伴って大きくなる傾向があります。
-* [スタンドアロンアクションへのルーティング](https://sailsjs.com/documentation/concepts/routes/custom-routes#?action-target-syntax)は、ネストされたコントローラファイルよりも直観的です（`foo/bar/baz.js` 対 `foo/BarController.baz`）。
+* [スタンドアロンアクションへのルーティング](https://sailsguides.jp/doc/concepts/routes/custom-routes#?action-target-syntax)は、ネストされたコントローラファイルよりも直観的です（`foo/bar/baz.js` 対 `foo/BarController.baz`）。
 * Blueprintインデックスルートはトップレベルのスタンドアロンアクションに適用されるため、`api/controllers/index.js`ファイルを作成してアプリの`/`ルートに自動的にバインドさせることができます（rootアクションを保持するコントローラーファイルを作成する必要がありません）。
 
 ### leanを保つ
 
-MVCフレームワークの伝統に従えば、成熟したSailsアプリケーションはたいてい「薄い」コントローラを持ちます。つまり、再利用可能なコードが[ヘルパー](https://sailsjs.com/documentation/concepts/helpers)に移動されたり、別のノードモジュールに抽出されたりすることがあります。このアプローチでは、複雑さが増すにつれてアプリケーションをより簡単に保守することができます。
+MVCフレームワークの伝統に従えば、成熟したSailsアプリケーションはたいてい「薄い」コントローラを持ちます。つまり、再利用可能なコードが[ヘルパー](https://sailsguides.jp/doc/concepts/helpers)に移動されたり、別のノードモジュールに抽出されたりすることがあります。このアプローチでは、複雑さが増すにつれてアプリケーションをより簡単に保守することができます。
 
 しかし同時に、再利用可能なヘルパーにコードを外挿することは、時間と生産性を犠牲にする保守の問題をあまりに早く引き起こす可能性があります。そのため正しい答えは真ん中のどこかにあります。
 

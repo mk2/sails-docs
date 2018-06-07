@@ -1,6 +1,6 @@
 # コントローラーまたはスタンドアロンアクションの生成
 
-[`sails-generate`](https://sailsjs.com/documentation/reference/command-line-interface/sails-generate)をSailsのコマンドラインツールから使うと、コントローラーもしくは個別のアクションだけをすばやく生成できます。
+[`sails-generate`](https://sailsguides.jp/doc/reference/command-line-interface/sails-generate)をSailsのコマンドラインツールから使うと、コントローラーもしくは個別のアクションだけをすばやく生成できます。
 
 
 ### コントローラーの生成
@@ -18,7 +18,7 @@ Sailsは`api/controllers/UserController.js`を次の内容で生成します。
  * UserController.js
  *
  * @description :: Server-side controller action for manging users.
- * @help        :: See https://sailsjs.com/documentation/concepts/controllers
+ * @help        :: See https://sailsguides.jp/doc/concepts/controllers
  */
 module.exports = {
 
@@ -43,7 +43,7 @@ Sailsは`api/controllers/user/sign-up.js`を次の内容で生成します。
  * user/sign-up.js
  *
  * @description :: Server-side controller action for handling incoming requests.
- * @help        :: See https://sailsjs.com/documentation/concepts/controllers
+ * @help        :: See https://sailsguides.jp/doc/concepts/controllers
  */
 module.exports = {
 
@@ -75,7 +75,7 @@ module.exports = {
 
 ```
 
-もしくは、[classic actions](https://sailsjs.com/documentation/concepts/actions-and-controllers#?classic-actions)のインターフェースを使用します。
+もしくは、[classic actions](https://sailsguides.jp/doc/concepts/actions-and-controllers#?classic-actions)のインターフェースを使用します。
 
 
 ```sh

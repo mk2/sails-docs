@@ -2,11 +2,11 @@
 
 ### 概要
 
-[`tasks/`](https://sailsjs.com/documentation/anatomy/tasks)ディレクトリには、ひとそろいの[Gruntタスク](http://gruntjs.com/creating-tasks)と[設定](http://gruntjs.com/configuring-tasks)が含まれています。
+[`tasks/`](https://sailsguides.jp/doc/anatomy/tasks)ディレクトリには、ひとそろいの[Gruntタスク](http://gruntjs.com/creating-tasks)と[設定](http://gruntjs.com/configuring-tasks)が含まれています。
 
 タスクは主に、フロントエンドのアセット（スタイルシート、スクリプト、クライアントサイドのマークアップテンプレートなど）をバンドルするのに便利ですが、[browserify](https://github.com/jmreidy/grunt-browserify)のコンパイルから[データベースマイグレーション](https://www.npmjs.org/package/grunt-db-migrate)まであらゆる種類の繰り返し開発作業を自動化するためにも使用できます。
 
-利便性のためにSailsはいくつかの[デフォルトタスク](https://sailsjs.com/documentation/grunt/default-tasks)をバンドルしていますが、[文字通り何百もの](http://gruntjs.com/plugins)プラグインを選択できます。タスクを使用して最小限の労力で自動化できます。もしあなたが必要なものをまだ誰も作っていないかった場合、[編集](http://gruntjs.com/creating-tasks)し、[自分自身のプラグイン](http://gruntjs.com/creating-plugins)として[npm](http://npmjs.org)に公開することができます。
+利便性のためにSailsはいくつかの[デフォルトタスク](https://sailsguides.jp/doc/grunt/default-tasks)をバンドルしていますが、[文字通り何百もの](http://gruntjs.com/plugins)プラグインを選択できます。タスクを使用して最小限の労力で自動化できます。もしあなたが必要なものをまだ誰も作っていないかった場合、[編集](http://gruntjs.com/creating-tasks)し、[自分自身のプラグイン](http://gruntjs.com/creating-plugins)として[npm](http://npmjs.org)に公開することができます。
 
 > 前もって[Grunt](http://gruntjs.com/)を使用していない場合は、[Getting Started](http://gruntjs.com/getting-started)ガイドをチェックしてください。[Gruntfile](http://gruntjs.com/sample-gruntfile)を作成し、Gruntプラグインをインストールして使用する方法についても説明しています。
 
@@ -30,7 +30,7 @@
 
 ### タスク設定
 
-設定されたタスクは、実行時にGruntfileが従う一連のルールです。完全にカスタマイズ可能で、[`tasks/config/`](https://sailsjs.com/documentation/anatomy/my-app/tasks/config)ディレクトリにあります。Gruntタスクを変更、省略、または置き換えて、要件に合わせることができます。独自のGruntタスクを追加することもできます。先ほどのディレクトリに`someTask.js`を追加すると新しいタスクが設定され、適切な親タスクに登録してください（`tasks/register/*.js`にあるファイルを参照してください）。ただ、Sailsには設定不要の便利なデフォルトタスクが用意されているということを覚えておいてください。
+設定されたタスクは、実行時にGruntfileが従う一連のルールです。完全にカスタマイズ可能で、[`tasks/config/`](https://sailsguides.jp/doc/anatomy/my-app/tasks/config)ディレクトリにあります。Gruntタスクを変更、省略、または置き換えて、要件に合わせることができます。独自のGruntタスクを追加することもできます。先ほどのディレクトリに`someTask.js`を追加すると新しいタスクが設定され、適切な親タスクに登録してください（`tasks/register/*.js`にあるファイルを参照してください）。ただ、Sailsには設定不要の便利なデフォルトタスクが用意されているということを覚えておいてください。
 
 ##### カスタムタスクを設定する
 
@@ -147,11 +147,11 @@ npm uninstall grunt-contrib-jst --save-dev
 
 ### タスクトリガー
 
-[開発モード](https://next.sailsjs.com/documentation/reference/configuration/sails-config#?sailsconfigenvironment)では、Sailsは`default`タスクを実行します（[`tasks/register/default.js`](https://sailsjs.com/documentation/anatomy/tasks/register/default.js)）。これによりLESSやCoffeeScript、クライアントサイドのJSTテンプレートがコンパイルされ、アプリの動的ビューや静的HTMLファイルから自動的にリンクされます。
+[開発モード](https://next.sailsjs.com/documentation/reference/configuration/sails-config#?sailsconfigenvironment)では、Sailsは`default`タスクを実行します（[`tasks/register/default.js`](https://sailsguides.jp/doc/anatomy/tasks/register/default.js)）。これによりLESSやCoffeeScript、クライアントサイドのJSTテンプレートがコンパイルされ、アプリの動的ビューや静的HTMLファイルから自動的にリンクされます。
 
-プロダクション環境では、Sailsは`prod`タスク（[`tasks/register/prod.js`](https://sailsjs.com/documentation/anatomy/tasks/register/prod.js)）と同じタスクを`default`として実行しますが、アプリのスクリプトとスタイルシートをミニファイする処理も行います。これにより、アプリのロード時間と帯域幅の使用が軽減されます。
+プロダクション環境では、Sailsは`prod`タスク（[`tasks/register/prod.js`](https://sailsguides.jp/doc/anatomy/tasks/register/prod.js)）と同じタスクを`default`として実行しますが、アプリのスクリプトとスタイルシートをミニファイする処理も行います。これにより、アプリのロード時間と帯域幅の使用が軽減されます。
 
-これらのタスクトリガは、[`tasks/register/`](https://sailsjs.com/documentation/anatomy/tasks/register)フォルダにある[「基本的な」Gruntタスク](http://gruntjs.com/creating-tasks#basic-tasks)です。以下に、Sailsのすべてのタスクトリガの完全なリファレンスと、それらを起動するコマンドを示します。
+これらのタスクトリガは、[`tasks/register/`](https://sailsguides.jp/doc/anatomy/tasks/register)フォルダにある[「基本的な」Gruntタスク](http://gruntjs.com/creating-tasks#basic-tasks)です。以下に、Sailsのすべてのタスクトリガの完全なリファレンスと、それらを起動するコマンドを示します。
 
 ##### `sails lift`
 
@@ -163,7 +163,7 @@ npm uninstall grunt-contrib-jst --save-dev
 
 ##### `sails www`
 
-参照内の相対パスを使用する`.tmp/public`の代わりに、すべてのアセットを`www`のサブフォルダにコンパイルする**ビルド**タスク（`tasks/register/build.js`）を実行します。これにより、[「wwwミドルウェア」](https://sailsjs.com/documentation/concepts/Middleware)に頼るのではなく、ApacheやNginxで静的コンテンツを提供することができます。
+参照内の相対パスを使用する`.tmp/public`の代わりに、すべてのアセットを`www`のサブフォルダにコンパイルする**ビルド**タスク（`tasks/register/build.js`）を実行します。これにより、[「wwwミドルウェア」](https://sailsguides.jp/doc/concepts/Middleware)に頼るのではなく、ApacheやNginxで静的コンテンツを提供することができます。
 
 ##### `sails www --prod` (production)
 
