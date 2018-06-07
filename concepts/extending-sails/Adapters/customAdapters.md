@@ -19,29 +19,26 @@ Sailsでは、独自のデータベースアダプターを簡単に作成でき
 
 
 ### カスタムアダプターには何が入っていますか？
-### What goes in a custom adapter?
 
-In Sails, database adapters expose **interfaces**, which imply a conract to implemnt certain functionality.  This allows us to guarantee conventional usage patterns across multiple models, developers, apps, and even companies, making app code more maintainable, efficient, and reliable.  Adapters are primarily useful for integrating with databases, but they can also be used to support any open API or internal/proprietary web service that is _purely_ RESTful.
+Sailsでは、データベースアダプターは **インターフェース** を公開しています。インターフェースは、特定の機能を実装するという約束を意味します。これにより、複数のモデル、開発者、アプリケーション、さらには企業の従来の使用パターンを保証し、アプリケーションコードのメンテナンス性、効率性、信頼性を向上させることができます。アダプターは主にデータベースとの統合に役立ちますが、純粋なRESTfulオープンAPI、もしくは内部/独自のWebサービスをサポートするためにも使用できます。
 
-> Not everything fits perfectly into a RESTful/CRUD mold.  Sometimes the service you're integrating with has more of an RPC-style interface, with one-off methods.  For example, consider an API request to send an email, or to read a remote sensor on a piece of connected hardware.  For that, you'll want to write or extend a machinepack.  [Learn more about machinepacks here](http://node-machine.org).
+> すべてがRESTful/CRUDの骨組みに完全な適合をするわけではありません。時には、統合しているサービスに、RPC方式のインターフェイスがあり、専用の方法があります。たとえば、メールを送信したり、接続されたハードウェア上のリモートセンサーを読み取ったりするAPIリクエストを考えてみましょう。そのためには、マシンパックを作成したり拡張したりしたいと思うでしょう。[マシンパックについての詳細はここで確認してください。](http://node-machine.org)
 
+### アダプターではどんなことができますか？
 
-### What kind of things can I do in an adapter?
+アダプターは、主に、モデル・コンテキスト化されたCRUDメソッドを提供することに重点を置いています。CRUDは、作成、読み取り、更新、および削除を表します。Sails/Waterlineでは、`create()`や`find()`、`update()`、そして`desctroy()`といったメソッドを呼び出します。
 
-Adapters are mainly focused on providing model-contextualized CRUD methods.  CRUD stands for create, read, update, and delete.  In Sails/Waterline, we call these methods `create()`, `find()`, `update()`, and `destroy()`.
+たとえば、`MySQLAdapter`は`create()`というメソッドを実装していて、それは内部的に指定されたテーブル名と接続情報を使用してMySQLデータベースを呼び出し、`INSERT ...`のSQLクエリを実行します。
 
-For example, a `MySQLAdapter` implements a `create()` method which, internally, calls out to a MySQL database using the specified table name and connection informtion and runs an `INSERT ...` SQL query.
+実際にやってみると、アダプターでなんでも好きなことをやることができます。あなたが書いたメソッドはすべて、生のデータストアオブジェクトとそれを使用するすべてのモデルに公開されます。
 
-In practice, your adapter can really do anything it likes-- any method you write will be exposed on the raw datastore objects and any models which use them.
+### カスタムアダプタの作成
 
-### Building a custom adapter
+[Sailsドキュメント](https://sailsguides.jp/doc)をチェックするか、新しいSailsプロジェクトでカスタムアダプターを設定する方法については、[`config/datastores.js`](https://sailsguides.jp/doc/anatomy/config/datastores-js)を参照してください。
 
-Check out the [Sails docs](https://sailsjs.com/documentation), or see [`config/datastores.js`](https://sailsjs.com/anatomy/config/datastores.js) in a new Sails project for information on setting up this adapter in a Sails app.
+#### テストの実行
 
-
-#### Running the tests
-
-Configure the interfaces you plan to support (and the targeted version of Sails) in the adapter's `package.json` file:
+アダプターの`package.json`ファイルで、サポートする予定のインターフェイス（およびSailsの対象バージョン）を設定します。
 
 ```javascript
 {
@@ -58,71 +55,64 @@ Configure the interfaces you plan to support (and the targeted version of Sails)
 }
 ```
 
-In your adapter's directory, run:
+アダプターのディレクトリで次のコマンドを実行します。
 
 ```sh
 $ npm test
 ```
 
+#### アダプタを公開する
 
-#### Publish your adapter
+> 非公開のアダプターを作成し、それを好きなように使うことができます。
+> 以下の手順は、オープンソースのアダプターをリリースするためのものです。
 
-> You're welcome to write proprietary adapters and use them any way you wish--
-> these instructions are for releasing an open-source adapter.
+1. 新しいパブリックリポジトリを作成し、それをリモートとして追加する（ `git remote add origin git@github.com:yourusername/sails-youradaptername.git`）。
+2. 自分自身を著者として設定し、package.jsonのライセンスを"MIT"に変更します。
+3. テストを1度実行します。
+4. [sails-docsへのプルリクエスト](https://github.com/balderdashy/sails-docs/edit/master/concepts/extending-sails/Adapters/adapterList.md)を行い、アダプターのリポジトリを追加してください。
+5. 我々はあなたの新しいアダプターについての情報をドキュメントに反映させます。
+6. 世界の人々が賞賛であなたを崇拝するようにしましょう。
+7. `npm version patch`を実行します。
+8. `git push && git push --tags`を実行します。
+9. `npm publish`を実行します。
 
-1. Create a [new public repo](https://github.com/new) and add it as a remote (`git remote add origin git@github.com:yourusername/sails-youradaptername.git)
-2. Make sure you attribute yourself as the author and set the license in the package.json to "MIT".
-3. Run the tests one last time.
-4. Do a [pull request to sails-docs](https://github.com/balderdashy/sails-docs/edit/master/concepts/extending-sails/Adapters/adapterList.md) adding your adapter's repo.
-5. We'll update the documentation with information about your new adapter
-6. Let the people of world adore you with lavish praises.
-7. Run `npm version patch`
-8. Run `git push && git push --tags`
-9. Run `npm publish`
+### カスタムアダプタが必要なのはなぜですか？
 
+Sailsアプリケーションを構築する場合、別のハードウェアとの非同期通信の送受信は、技術的にアダプタに正規化することができます。（すなわちAPIとの統合です）
 
-
-### Why would I need a custom adapter?
-
-When building a Sails app, the sending or receiving of any asynchronous communication with another piece of hardware can _technically_ be normalized into an adapter.  (viz. API integrations)
-
-> **From Wikipedia:**
+> **ウィキペディアから:**
 > *http://en.wikipedia.org/wiki/Create,_read,_update_and_delete*
 
-> Although a relational database provides a common persistence layer in software applications, numerous other persistence layers exist. CRUD functionality can be implemented with an object database, an XML database, flat text files, custom file formats, tape, or card, for example.
+> リレーショナルデータベースはソフトウェアアプリケーションで共通の永続性レイヤを提供しますが、他の多くの永続化レイヤが存在します。CRUD機能は、オブジェクトデータベース、XMLデータベース、フラットテキストファイル、カスタムファイル形式、テープ、またはカードなどで実装できます。
 
-In other words, Waterline is not _necessarily_ just an ORM for your database.  It is a purpose-agnostic, open standard and toolset for integrating with all kinds of RESTful services, datasources, and devices, whether it's LDAP, Neo4J, or [a lamp](https://www.youtube.com/watch?v=OmcQZD_LIAE).
+言い換えれば、WaterlineはデータベースのORMであるとは限りません。LDAP、Neo4J、[ランプ](https://www.youtube.com/watch?v=OmcQZD_LIAE)など、あらゆる種類のRESTfulサービス、データソース、およびデバイスと統合する目的にとらわれないオープンな標準とツールセットです。
 
-> **But remember:** only use Waterline adapters for communicating with databases and APIs that support a "create", "read", "update", and "destroy" interface.  Not everything fits into that mold, and there are [better, more generic ways](http://node-machine.org) to address those other use cases.
-
-
-### Why should I build a custom adapter?
-
-To recap, writing your API integrations as adapters is **easier**, takes **less time**, and **absorbs a considerable amount of risk**, since you get the advantage of a **standardized set of conventions**, a **documented API**, and a **built-in community** of other developers who have gone through the same process.  Best of all, you (and your team) can **reuse the adapter** in other projects, **speeding up development** and **saving time and money**.
-
-Finally, if you choose to release your adapter as open-source, you provide a tremendous boon to our little framework and our budding Sails.js ecosystem.  Even if it's not via Sails, I encourage you to give back to the OSS community, even if you've never forked a repo before-- don't be intimidated, it's not that bad!
-
-The more high-quality adapters the Sails community collectively releases as open-source, the less repetitive work we all have to do when we integrate with various databases and services.  Our vision is to make building server-side apps more fun and less repetitive for everyone, and that happens one community adapter (or machinepack/driver/generator/view engine/etc.) at a time.
+> **ただ、覚えておいてください。** 「作成」、「読み取り」、「更新」、および「破棄」インターフェースをサポートするデータベースおよびAPIとの通信のみに、Waterlineのアダプターを使用してください。すべてがその仕組みに適合するわけではなく、他のユースケースに対処するためのより優れた、より[一般的な方法](http://node-machine.org)があるでしょう。
 
 
-### What is an adapter interface?
+### なぜカスタムアダプターを作成しなければならないのですか？
 
-The functionality of database adapters is as varied as the services they connect.  That said, there is a standard library of methods, and a support matrix you should be aware of.  Adapters may implement some, all, or none of the interfaces below, but rest assured that **if an adapter implements one method in an interface, it should implement *all* of them**.  This is not always the case due to limitations and/or incomplete implementations, but at the very least, a descriptive error message should be used to keep developers informed of what's supported and what's not.
+要約すると、アダプターとしてあなたのAPIの統合を書くことで、**簡単に**、**短時間で**、**リスクを低減し**、**標準化された規約のセット** の利点を得ることができ、**文書化されたAPI** と同じプロセスを経験した他の開発者の **コミュニティサポート** を得ることができるからです。何よりも、自分自身や自分のチームが **アダプターの再利用** を他のプロジェクトで行うことができ、**開発のスピードアップ** や **時間とお金の節約** につながります。
 
-> For more information, check out the Sails docs, and specifically the [adapter interface reference](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md).
+最後に、アダプターをオープンソースとしてリリースすることを選択した場合、私たちの小さなフレームワークと芽吹き始めたSails.jsエコシステムに大きな恩恵をもたらします。Sailsでなくても、以前にリポジトリをフォークした経験がなくても、OSSコミュニティにお返しすることをお勧めします。怖がらないでください、悪くはありません！
 
-### Are there examples I can look at?
+Sailsコミュニティが共同でオープンソースとしてリリースする高品質のアダプタであれば、さまざまなデータベースやサービスと統合する際に、すべての作業を繰り返す必要はありません。我々のビジョンは、サーバーサイドのアプリケーションの構築をもっと楽しく、繰り返す作業がより少ないものへとすることであり、同時にその結果として、コミュニティの統一されたアダプターやマシンパック、ドライバー、ジェネレーター、ビューエンジンや他のものが作られることです。
 
-If you're looking for some inspiration, a good place to start is with the core adapters.  Take a look at **[MySQL](https://github.com/balderdashy/sails-mysql)**, **[PostgreSQL](https://github.com/balderdashy/sails-postgresql)**, **[MongoDB](https://github.com/balderdashy/sails-mongo)**, **[Redis](https://github.com/balderdashy/sails-redis)**, or local [disk](https://github.com/balderdashy/sails-disk).
+### アダプターインターフェイスとは何ですか？
+
+データベースアダプターの機能は、接続するサービスと同じくらい多様です。つまり、メソッドの標準ライブラリがあり、サポートマトリックスを知っておく必要があります。アダプターは、以下のインターフェースの一部または全部を実装することもあれば実装しないこともありますが、**アダプターがインターフェース内に1つのメソッドを実装する場合は、すべてのインターフェースを実装する必要があります。** これは、制限や不完全な実装のために必ずしも当てはまるわけではありませんが、少なくとも、記述されたエラーメッセージを使用して、サポートされているものとされていないものを知らせる必要があります。
+
+> 詳細については、Sailsのドキュメント、特に[アダプターインターフェイスのリファレンス](https://github.com/balderdashy/sails-docs/blob/master/contributing/adapter-specification.md)を参照してください。
+
+### 参考になる例はありますか？
+
+インスピレーションを求めているなら、コアアダプタで始めるのがよいでしょう。 **[MySQL](https://github.com/balderdashy/sails-mysql)** や、 **[PostgreSQL](https://github.com/balderdashy/sails-postgresql)**、 **[MongoDB](https://github.com/balderdashy/sails-mongo)**、 **[Redis](https://github.com/balderdashy/sails-redis)**、そして [ローカルディスク](https://github.com/balderdashy/sails-disk)を見てみてください。
+
+### どこで助けを受けられますか？
+
+GithubやStack Overflow、Googleグループ、IRC、そしてGitterなどに、SailsとWaterlineユーザーのアクティブなコミュニティが存在します。推奨事項の一覧については、[サポートページ](https://sailsjs.com/support)を参照してください。
+
+> ここではカバーされていない未回答の質問があり、コミュニティーにとって価値があると思われる場合は、自由にPRを送って文書のこのセクションに追加してください。
 
 
-### Where do I get help?
-
-An active community of Sails and Waterline users exists on GitHub, Stack Overflow, Google groups, IRC, Gitter, and more.  See the [Support page](https://sailsjs.com/support) for a list of recommendations.
-
-> If you have an unanswered question that isn't covered here, and that you feel would add value for the community, please feel free to send a PR adding it to this section of the docs.
-
-
-
-
-<docmeta name="displayName" value="Custom adapters">
+<docmeta name="displayName" value="カスタムアダプター">
