@@ -19,5 +19,6 @@ SailsとWaterlineでは、データベースアダプター（「アダプター
 
 [有効なアダプター](https://sailsguides.jp/doc/concepts/extending-sails/adapters/available-adapters)を読むか、[カスタムアダプター](https://sailsguides.jp/doc/concepts/extending-sails/adapters/custom-adapters)を作成する方法を読みます。
 
-<docmeta name="displayName" value="アダプター">
+<docmeta name="displayName" value="Adapters">
+<docmeta name="displayName_ja" value="アダプター">
 <docmeta name="stabilityIndex" value="3">

@@ -48,4 +48,6 @@ module.exports = function(message) {
   });
 }
 ```
-<docmeta name="displayName" value="カスタムレスポンスの追加">
+
+<docmeta name="displayName" value="Adding a custom response">
+<docmeta name="displayName_ja" value="カスタムレスポンスの追加">

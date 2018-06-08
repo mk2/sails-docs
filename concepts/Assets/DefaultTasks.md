@@ -103,4 +103,5 @@ Sailsにバンドルされているアセットパイプラインは、プロジ
 > [使用方法](https://github.com/gruntjs/grunt-contrib-watch)
 
 
-<docmeta name="displayName" value="デフォルトタスク">
+<docmeta name="displayName" value="Default tasks">
+<docmeta name="displayName_ja" value="デフォルトタスク">

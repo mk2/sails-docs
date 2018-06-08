@@ -10,5 +10,6 @@ config/local.jsファイルは、あなたのローカル環境（例えばあ�
 > つまり、個人情報（データベースのパスワードなど）をリポジトリに誤ってコミットすることなく、このファイル内のローカルマシンの構成を指定できるということです。さらに、これにより、チームの他のメンバーが自分のローカル設定の変更をコミットするのを防ぐことができます。
 >
 > 本番環境では、このファイルを残して、`env/production.js`、環境変数、または両方の組み合わせを使用してすべての本番環境の上書きを構成することをお勧めします。
- 
-<docmeta name="displayName" value="local.jsファイル">
+
+<docmeta name="displayName" value="The local.js file">
+<docmeta name="displayName_ja" value="local.jsファイル">

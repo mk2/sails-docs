@@ -199,6 +199,7 @@ Sailsは、次の一般的な経験則をお勧めします。**別のヘルパ�
 
 > あなたが情熱や利益のために開発しているかどうかにかかわらず、最終目標は、エンジニアとしての時間を最大限に活用することです。ある日はたくさんのコードを書くことになるかもしれないし、また別の日はプロジェクトの長期的な保守性に気を配ることになるかもしれません。現在の開発段階でこれらの目標のどれが重要かわからない場合は、一歩退いて考えてみてください。（チームの他の人たちや[Node.js / Sails上のアプリケーションを構築している人たち](https://sailsjs.com/support)とチャットをするのは良いことです。）
 
-<docmeta name="displayName" value="アクションとコントローラ">
+<docmeta name="displayName" value="Actions and controllers">
+<docmeta name="displayName_ja" value="アクションとコントローラ">
 <docmeta name="nextUpLink" value="/documentation/concepts/views">
 <docmeta name="nextUpName" value="Views">

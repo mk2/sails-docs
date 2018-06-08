@@ -9,6 +9,5 @@ Sails CLIがコマンドを実行すると、現在のディレクトリとホ�
 
 
 
-
-<docmeta name="displayName" value=".sailsrcファイルを使う">
-
+<docmeta name="displayName" value="Using `.sailsrc` files">
+<docmeta name="displayName_ja" value=".sailsrcファイルを使う">

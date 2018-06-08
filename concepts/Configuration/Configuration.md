@@ -152,7 +152,7 @@ Sailsの設定ローダーを活用して、独自のカスタム設定を管理
 ### 注釈
 > `sails.config`にある設定の意味は、場合によっては、"lift"プロセスの最中のみSailsによって解釈されます。つまり、実行中にオプションを変更しても効果はありません。たとえば、アプリケーションが実行されているポートを変更するには、`sails.config.port`を変更するだけで済みません。設定ファイルやコマンドライン引数などで設定を変更または上書きしてから、サーバを再起動する必要があります。
 
-
-<docmeta name="displayName" value="設定">
+<docmeta name="displayName" value="Configuration">
+<docmeta name="displayName_ja" value="設定">
 <docmeta name="nextUpLink" value="/documentation/concepts/policies">
 <docmeta name="nextUpName" value="Policies">

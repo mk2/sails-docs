@@ -95,4 +95,5 @@ TODO: check on this (it's unclear what point it was trying to get across):
 
 さまざまなカテゴリのblueprintルートを有効/無効にする方法を含め、[Sailsでblueprintを設定する方法](https://sailsguides.jp/doc/reference/configuration/sails-config-blueprints)の詳細をお読みください。
 
-<docmeta name="displayName" value="Blueprintルート">
+<docmeta name="displayName" value="Blueprint routes">
+<docmeta name="displayName_ja" value="Blueprintルート">

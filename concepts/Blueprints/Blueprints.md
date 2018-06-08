@@ -16,3 +16,4 @@ Blueprintは強力なプロトタイピングツールですが、上書きし�
 + 暗黙の「シャドウ」ルートについて、それをどのように設定したり上書きしたりするのか、[詳細を読む](https://sailsguides.jp/doc/concepts/blueprints/blueprint-routes)。
 
 <docmeta name="displayName" value="Blueprints">
+<docmeta name="displayName_ja" value="Blueprints">

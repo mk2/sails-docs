@@ -114,5 +114,5 @@ GithubやStack Overflow、Googleグループ、IRC、そしてGitterなどに、
 
 > ここではカバーされていない未回答の質問があり、コミュニティーにとって価値があると思われる場合は、自由にPRを送って文書のこのセクションに追加してください。
 
-
-<docmeta name="displayName" value="カスタムアダプター">
+<docmeta name="displayName" value="Custom adapters">
+<docmeta name="displayName_ja" value="カスタムアダプター">

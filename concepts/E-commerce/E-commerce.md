@@ -6,4 +6,5 @@ SailsでカスタムのEコマースソリューションを構築する場合�
 
 > 最初からカスタムのEコマース機能を動かすことが難しい場合は、既存のSailsベースのプラットフォーム（たとえば[Ymple](https://www.ymple.com/en/)）の上にSailsアプリケーションを構築する方法も検討してみてください。
 
-<docmeta name="displayName" value="Eコマース">
+<docmeta name="displayName" value="E-commerce">
+<docmeta name="displayName_ja" value="Eコマース">

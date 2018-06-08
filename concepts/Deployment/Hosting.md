@@ -132,4 +132,5 @@ More 2013:
 + [Microsoft Azure](https://stackshare.io/microsoft-azure)や[EC2](https://stackshare.io/amazon-ec2)のようなものであれば、ほかにたくさんの[Node.js/Sails.jsが動く"ベアメタル"もしくはIaaSなサーバーがあります](https://stackshare.io/amazon-ec2/alternatives)
 + [Cloudflare](https://stackshare.io/cloudflare)のようなものであれば、ほかに[静的なあアセットをホストするのに最適化された、優れたCDNがあります](https://stackshare.io/cloudflare/alternatives)
 
-<docmeta name="displayName" value="ホスティング">
+<docmeta name="displayName" value="Hosting">
+<docmeta name="displayName_ja" value="ホスティング">

@@ -104,5 +104,5 @@ module.exports = function insufficientFunds(err, extraInfo){
 >
 
 
-
-<docmeta name="displayName" value="カスタムレスポンス">
+<docmeta name="displayName" value="Custom responses">
+<docmeta name="displayName_ja" value="カスタムレスポンス">

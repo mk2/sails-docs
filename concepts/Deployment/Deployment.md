@@ -119,5 +119,5 @@ HerokuのようなPaaSにデプロイしていない場合を除いて、[`pm2`]
 + [Sails/Node.jsアプリケーションのスケーリング](https://sailsguides.jp/doc/concepts/deployment/scaling)
 + [APIリファレンス](https://sailsguides.jp/doc/reference)
 
-
-<docmeta name="displayName" value="デプロイ">
+<docmeta name="displayName" value="Deployment">
+<docmeta name="displayName_ja" value="デプロイ">

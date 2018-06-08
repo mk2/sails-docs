@@ -64,5 +64,5 @@ Sailsアプリケーションでセッションを使用している場合は、
 }
 ```
 
-
-<docmeta name="displayName" value="よくある質問">
+<docmeta name="displayName" value="FAQ">
+<docmeta name="displayName_ja" value="よくある質問">

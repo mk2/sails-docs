@@ -153,5 +153,5 @@ _デフォルトで、標準で使うデータベースとして設定されて�
 上記のコミュニティアダプターにこれらの規約のいずれかが当てはまらないことが判明した場合（言い換えると、Githubのコードではなく、NPMへ公開された最新の安定板）、アダプターのメンテナに問い合わせてください。連絡が取れない場合や、さらなる支援が必要な場合は、Sailsのコアチームのメンバーに[連絡](https://sailsjs.com/contact)してください。
 
 
-
-<docmeta name="displayName" value="利用可能なアダプター">
+<docmeta name="displayName" value="Available adapters">
+<docmeta name="displayName_ja" value="利用可能なアダプター">

@@ -10,7 +10,7 @@
 
 ### アーキテクチャの例
 
-```txt
+```
                              ....
                     /  Sails.js server  \      /  Database (e.g. Mongo, Postgres, etc)
 Load Balancer  <-->    Sails.js server    <-->    Socket.io message queue (Redis)
@@ -63,4 +63,5 @@ Node/Sailsアプリケーションのエンドポイントの最適化は、他�
 > + セッションにRedisを使用する必要はありません。実際には、ConnectまたはExpress互換のセッションストアを使用できます。詳細については、[sails.config.session](sailsjs.com/documentation/reference/configuration/sails-config-session)を参照してください。
 > + 一部のホストされたRedisプロバイダ（<a href="https://elements.heroku.com/addons/redistogo" target="_blank">Redis To Go</a>など）は、<a href="https://redis.io/topics/clients#client-timeouts">アイドル状態の接続に対してタイムアウトを設定</a>します。ほとんどの場合、アプリの予期しない動作を避けるため、この機能をオフにします。タイムアウトを無効にする方法の詳細は、プロバイダによって異なります（サポートチームに連絡する必要があります）。
 
-<docmeta name="displayName" value="スケーリング">
+<docmeta name="displayName" value="Scaling">
+<docmeta name="displayName_ja" value="スケーリング">

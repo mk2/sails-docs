@@ -11,4 +11,5 @@ Sails用のプラグインを開発することに興味があるなら、ほと
 
 <sub><a name="foot1">*</a> コア・フック、例えばhttp、requestなどは、Sailsにあらかじめバンドルされているフックです。`.sailsrc`ファイルに`hooks`設定を指定するか、プログラムでSailsを起動することで無効化できます。</sub>
 
-<docmeta name="displayName" value="Sailsを拡張する">
+<docmeta name="displayName" value="Extending Sails">
+<docmeta name="displayName_ja" value="Sailsを拡張する">

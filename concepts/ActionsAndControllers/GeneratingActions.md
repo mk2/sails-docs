@@ -108,5 +108,5 @@ module.exports = function signup(req, res) {
 
 
 
-
-<docmeta name="displayName" value="アクションとコントローラを生成する">
+<docmeta name="displayName" value="Generating actions and controllers">
+<docmeta name="displayName_ja" value="アクションとコントローラを生成する">
