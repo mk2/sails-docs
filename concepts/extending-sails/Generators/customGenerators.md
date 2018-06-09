@@ -1,30 +1,30 @@
-# Custom generators
+# カスタムジェネレーター
 
 <!-- TODO: update this tutorial to reflect how generator names are spat out.  Also update it to explain that you can just delete the package.json file in the newly generated generator if you're not planning on publishing it to npm.  Also bring back in the information that was deleted because the examples were quite out of date (the other content is still good though- see commit history of this file on GitHub  -->
 
-### Overview
+### 概要
 
-Custom [generators](https://sailsjs.com/documentation/concepts/extending-sails/generators) are a type of plugin for the Sails command-line.  Through templates, they control which files get generated in your Sails projects when you run `sails new` or `sails generate`, and also what those files look like.
+カスタム[ジェネレーター](https://sailsguides.jp/doc/concepts/extending-sails/generators)は、Sailsのコマンドライン用のプラグインの一種です。`sails new`や`sails generate`を実行するとき、テテンプレートを通じてSailsプロジェクトに生成されるファイルやその内容をコントロールすることができます。
 
-### Creating a generator
+### ジェネレーターの作成
 
-To make this easier to play with, let's first make a Sails project.  If you haven't already created one, go to your terminal and type:
+まずは体験するために、Sailsプロジェクトを作成しましょう。まだ作成していない場合は、ターミナルに移動して次のように入力します。
 
 ```sh
 sails new my-project
 ```
 
-Then `cd` into `my-project` and ask Sails to spit out the template for a new generator:
+次に`cd`で`my-project`へ移動し、Sailsに新しいジェネレーターのテンプレートを吐き出させてください。
 
 ```sh
 sails generate generator awesome
 ```
 
-### Configuring a generator
+### ジェネレーターの設定
 
-To enable the generator you need to tell Sails about it via your test project's [`.sailsrc` file](https://sailsjs.com/documentation/concepts/configuration/using-sailsrc-files).
+ジェネレーターを有効にするには、先ほど生成したテストプロジェクトの[`.sailsrc`ファイル](https://sailsguides.jp/doc/concepts/configuration/using-sailsrc-files)を介してSailsに伝える必要があります。
 
-If we were using an existing generator, we could just install it from NPM, then specify the name of the package in `.sailsrc`.  But since we're developing this generator locally, we'll just connect it to the folder directly:
+既存のジェネレーターを使う場合は、NPMからジェネレーターをインストールして、そのジェネレーターの名前を`.sailsrc`に指定してください。ただ、今はジェネレーターをローカルで開発しているので、直接フォルダに接続します。
 
 ```javascript
 {
@@ -36,42 +36,42 @@ If we were using an existing generator, we could just install it from NPM, then 
 }
 ```
 
-> **Note:** For now, we'll stick with "awesome", but you can mount the generator under any name you want.  Whatever you choose for the name of the key in the `.sailsrc` file will be the name you'll use to run this generator from the terminal (e.g. `sails generate awesome`).
+> **注意：** 今のところ、「素晴らしい」としていますが、任意の名前でジェネレーターをマウントすることができます。`.sailsrc`で設定したキー名が、ターミナルからジェネレーターを実行する際の名前になります（たとえば`sails generate awesome`）。
 
 
-### Running a custom generator
+### カスタムジェネレーターを実行する
 
-To run your generator, just tack its name on to `sails generate`, followed by any desired arguments or command-line options.  For example:
+ジェネレーターを実行するには、その名前を`sails generate`に付け加えて、さらにその後に任意の引数やコマンドラインオプションを続けます。例を示します。
 
 ```js
 sails generate awesome
 ```
 
 
-### Publishing to NPM
+### NPMへ公開する
 
-If your generator is useful across different projects, you might consider publishing it as an NPM package.  (Note that this doesn't mean that your generator must be open-source.  NPM also supports [private packages](https://docs.npmjs.com/private-modules/intro).)
+ジェネレーターが他のプロジェクトで役立つ場合は、NPMパッケージとして公開することを検討してみてください。（ジェネレーターが必ずオープンソースにならなければいけない、ということではありません。NPMは[プライベートパッケージ](https://docs.npmjs.com/private-modules/intro)もサポートしています。）
 
-First, pop open the `package.json` file and verify the package name (e.g. "@my-npm-name/sails-generate-awesome"), author ("My Name"), license, and other information are correct.  (If you're unsure, a good open source license to use is "MIT".  If you're publishing a private generator, and want it to remain proprietary to your organization, use "UNLICENSED".)
+まず、`package.json`ファイルを開いて、パッケージ名（たとえば"@my-npm-name/sails-generate-awesome"）や著者（"My Name"）、ライセンス、そして他の情報が正しいことを確認します。（もしわからないのであれば、オープンソースライセンスは"MIT"を使ってください。プライベートなジェネレーターを公開しようとしているのであれば、"UNLICENSED"を使うことで自分の組織の所有にさせることができます。）
 
-> **Note:**  If you don't already have an NPM account, go to [npmjs.com](https://www.npmjs.com/) and create one.  Then use `npm login` to get set up.
+> **注意：** まだNPMアカウントを持っていない場合は、[npmjs.com](https://www.npmjs.com/)にアクセスしてアカウントを作成してください。そのあと`npm login`を実行してセットアップします。
 
-When you're ready, to pull the trigger and publish your generator on NPM, cd into the generator's folder in the terminal and type:
+準備ができたら、NPMにジェネレーターを公開しましょう。ターミナルのジェネレーターのフォルダにcdで移動し、次のように入力します。
 
 ```sh
 npm publish
 ```
 
 
-### Installing a generator
+### ジェネレーターをインストールする
 
-To take your newly-published generator for a spin, cd back into your example Sails project (`my-project`), delete the inline generator, and run:
+新しく公開されたジェネレーターを試しに実行するには、サンプルのSailsプロジェクト（`my-project`）にcdで戻り、インラインのジェネレーターを削除し、次を実行します。
 
 ```js
 npm install @my-npm-name/sails-generate-awesome
 ```
 
-then change the `.sailsrc` in your example Sails project (`my-project/.sailsrc`):
+そしたらサンプルのSailsプロジェクトの`.sailsrc`を変更します（`my-project/.sailsrc`）。
 
 ```javascript
 {
@@ -83,7 +83,7 @@ then change the `.sailsrc` in your example Sails project (`my-project/.sailsrc`)
 }
 ```
 
-And, last but not least:
+そして最後に次を実行します。
 
 ```sh
 sails generate awesome
@@ -91,3 +91,4 @@ sails generate awesome
 
 
 <docmeta name="displayName" value="Custom generators">
+<docmeta name="displayName_ja" value="カスタムジェネレーター">
