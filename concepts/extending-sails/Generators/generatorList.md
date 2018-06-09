@@ -1,12 +1,12 @@
-# Available generators
+# 利用可能なジェネレーター
 
-The Sails framework's built-in [generators](https://sailsjs.com/documentation/concepts/extending-sails/generators) can be customized using command-line options, and overridden by [mounting custom generators in the `.sailsrc` file](https://sailsjs.com/documentation/concepts/extending-sails/generators/custom-generators).  Other generators that add completely new sub-commands to [`sails generate`](https://sailsjs.com/documentation/reference/command-line-interface/sails-generate) can be mounted in the same way.
+Sailsフレームワークの組み込みの[ジェネレーター](https://sailsguides.jp/doc/concepts/extending-sails/generators)は、コマンドラインオプションを使用してカスタマイズすることができ、[カスタムジェネレータを`.sailsrc`ファイルにマウントする](https://sailsguides.jp/doc/concepts/extending-sails/generators/custom-generators)ことで上書きできます。[`sails generate`](https://sailsguides.jp/doc/reference/command-line-interface/sails-generate)に完全に新しいサブコマンドを追加する他のジェネレータも同じ方法でマウントできます。
 
-### Core Generators
+### コアジェネレーター
 
-Certain generators are built in to Sails by default.
+特定のジェネレーターは、Sailsにデフォルトで組み込まれています。
 
-| Commands that generate a new Sails app
+| 新しいSailsアプリケーションを生成するコマンド
 |:-----------------------------------|
 | sails new _name_
 | sails new _name_ --fast
@@ -17,7 +17,7 @@ Certain generators are built in to Sails by default.
 | sails new _name_ --minimal
 
 
-| Generators for spitting out new files in an existing Sails app
+| Sailsアプリケーションで、新しいファイルを生成するためのジェネレーター
 |:-----------------------------------|
 | sails generate model _identity_
 | sails generate action _name_
@@ -34,28 +34,29 @@ Certain generators are built in to Sails by default.
 | sails generate response _name_
 
 
+| プラグインを生成するためのコマンド
 | Commands for generating plugins
 |:-----------------------------------|
 | sails generate generator _name_
 | sails generate adapter _name_
 
 
-| Commands for (re)generating client-side dependencies
+| クライアント側の依存関係を生成（もしくは再生成）するためのコマンド
 |:-----------------------------------|
 | sails generate sails.io.js
 | sails generate parasails
 
-| Utils for building your own 3rd party packages
+| サードパーティパッケージを構築するためのユーティティ
 |:-----------------------------------|
 | sails generate etc
 
 
-_Since Sails v1.0, built-in generators are now [bundled](https://npmjs.com/package/sails-generate) in Sails core, rather than in separate NPM packages.  All generators can still be overridden the same way.  For advice setting up overrides for core generators in your environment, [click here](https://sailsjs.com/support)._
+_Sailsのv1.0以降、組み込みのジェネレーターは、別のNPMパッケージではなく、Sailsコアに[バンドルされています](https://npmjs.com/package/sails-generate)。すべてのジェネレーターは同じ方法で上書きすることができます。コアジェネレーターで上書きを設定する方法については、[サポートに問い合わせてください](https://sailsjs.com/support)。_
 
 
-### Community Generators
+### コミュニティのジェネレーター
 
-There are over 100 community-supported generators [available on NPM](https://www.npmjs.com/search?q=sails+generate):
+100を超えるコミュニティサポートのジェネレーターが、[NPMで利用可能です](https://www.npmjs.com/search?q=sails+generate)。
 
 + [sails-inverse-model](https://github.com/juliandavidmr/sails-inverse-model)
 + [sails-generate-new-gulp](https://github.com/Karnith/sails-generate-new-gulp)
@@ -65,7 +66,8 @@ There are over 100 community-supported generators [available on NPM](https://www
 + [sails-generate-bower](https://github.com/smies/sails-generate-bower)
 + [sails-generate-angular-gulp](https://github.com/Karnith/sails-generate-angular-gulp)
 + [sails-generate-ember-blueprints](https://github.com/mphasize/sails-generate-ember-blueprints)
-+ And [many more](https://www.npmjs.com/search?q=sails+generate)...
++ 他にも、[たくさんあります](https://www.npmjs.com/search?q=sails+generate)。
 
 
 <docmeta name="displayName" value="Available generators">
+<docmeta name="displayName_ja" value="利用可能なジェネレーター">
