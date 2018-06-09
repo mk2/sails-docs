@@ -1,14 +1,14 @@
 # ジェネレーター
 
-A big part of Sails, like any framework, is to automate repetitive tasks.  **Generators** are no exception-- they're what power the Sails command-line interface any time it generates new files for your Sails projects.  In fact, you or someone on your team probably used a _generator_ to create your latest Sails project.
+Sailsの大きな部分は、他のフレームワークと同様に、繰り返しのタスクを自動化することです。**ジェネレーター** も例外ではありません。Sailsプロジェクト用の新しいファイルを生成するたびに、Sailsコマンドラインインターフェイスに力を与えています。実際、あなたやチームの誰かが、おそらくジェネレーターを使って最新のSailsプロジェクトを作成したでしょう。
 
-When you type
+以下のように入力するとき、
 
 ```sh
 sails new my-project
 ```
 
-sails uses its built-in "new" generator to prompt you for your app template of choice, then spits out the initial folder structure for a Sails app:
+sailsは組み込みの「新しい」ジェネレーターを使って、アプリケーションのテンプレートを選ぶよう指示し、Sailsアプリケーションの初期状態のフォルダ構造を吐き出します。
 
 ```javascript
 my-project
@@ -28,28 +28,28 @@ my-project
   └── README.md
 ```
 
+この慣習的な（標準の）フォルダ構造は、フレームワークを利用する大きな利点のひとつです。同時に、トレードオフのひとつでもあります。（チームや組織が別の慣習に固執している場合はどうするのでしょうか？）
 
-This conventional folder structure is one of the big advantages of using a framework.  But it's usually also one of the trade-offs.  (What if your team or organization has made firm commitments to a different set of conventions?)
+幸いなことに、Sailsのv0.11以降ではジェネレーターは拡張性があり、プロジェクトリポジトリにチェックインしたり、再利用のためにNPMに公開することが簡単にできます。
 
-Fortunately since Sails v0.11, generators are extensible and easy to check in to a project repository or publish on NPM for re-use.
+`sails new`や`sails generate`をコマンドラインから実行したときに、Sailsのジェネレーターで何をやるかを完全にカスタマイズすることができます。新しいアプリケーションや新たに生成されたモジュールを強化することで、カスタムジェネレーターはたくさんのクールなことを実行できるようになります。
 
-Sails' generators allow you to completely customize what happens when you run `sails new` and `sails generate` from the command-line.  By augmenting new apps and newly-generated modules, custom generators can be used to do all sorts of cool things:
-- to standardize conventions and boilerplate logic for all new apps across your organization
-- to swap out rules in the default .eslintrc file
-- to customize how the asset pipeline works in new projects
-- to use a different asset pipeline altogether (like [Gulp](http://gulpjs.com/) or [webpack](https://webpack.github.io/))
-- to use a [different default view engine](https://sailsjs.com/documentation/concepts/views/view-engines)
-- to automate custom deployments (e.g. white label apps with one server per-customer)
-- to include a different set of dependencies in the package.json file
-- to generate files in a transpiled language like Typescript or CoffeeScript
-- to start off with all documentation and comments in a language other than English
-- to include ASCII pictures of cats at the top of every code file (or license headers, whatever)
-- to standardize around a particular version of a front-end dependency (for example `sails generate jquery`)
-- to include a particular front-end framework in your new Sails apps
-- to make it easy to include new Vue / React components or Angular modules from your favorite templates (for example `sails generate component` or `sails generate ng-module`)
+- 組織全体で、すべての新しいアプリケーションにための規約とボイラープレートロジックを標準化する
+- デフォルトの.eslintrcファイルでルールを交換する
+- 新しいプロジェクトで、あせっとぱぷラインがどのように動くかをカスタマイズする
+- 全くことなるアセットパイプライン（たとえば[Gulp](http://gulpjs.com/)や[webpack](https://webpack.github.io/)）を使う
+- [別のデフォルトビューエンジン](https://sailsguides.jp/doc/concepts/views/view-engines)を使う
+- カスタムデプロイを自動化する（たとえば、1人の顧客ごとに1台のサーバーを持つ、専用のアプリケーション）
+- package.jsonファイルに異なる依存関係のセットを含める
+- TypescriptやCoffeeScriptのようなトランスパイルする言語でファイルを生成する
+- 英語以外の言語で、ドキュメントとコメントを書く
+- すべてのコードファイルで、猫のアスキーアートを含む（もしくはライセンスヘッダーなど）
+- 特定のバージョンのフロントエンド依存関係を標準化する（たとえば`sails generate jquery`）
+- 新しいSailsアプリケーションに特定のフロントエンドフレームワークを含める
+- 好きなテンプレートから新しいVue/ReactコンポーネントやAngularモジュールを簡単に組み込むことができます（例えば、`sails generate component`または`sails generate ng-module`）。
 
-
-> If you are interested in making custom generators, the best place to start is by checking out the [introduction to custom generators](https://sailsjs.com/documentation/concepts/extending-sails/generators/custom-generators).  You also might check out [open-source generators from the community](https://sailsjs.com/documentation/concepts/extending-sails/generators/available-generators), in case something already out there will save you some time.
+> カスタムジェネレータの作成に興味がある場合は、[カスタムジェネレータ入門](https://sailsguides.jp/doc/concepts/extending-sails/generators/custom-generators)をチェックするのが良いでしょう。。また、[コミュニティからオープンソースのジェネレータ](https://sailsguides.jp/doc/concepts/extending-sails/generators/available-generators)をチェックアウトすることもできます。すでに何かあれば、時間を節約できます。
 
 
 <docmeta name="displayName" value="Generators">
+<docmeta name="displayName_ja" value="ジェネレーター">
