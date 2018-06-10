@@ -14,7 +14,7 @@ Sailsには3種類のフックがあります。
 
 ### 続きを読む
 
-* [アプリケーションでフックを使う](https://sailsguides.jp/doc/concepts/extending-sails/Hooks/using-hooks)
+* [アプリケーションでフックを使う](https://sailsguides.jp/doc/concepts/extending-sails/hooks/using-hooks)
 * [フックの仕様](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification)
 * [プロジェクトのフックを作成する](https://sailsguides.jp/doc/concepts/extending-sails/hooks/project-hooks)
 * [インストール可能なフックを作成する](https://sailsguides.jp/doc/concepts/extending-sails/Hooks/installable-hooks)
