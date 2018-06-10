@@ -1,8 +1,7 @@
-# The hook specification
+# フックの仕様
 
-### Overview
-
-Each Sails hook is implemeted as a Javascript function that takes a single argument&mdash;a reference to the running `sails` instance&mdash;and returns an object with one or more of the keys described later in this document.  So, the most basic hook would look like this:
+### 概要
+各Sailsフックは、実行中の`sails`インスタンスへの参照である1つの引数を受け取るようなJavascriptの関数として実装され、このドキュメントで後述する1つ以上のキーを持つオブジェクトを返します。そのため、最も基本的なフックは次のようになります。
 
 ```javascript
 module.exports = function myBasicHook(sails) {
@@ -10,24 +9,23 @@ module.exports = function myBasicHook(sails) {
 }
 ```
 
-It wouldn't do much, but it would work!
+たいしたことはしませんが、動くでしょう！
 
-Each hook should be saved in its own folder with the filename `index.js`.  The folder name should uniquely identify the hook, and the folder can contain any number of additional files and subfolders.  Extending the previous example, if you saved the file containing `myBasicHook` in a Sails project as `index.js` in the folder `api/hooks/my-basic-hook` and then lifted your app with `sails lift --verbose`, you would see the following in the output:
+それぞれのフックは、それ自身のフォルダに`index.js`として保存される必要があります。フォルダ名はフックを一意に識別し、フォルダには任意の数の追加ファイルとサブフォルダを含めることができます。先ほど示した例を拡張するには、Sailsプロジェクトの`api/hooks/my-basic-hook`フォルダに`index.js`として先ほどの内容を保存し、`sails lift --verbose`を実行してアプリケーションを起動します。すると出力に次のように表示されます。
 
 `verbose: my-basic-hook hook loaded successfully.`
 
-### Hook features
-The following features are available to implement in your hook.  All features are optional, and can be implemented by adding them to the object returned by your hook function.
+### フックの機能
+以下の機能をフックに実装することができます。すべての機能は実装してもしなくてもよく、フック関数が返すオブジェクトに追加することで実装できます。
 
-* [.defaults](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification/defaults)
-* [.configure()](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification/configure)
-* [.initialize()](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification/initialize)
-* [.routes](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification/routes)
-* [.registerActions()](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification/register-actions)
+* [.defaults](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification/defaults)
+* [.configure()](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification/configure)
+* [.initialize()](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification/initialize)
+* [.routes](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification/routes)
+* [.registerActions()](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification/register-actions)
 
-### Custom hook data and functions
-
-Any other keys added to the object returned from the main hook function will be provided in the `sails.hooks[<hook name>]` object.  This is how custom hook functionality is provided to end-users.  Any data and functions that you wish to remain private to the hook can be added *outside* the returned object:
+### カスタムフックのデータと関数
+メインのフック関数から返すオブジェクトに追加された他のキーは、`sails.hooks.[<hook name>]`オブジェクトに提供されます。これはエンドユーザーがフックの機能をカスタムする方法です。フックで非公開にしたいデータや関数は、返すオブジェクトの外に追加することができます。
 
 ```javascript
 // File api/hooks/myhook/index.js
@@ -56,8 +54,9 @@ module.exports = function (sails) {
 };
 ```
 
-The public var and function above would be available as `sails.hooks.myhook.abc` and `sails.hooks.myhook.sayHi`, respectively.
+上記の公開されている変数と関数は、`sails.hooks.myhook.abc`と`sails.hooks.myhook.sayHi`としてそれぞれ利用可能です。
 
 
 <docmeta name="displayName" value="Hook specification">
+<docmeta name="displayName_ja" value="フックの仕様">
 <docmeta name="stabilityIndex" value="3">

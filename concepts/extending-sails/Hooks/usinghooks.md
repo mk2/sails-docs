@@ -37,4 +37,5 @@ module.exports.installedHooks = {
 
 
 <docmeta name="displayName" value="Using hooks">
+<docmeta name="displayName_ja" value="フックを使う">
 <docmeta name="stabilityIndex" value="3">
