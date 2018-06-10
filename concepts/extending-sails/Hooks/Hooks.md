@@ -1,25 +1,26 @@
-# Hooks
+# フック
 
-### What is a hook?
+### フックとは何ですか？
 
-A hook is a Node module that adds functionality to the Sails core.  The [hook specification](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification) defines the requirements a module must meet for Sails to be able to import its code and make the new functionality available.  Because they can be saved separately from the core, hooks allow Sails code to be shared between apps and developers without having to modify the framework.
+フックは、Sailsコアに機能を追加するNodeモジュールです。[フックの仕様](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification)では、Sailsがそのコードをインポートし、新しい機能を利用できるようにするためのモジュールが満たすべき要件を定義しています。コアとは別に保存することができるため、フックを使用すると、フレームワークを変更することなくアプリケーションと開発者がSailsコードを共有することができます。
 
-### Types of hooks
+### フックの種類
 
-There are three types of hooks available in Sails:
+Sailsには3種類のフックがあります。
 
-1. **Core hooks**.  These built-in hooks provide many of the common features essential to a Sails app, such as request handling, blueprint route creation, and database integration via [Waterline](https://sailsjs.com/documentation/concepts/models-and-orm).  Core hooks are bundled with the Sails core and are thus available to every app.  You will rarely have a need to call core hook methods in your code.
-2. **App-level hooks**.  These are hooks that live in the `api/hooks/` folder of a Sails app.  Project hooks provide a way to take advantage of the features of the hook system for code that doesn&rsquo;t need to be shared between apps.
-3. **Installable hooks**.  These hooks are plugins, installed into an app&rsquo;s `node_modules` folder using `npm install`.  Installable hooks allow developers in the Sails community to create &ldquo;plug-in&rdquo;-like modules for use in Sails apps.
+1. **コアフック**。これはあらかじめ組み込まれているフックで、リクエスト処理、blueprintルート作成、そして[Waterline](https://sailsguides.jp/doc/concepts/models-and-orm)経由でのデータベース統合など、Sailsアプリケーションに不可欠な多くの共通機能を提供します。コアフックはSailsコアにバンドルされており、すべてのアプリで使用できます。コード内でコアフックメソッドを呼び出す必要はほとんどありません。
+2. **アプリケーションレベルのフック**。これらは、Sailsアプリケーションの`api/hooks`フォルダににあるフックです。プロジェクトのフックは、アプリケーション間で共有する必要のないコードでフックシステムの機能を利用する方法を提供します。
+3. **インストール可能なフック**。これらのフックはプラグインであり、`npm install`を使用することでアプリケーションの`node_modules`フォルダにインストールされます。インストール可能なフックを用いることで、Sailsコミュニティの開発者はSailsアプリケーションで使用するための「プラグイン」のようなモジュールを作成することができます。
 
-### Read more
+### 続きを読む
 
-* [Using hooks in your app](https://sailsjs.com/documentation/concepts/extending-sails/Hooks/using-hooks)
-* [The hook specification](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification)
-* [Creating a project hook](https://sailsjs.com/documentation/concepts/extending-sails/hooks/project-hooks)
-* [Creating an installable hook](https://sailsjs.com/documentation/concepts/extending-sails/Hooks/installable-hooks)
+* [アプリケーションでフックを使う](https://sailsguides.jp/doc/concepts/extending-sails/Hooks/using-hooks)
+* [フックの仕様](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification)
+* [プロジェクトのフックを作成する](https://sailsguides.jp/doc/concepts/extending-sails/hooks/project-hooks)
+* [インストール可能なフックを作成する](https://sailsguides.jp/doc/concepts/extending-sails/Hooks/installable-hooks)
 
 
 
 <docmeta name="displayName" value="Hooks">
+<docmeta name="displayName_ja" value="フック">
 <docmeta name="stabilityIndex" value="3">
