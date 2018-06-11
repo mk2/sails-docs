@@ -2,7 +2,7 @@
 
 ### 概要
 
-Sailsアプリケーションには、[アクションコード](https://sailsguides.jp/doc/concepts/actions-and-controllers)から呼び出すことのできる、予め設定されたいくつかのレスポンスが同梱されています。これらのデフォルトのレスポンスは"resource not found"（[`notfound`レスポンス](https://sailsguides.jp/doc/reference/res/res-not-found)）や"internal server error"（[`serverError`レスポンス](https://sailsguides.jp/doc/reference/res/res-server-error)）のような状況に対処することができます。もしアプリケーションがデフォルトのレスポンスの仕方を変更がする必要がある場合や、全く新しい応答を作成したい場合は、`api/responses`フォルダーにファイルを追加してください。
+Sailsアプリケーションには、[アクションコード](https://sailsguides.jp/doc/concepts/actions-and-controllers)から呼び出すことのできる、予め設定されたいくつかのレスポンスが同梱されています。これらのデフォルトのレスポンスは"resource not found"（[`notfound`レスポンス](https://sailsguides.jp/doc/reference/response-res/res-not-found)）や"internal server error"（[`serverError`レスポンス](https://sailsguides.jp/doc/reference/response-res/res-server-error)）のような状況に対処することができます。もしアプリケーションがデフォルトのレスポンスの仕方を変更がする必要がある場合や、全く新しい応答を作成したい場合は、`api/responses`フォルダーにファイルを追加してください。
 
 > 注意：`api/responses`はSailsアプリケーションを新しく生成した場合にデフォルトで作成されないため、レスポンスを追加・カスタマイズしたい場合は自分で追加する必要があります。
 
@@ -90,7 +90,7 @@ module.exports = function insufficientFunds(err, extraInfo){
 
 ### 組み込みのレスポンス
 
-すべてのSailsアプリケーションには、あらかじめ設定されたレスポンスが組み込まれています。たとえば[`res.serverError()`](https://sailsguides.jp/doc/reference/res/res-server-error)や[`res.notFound()`](https://sailsguides.jp/doc/reference/res/res-not-found)などがあり、`api/responses`の配下に対応するファイルがなくても使用することができます。
+すべてのSailsアプリケーションには、あらかじめ設定されたレスポンスが組み込まれています。たとえば[`res.serverError()`](https://sailsguides.jp/doc/reference/response-res/res-server-error)や[`res.notFound()`](https://sailsguides.jp/doc/reference/response-res/res-not-found)などがあり、`api/responses`の配下に対応するファイルがなくても使用することができます。
 
 デフォルトのレスポンスは、アプリケーションの`api/responses/`配下に同名のファイルを追加することで上書きすることができます（例えば、`api/responses/serverError.js`）。
 
