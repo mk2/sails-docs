@@ -34,8 +34,7 @@ Sailsフレームワークの組み込みの[ジェネレーター](https://sail
 | sails generate response _name_
 
 
-| プラグインを生成するためのコマンド
-| Commands for generating plugins
+| プラグインを生成するためのコマンド |
 |:-----------------------------------|
 | sails generate generator _name_
 | sails generate adapter _name_
