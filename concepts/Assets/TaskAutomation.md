@@ -163,7 +163,7 @@ npm uninstall grunt-contrib-jst --save-dev
 
 ##### `sails www`
 
-参照内の相対パスを使用する`.tmp/public`の代わりに、すべてのアセットを`www`のサブフォルダにコンパイルする**ビルド**タスク（`tasks/register/build.js`）を実行します。これにより、[「wwwミドルウェア」](https://sailsguides.jp/doc/concepts/Middleware)に頼るのではなく、ApacheやNginxで静的コンテンツを提供することができます。
+参照内の相対パスを使用する`.tmp/public`の代わりに、すべてのアセットを`www`のサブフォルダにコンパイルする**ビルド**タスク（`tasks/register/build.js`）を実行します。これにより、[「wwwミドルウェア」](https://sailsguides.jp/doc/concepts/middleware)に頼るのではなく、ApacheやNginxで静的コンテンツを提供することができます。
 
 ##### `sails www --prod` (production)
 
