@@ -38,7 +38,7 @@ Node.js（Sails.jsも）のアプリケーションは水平方向にスケー�
 
 ### PaaSにNode/Sailsアプリケーションをデプロイする
 
-HerokuやModulusのようなPaaSにアプリケーションをデプロイするのは簡単です。状況によっては、細部にいくつかの悪魔が残っているかもしれませんが、ホスティングプロバイダのNodeサポートはここ数年で本当に良くなってきました。より多くのプラットフォーム固有の情報については、[ホスティング](https://sailsguides.jp/doc/concepts/deployment/Hosting)を見てください。
+HerokuやModulusのようなPaaSにアプリケーションをデプロイするのは簡単です。状況によっては、細部にいくつかの悪魔が残っているかもしれませんが、ホスティングプロバイダのNodeサポートはここ数年で本当に良くなってきました。より多くのプラットフォーム固有の情報については、[ホスティング](https://sailsguides.jp/doc/concepts/deployment/hosting)を見てください。
 
 ### 独自にクラスタをデプロイする
 
