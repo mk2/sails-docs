@@ -2,11 +2,11 @@
 
 ### 概要
 
-Sailsは[設定よりも規約](http://en.wikipedia.org/wiki/Convention_over_configuration)の考え方に忠実に従っていますが、時に応じてそれらの便利なデフォルトの動作をカスタマイズする方法を理解することが重要です。ほとんどすべてのSailsの規約には、必要に応じて調整または上書きできる設定オプションが付いています。
+Sailsは[設定よりも規約](https://ja.wikipedia.org/wiki/%E8%A8%AD%E5%AE%9A%E3%82%88%E3%82%8A%E8%A6%8F%E7%B4%84)の考え方に忠実に従っていますが、時に応じてそれらの便利なデフォルトの動作をカスタマイズする方法を理解することが重要です。ほとんどすべてのSailsの規約には、必要に応じて調整または上書きできる設定オプションが付いています。
 
 > 特定の設定を探していますか？Sailsで利用可能なすべての設定オプションへの完璧なガイドを参照するするには、上にある[Reference > Configuration](sailsjs.com/documentation/reference/configuration)を見てください。
 
-Sailsアプリケーションは、[環境変数](http://en.wikipedia.org/wiki/Environment_variable)やコマンドライン引数を指定したり、ローカルファイルやグローバルの[`.sailsrc`ファイル](https://sailsguides.jp/doc/anatomy/.sailsrc)を変更したり、新しいプロジェクトの[`config/`](https://sailsguides.jp/doc/anatomy/config)フォルダにある設定ファイルを使用して[プログラマブルに設定する](https://github.com/mikermcneil/sails-generate-new-but-like-express/blob/master/templates/app.js#L15)ことができます。マージされ、アプリで使われている正規の設定は、実行時にグローバル変数である`sails`および`sails.config`として利用できます。
+Sailsアプリケーションは、[環境変数](https://ja.wikipedia.org/wiki/%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0)やコマンドライン引数を指定したり、ローカルファイルやグローバルの[`.sailsrc`ファイル](https://sailsguides.jp/doc/anatomy/.sailsrc)を変更したり、新しいプロジェクトの[`config/`](https://sailsguides.jp/doc/anatomy/config)フォルダにある設定ファイルを使用して[プログラマブルに設定する](https://github.com/mikermcneil/sails-generate-new-but-like-express/blob/master/templates/app.js#L15)ことができます。マージされ、アプリで使われている正規の設定は、実行時にグローバル変数である`sails`および`sails.config`として利用できます。
 
 ### 標準設定ファイル (`config/*`)
 
@@ -124,7 +124,7 @@ Sailsの設定ローダーを活用して、独自のカスタム設定を管理
 
 設定に関しては、ほとんどの場合、アプリケーションの実行時設定（ポート、データベース設定など）を管理することに重点を置いています。ただし、Sails CLI自体をカスタマイズすることもできます。ワークフローを簡素化し、繰り返し作業を減らし、カスタムビルドの自動化などを実行できます。ありがたいことに、Sails v0.10はこれを行うための強力な新しいツールを追加しました。
 
-[.sailsrcファイル](https://sailsguides.jp/doc/anatomy/.sailsrc)は、Sailsの他の設定ファイルに比べると変わっています。これは、Sails CLIの設定にも使用可能で、他にもシステム全体や、ディレクトリのグループ、そして特定のフォルダに`cd`したときにのみにも有効です。なぜ必要なのかというと、`sails generate`および`sails new`が実行されたときに使用される[ジェネレータ](https://sailsguides.jp/doc/concepts/extending-sails/Generators)をカスタマイズするためですが、独自のカスタムジェネレータをインストールしたり、ハードコードされた設定を上書きするというような用途でも有効です。
+[.sailsrcファイル](https://sailsguides.jp/doc/anatomy/.sailsrc)は、Sailsの他の設定ファイルに比べると変わっています。これは、Sails CLIの設定にも使用可能で、他にもシステム全体や、ディレクトリのグループ、そして特定のフォルダに`cd`したときにのみにも有効です。なぜ必要なのかというと、`sails generate`および`sails new`が実行されたときに使用される[ジェネレータ](https://sailsguides.jp/doc/concepts/extending-sails/generators)をカスタマイズするためですが、独自のカスタムジェネレータをインストールしたり、ハードコードされた設定を上書きするというような用途でも有効です。
 
 そしてSailsは「最も近い」`.sailsrc`を探すので、現在の作業ディレクトリの祖先ディレクトリに、クラウドでホストされたコードリポジトリにチェックインすることができない秘密の設定（例えばデータベースパスワードのようなもの）を行うために、このファイルを安全に使用することができます。"$HOME"ディレクトリに`.sailsrc`ファイルをおいてください。詳細については、[.sailsrcファイルに関するドキュメント](https://sailsguides.jp/doc/anatomy/.sailsrc)を参照してください。
 
@@ -135,7 +135,7 @@ Sailsの設定ローダーを活用して、独自のカスタム設定を管理
 ##### `sails lift`もしくは`node app.js`から起動した場合の優先順位（高いものから順に）
 
 + [minimist](https://github.com/substack/minimist/tree/0.0.10)によってパースされたコマンドラインオプション。例えば`sails lift --custom.mailgun.apiToken='foo'`は`sails.config.custom.mailgun.apiToken`になります。
-+ `sails_`が先頭につき、ドットを二重のアンダースコアで表現した、[環境変数](https://en.wikipedia.org/wiki/Environment_variable)。例えば、`sails_port=1492 sails lift`（[A few more examples](https://gist.github.com/mikermcneil/92769de1e6c10f0159f97d575e18c6cf)）。
++ `sails_`が先頭につき、ドットを二重のアンダースコアで表現した、[環境変数](https://ja.wikipedia.org/wiki/%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0)。例えば、`sails_port=1492 sails lift`（[A few more examples](https://gist.github.com/mikermcneil/92769de1e6c10f0159f97d575e18c6cf)）。
 + アプリケーションのディレクトリか、`../`や`../../`などで最初に見つかった[`.sailsrc`ファイル](https://sailsguides.jp/doc/concepts/configuration/using-sailsrc-files)
 + ホームフォルダにある`.sailsrc`（例えば、`~/.sailsrc`）。
 + アプリケーションにある`config/local.js`ファイル。
