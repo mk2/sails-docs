@@ -18,7 +18,7 @@
   'POST /make/a/sandwich': 'sandwich/make'
 ```
 
-ルーティングの詳細については、[ルートのドキュメント](https://sailsguides.jp/doc/concepts/Routes)を参照してください。
+ルーティングの詳細については、[ルートのドキュメント](https://sailsguides.jp/doc/concepts/routes)を参照してください。
 
 ### 自動ルーティング
 
