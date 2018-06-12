@@ -1,12 +1,12 @@
-# Creating an installable hook
+# インストール可能なフックの作成
+インストール可能なフックは、アプリケーションの`node_modules`フォルダにあるカスタムなSailsフックです。Sailsアプリケーション間で機能を共有したり、[NPM](http://npmjs.org)にフックを公開してSailsコミュニティと共有したりする場合に便利です。1つの Sailsアプリケーションで使用するフックを作成する場合は 、代わりに[プロジェクトフックの作成](https://sailsguides.jp/doc/concepts/extending-sails/hooks/project-hooks)を参照してください。
 
-Installable hooks are custom Sails hooks that reside in an application&rsquo;s `node_modules` folder.  They are useful when you want to share functionality between Sails apps, or publish your hook to [NPM](http://npmjs.org) to share it with the Sails community.  If you wish to create a hook for use in  *just one* Sails app, see [creating a project hook](https://sailsjs.com/documentation/concepts/extending-sails/hooks/project-hooks) instead.
+新規のインストール可能なフックを作成する方法を説明します。
 
-To create a new installable hook:
+1. 新しいフックの名前を選択します。[コアフックの名前](https://github.com/balderdashy/sails/blob/master/lib/app/configuration/default-hooks.js)と衝突してはいけません。
+2. `sails-hook-<your hook name>`という名前でシステムに新しいフォルダを作成します。`sails-hook-`接頭辞はオプションですが、一貫性のために推奨されています。フックがロードされた時に、Sailsによって接頭辞は取り除かれます。
+3. `package.json`ファイルをフォルダに作成します。`npm`がシステムにインストールされている場合は、`npm init`を実行し、指示に従うことで簡単に実行できます。それ以外の場合は、手動でファイルを作成し、ファイルに次の記述が最低限含まれていることを確認します。
 
-1. Choose a name for your new hook.  It must not conflict with any of the [core hook names](https://github.com/balderdashy/sails/blob/master/lib/app/configuration/default-hooks.js).
-1. Create a new folder on your system with the name `sails-hook-<your hook name>`.  The `sails-hook-` prefix is optional but recommended for consistency; it is stripped off by Sails when the hook is loaded.
-1. Create a `package.json` file in the folder.  If you have `npm` installed on your system, you can do this easily by running `npm init` and following the prompts.  Otherwise, you can create the file manually, and ensure that it contains at a minimum the following:
 ```json
 {
     "name": "sails-hook-your-hook-name",
@@ -18,14 +18,17 @@ To create a new installable hook:
     }
 }
 ```
-If you use `npm init` to create your `package.json`, be sure to open the file afterwards and manually insert the `sails` key containing `isHook: true`.
-1. Write your hook code in `index.js` in accordance with the [hook specification](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification).
 
-Your new folder may contain other files as well, which can be loaded in your hook via `require`; only `index.js` will be read automatically by Sails.  Use the `dependencies` key of your `package.json` to refer to any dependencies that need to be installed in order for your hook to work (you may also use `npm install <dependency> --save` to easily save dependency information to `package.json`).
+もし`npm init`を使って`package.json`を作成したら、後でファイルを開いて、`isHook: true`を含む`sails`キーを手作業で挿入してください。
 
-### Specifying the internal name Sails uses for your hook (advanced)
+1. [フックの仕様](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification)に従って、`index.js`にフックのコードを書いてください。
 
-In certain cases, especially when using a [scoped NPM package](https://docs.npmjs.com/misc/scope) to override a core Sails hook, you will want to change the name that Sails uses internally when it loads your hook.  You can use the `sails.hookName` configuration option in your `package.json` file for this.  The value should be the name you want to be loaded into the `sails.hooks` dictionary, so you generally will _not_ want a `sails-hooks-` prefix.  For example, if you have a module `@mycoolhooks/sails-hook-sockets` that you wish to use to override the core `sails-hook-sockets` module, the `package.json` might look like:
+新しいフォルダには他のファイルも含まれている可能性があります。それらは`require`によってフックでロードすることができ、`index.js`のみがSailsによって自動的に読み込まれます。`package.json`の`dependencies`キーを使うことで、フックを動かすために必要なすべての依存関係を参照することができます。（さらには`npm install <dependency> --save`を使うことで、簡単に`package.json`に依存関係の情報を保存することもできます。）
+
+
+### フックに対してSailsが内部で使う名前を指定する（上級）
+
+時に、Sailsのコアフックを上書きする[スコープ付きNPMパッケージ](https://docs.npmjs.com/misc/scope)を使う時、Sailsがフックをロードするときに内部的に使用する名前を変更したい場合があります。そのために、`package.json`ファイルにある`sails.hookName`設定オプションを使うことができます。その値は`sails.hooks`の下にロードさせたい名前にすべきで、一般的に`sails-hooks-`接頭辞をつけたくないでしょう。例えば、`@mycoolhooks/sails-hook-sockets`モジュールがあった場合に、コアの`sails-hooks-sockets`モジュールを上書きしたいとします。その場合、`package.json`は次のようになるでしょう。
 
 ```json
 {
@@ -40,20 +43,23 @@ In certain cases, especially when using a [scoped NPM package](https://docs.npmj
 }
 ```
 
-### Testing your new hook
+### 新しいフックのテスト
 
-Before you distribute your installable hook to others, you&rsquo;ll want to write some tests for it.  This will help ensure compatibility with future Sails versions and significantly reduce hair-pulling and destruction of nearby objects in fits of rage.  While a full guide to writing tests is outside the scope of this doc, the following steps should help get you started:
+インストール可能なフックを他の人へ配布する前に、いくつかのテストを書いておきましょう。これにより、将来のSailsバージョンとの互換性が確保され、毛をかきむしりたくなるような、もしくは怒りに満ちた近くのオブジェクトの破壊が大幅に軽減されます。テストを書くための完全なガイドはこのドキュメントの範囲外ですが、以下の手順で始めてください。
 
-1. Add Sails as a `devDependency` in your hook&rsquo;s `package.json` file:
+1. フックの`package.json`で、Sailsを`devDependency`に追加します。
+
 ```json
 "devDependencies": {
       "sails": "~0.11.0"
 }
 ```
-1. Install Sails as a dependency of your hook with `npm install sails` or `npm link sails` (if you have Sails installed globally on your system).
-1. Install [Mocha](http://mochajs.org/) on your system with `npm install -g mocha`, if you haven&rsquo;t already.
-1. Add a `test` folder inside your hook&rsquo;s main folder.
-2. Add a `basic.js` file with the following basic test:
+
+2. `npm install sails`や`npm link sails`を実行してSailsをフックの依存関係としてインストールします（もしSailsがグローバルにインストールされている場合）
+3. まだMochaをインストールしていない場合は、`npm install -g mocha`を実行して[Mocha](http://mochajs.org/)をシステムにインストールします。
+4. `test`フォルダーをフックのメインフォルダへ追加します。
+5. `basic.js`ファイルを作成し、次のような基本的なテストを記入します。
+
 ```javascript
     var Sails = require('sails').Sails;
 
@@ -102,19 +108,23 @@ Before you distribute your installable hook to others, you&rsquo;ll want to writ
 
     });
 ```
-1. Run the test with `mocha -R spec` to see full results.
-1. See the [Mocha](http://mochajs.org/) docs for a full reference.
 
-### Publishing your hook
+6. `mocha -R spec`でテストを実行し、全結果が表示されます。
+7. 詳細は[Mocha](http://mochajs.org/)のドキュメントを見てください。
 
-Assuming your hook is tested and looks good, and assuming that the hook name isn&rsquo;t already in use by another [NPM](http://npmjs.org) module, you can share it with world by running `npm publish`.  Go you!
 
-* [Hooks overview](https://sailsjs.com/documentation/concepts/extending-sails/hooks)
-* [Using hooks in your app](https://sailsjs.com/documentation/concepts/extending-sails/hooks/using-hooks)
-* [The hook specification](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification)
-* [Creating a project hook](https://sailsjs.com/documentation/concepts/extending-sails/hooks/project-hooks)
+### フックを公開する
+
+フックがテストされ、いい感じになったら、さらにフック名がまだ[NPM](http://npmjs.org)の他のモジュールで使われていないのなら`npm publish`を実行して世界に共有できます！やってみましょう！
+
+
+* [フックの概要](https://sailsguides.jp/doc/concepts/extending-sails/hooks)
+* [アプリケーションでフックを使う](https://sailsguides.jp/doc/concepts/extending-sails/hooks/using-hooks)
+* [フックの仕様](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification)
+* [プロジェクトのフックを作成する](https://sailsguides.jp/doc/concepts/extending-sails/hooks/project-hooks)
 
 
 
 <docmeta name="displayName" value="Installable hooks">
+<docmeta name="displayName_ja" value="インストール可能なフック">
 <docmeta name="stabilityIndex" value="3">
