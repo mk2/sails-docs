@@ -1,6 +1,6 @@
 # Blueprintルート
 
-blueprintsを有効化して`sails lift`を実行すると、フレームワークは[特定のルートを自動的にバインド](https://sailsguides.jp/doc/concepts/Routes)するために、モデルと設定を検査します。これら暗黙のblueprintルート（「シャドールート」もしくは単に「シャドウ」と呼ばれることもあります）は、アプリが`config/routes.js`ファイル内でルートを手動でバインドしてなくても、特定のリクエストに応答することを可能にしています。有効にすると、blueprintルートは対応するblueprint*アクション*（下記の「アクションルート」を参照）を指すようになります。そのいずれも、カスタムコードで上書きすることができます。
+blueprintsを有効化して`sails lift`を実行すると、フレームワークは[特定のルートを自動的にバインド](https://sailsguides.jp/doc/concepts/routes)するために、モデルと設定を検査します。これら暗黙のblueprintルート（「シャドールート」もしくは単に「シャドウ」と呼ばれることもあります）は、アプリが`config/routes.js`ファイル内でルートを手動でバインドしてなくても、特定のリクエストに応答することを可能にしています。有効にすると、blueprintルートは対応するblueprint*アクション*（下記の「アクションルート」を参照）を指すようになります。そのいずれも、カスタムコードで上書きすることができます。
 
 Sailsには4種類のblueprintルートがあります。
 
@@ -23,7 +23,7 @@ RESTなblueprintsは、Sailsが従来のモデル用REST APIを公開するた�
 + **DELETE /boat/:id/drivers/:fk** -> [`remove` blueprint](https://sailsguides.jp/doc/reference/blueprint-api/remove-from)を使用して、`:fk`と同じIDを持つDriverを、`:id`と同じIDを持つBoatの`drivers`コレクションから削除します。
 + **PUT /boat/:id/drivers** -> [`replace` blueprint](https://sailsguides.jp/doc/reference/blueprint-api/replace)を使用して、リクエストボディに含まれる配列とそのIDを使用して、`drivers`コレクションをすべて置き換えます。
 
-`rest` blueprintとはデフォルトで有効化されていて、不正なアクセスを防止する[ポリシー](https://sailsguides.jp/doc/concepts/Policies)によって保護されている限り、本番シナリオでの使用に適しています。
+`rest` blueprintとはデフォルトで有効化されていて、不正なアクセスを防止する[ポリシー](https://sailsguides.jp/doc/concepts/policies)によって保護されている限り、本番シナリオでの使用に適しています。
 
 > 事前に注意してほしいこととして、ほとんどのウェブアプリやマイクロサービス、さらにはREST APIでも、単なる「作成」、「更新」、「破棄」といった機能は最終的には必要なくなります。時が来たら、あなた自身のカスタムアクションを書くことを恐れないでください。カスタムアクションとルートは、多くの場合そうできなければいけないように、RESTful APIとして機能し、必要に応じてblueprintと混在させ融合させることが出来るようできます。何よりも、[Node.jsでasync/awaitが導入された](https://gist.github.com/mikermcneil/c1028d000cc0cc8bce995a2a82b29245)ため、カスタムアクションを記述するためにコールバックを使用する必要がなくなりました。
 
