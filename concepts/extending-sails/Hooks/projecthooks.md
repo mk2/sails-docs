@@ -1,31 +1,30 @@
-# Creating a project hook
+# プロジェクトフックの作成
 
-Project hooks are custom Sails hooks that reside in an application&rsquo;s `api/hooks` folder.  They are typically useful when you want to take advantage of hook features like [defaults](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification/defaults) and [routes](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification/routes) for code that is used by multiple components in a single app.  If you wish to re-use a hook in *more than one* Sails app, see [creating an installable hook](https://sailsjs.com/documentation/concepts/extending-sails/hooks/installable-hooks) instead.
+プロジェクトフックは、アプリケーションの`api/hooks`フォルダにあるカスタムセイルフックです。単一のアプリケーションで複数のコンポーネントが使用するコードで、[デフォルト](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification/defaults)や[ルート](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification/routes)などのフック機能を利用する場合に便利です。複数のSailsアプリでフックを再利用したい場合は、代わりに[インストール可能なフックの作成](https://sailsguides.jp/doc/concepts/extending-sails/hooks/installable-hooks)を参照してください。
 
-To create a new project hook:
+新しくプロジェクトフックを作成する方法です。
 
-1. Choose a name for your new hook.  It must not conflict with any of the [core hook names](https://github.com/balderdashy/sails/blob/master/lib/app/configuration/default-hooks.js).
-2. Create a folder with that name in your app&rsquo;s `api/hooks` folder.
-3. Add an `index.js` file to that folder.
-4. Write your hook code in `index.js` in accordance with the [hook specification](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification).
+1. 新しいフックの名前を選択します。[コアのフック名](https://github.com/balderdashy/sails/blob/master/lib/app/configuration/default-hooks.js)と衝突してはいけません。
+2. その名前の`api/hooks`フォルダをアプリケーションのフォルダに作成します。
+3. そのフォルダに`index.js`ファイルを追加します。
+4. [フックの仕様](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification)に従ってフックのコードを`index.js`に記述してください。
 
-Your new folder may contain other files as well, which can be loaded in your hook via `require`; only `index.js` will be read automatically by Sails.
+新しいフォルダには他のファイルも含まれているかもしれませんが、それらはフック内で`require`を使うことで読み込むことができます。Sailsが自動で読み込むのは、`index.js`のみです。
 
-As an alternative to a folder, you may create a file in your app&rsquo;s `api/hooks` folder like `api/hooks/myProjectHook.js`.
+フォルダの代わりに、`api/hooks`フォルダに`api/hooks/myProjectHook.js`のようなファイルを作成することもできます。
 
-#### Testing that your hook loads properly
+#### 適切にフックが読み込まれていることをテストする
 
-To test that your hook is being loaded by Sails, lift your app with `sails lift --verbose`.  If your hook is loaded, you will see a message like:
+フックがSailsによって読み込まれていることをテストするには、`sails lift --verbose`でアプリケーションを立ち上げます。フックが読み込まれているのであれば、次のようなメッセージがログに表示されます。
 
 `verbose: your-hook-name hook loaded successfully.`
 
-in the logs.
-
-* [Hooks overview](https://sailsjs.com/documentation/concepts/extending-sails/hooks)
-* [Using hooks in your app](https://sailsjs.com/documentation/concepts/extending-sails/hooks/using-hooks)
-* [The hook specification](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification)
-* [Creating an installable hook](https://sailsjs.com/documentation/concepts/extending-sails/hooks/installable-hooks)
+* [フックの概要](https://sailsguides.jp/doc/concepts/extending-sails/hooks)
+* [アプリケーションでフックを使う](https://sailsguides.jp/doc/concepts/extending-sails/hooks/using-hooks)
+* [フックの仕様](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification)
+* [インストール可能なフックを作成する](https://sailsguides.jp/doc/concepts/extending-sails/hooks/installable-hooks)
 
 
 <docmeta name="displayName" value="Project hooks">
+<docmeta name="displayName_ja" value="プロジェクトフック">
 <docmeta name="stabilityIndex" value="3">
