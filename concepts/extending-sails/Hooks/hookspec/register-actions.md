@@ -1,10 +1,10 @@
 # `.registerActions()`
 
-If your hook adds new actions to an app, and you want to guarantee that those actions will be maintained even after a call to [`sails.reloadActions()`](https://sailsjs.com/documentation/reference/application/sails-reload-actions), you should register the actions from within a `registerActions` method.
+もしフックが新しいアクションをアプリケーションに追加し、そのアクションが[`sails.reloadActions()`](https://sailsguides.jp/doc/reference/application/sails-reload-actions)の呼び出し後も維持されて欲しい場合は、アクションを`registerActions`メソッド内で登録すべきです。
 
-For example, the core Sails security hook registers the [`grant-csrf-token` action](https://sailsjs.com/documentation/concepts/security/csrf#?using-ajax-websockets) from within a `registerActions()` method.
+例えば、コアのSailsセキュリティフックは[`grant-csrf-token`アクション](https://sailsguides.jp/doc/concepts/security/csrf#?using-ajax-websockets)を`registerActions()`メソッド内から登録しています。
 
-`registerActions` should be implemented as a function with a single argument (a callback) to be called after the hook is done adding actions.  In the interest of avoiding duplicate code, you may want to call this method yourself from within the hook&rsquo;s [`initialize()` method]((https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification/initialize)).
+`registerActions`は、一つのコールバック（フックがアクションを追加した後に呼ぶもの）を引数として受け取る関数として実装する必要があります。コードの重複を避けるため、フックの[`initialize()`メソッド]((https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification/initialize)からこのメソッドを呼び出したいかもしれません。
 
 ```
 registerActions: function(cb) {
@@ -21,4 +21,5 @@ registerActions: function(cb) {
 ```
 
 <docmeta name="displayName" value=".registerActions()">
+<docmeta name="displayName_ja" value=".registerActions()">
 <docmeta name="stabilityIndex" value="3">
