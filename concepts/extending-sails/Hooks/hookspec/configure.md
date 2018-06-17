@@ -1,8 +1,8 @@
 # `.configure()`
 
-The `configure` feature provides a way to configure a hook after the [`defaults` objects](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification/defaults) have been applied to all hooks.  By the time a custom hook&rsquo;s `configure()` function runs, all user-level configuration and core hook settings will have been merged into `sails.config`.  However, you should *not* depend on other custom hooks&rsquo; configuration at this point, as the load order of custom hooks is not guaranteed.
+`configure`機能は、[`defaults`オブジェクト](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification/defaults)がすべてのフックに適用された後にフックを設定する方法を提供します。カスタムフックの`configure()`関数が実行されるまでに、すべてのユーザーレベルの設定とコアフックの設定が`sails.config`へマージされます。ただし、カスタムフックのロード順序が保証されていないため、この時点で他のカスタムフックの設定に依存しないでください。
 
-`configure` should be implemented as a function with no arguments, and should not return any value.  For example, the following `configure` function could be used for a hook that communicates with a remote API, to change the API endpoint based on whether the user set the hook&rsquo;s `ssl` property to `true`.  Note that the hook&rsquo;s configuration key is available in `configure` as `this.configKey`:
+`configure`は引数のない関数として実装し、値を返すべきではありません。たとえば、次に示す`configure`関数はリモートのAPIと通信するフックに使われているものですが、APIのエンドポイントをユーザーがフックの`ssl`プロパティを`true`にするかどうかによって変更することができます。`configure`関数内で、`this.configKey`としてフックの設定キーが参照できることに注意してください。
 
 ```
 configure: function() {
@@ -18,8 +18,9 @@ configure: function() {
 }
 ```
 
-The main benefit of `configure` is that all hook `configure` functions are guaranteed to run before any [`initialize` functions](https://sailsjs.com/documentation/concepts/extending-sails/hooks/hook-specification/initialize) run; therefore a hook&rsquo;s `initialize` function can examine the configuration settings of other hooks.
+`configure`の主な利点は、すべてのフックの`configure`関数は[他の`initialize`関数](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification/initialize)が実行されるより前に実行されることが保証されています。従ってフックの`initialize`関数は他のフックの設定を調べることができます。
 
 
 <docmeta name="displayName" value=".configure()">
+<docmeta name="displayName_ja" value=".configure()">
 <docmeta name="stabilityIndex" value="3">
