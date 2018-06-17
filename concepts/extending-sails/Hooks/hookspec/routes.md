@@ -1,6 +1,6 @@
 # `.routes`
 
-The `routes` feature allows a custom hook to easily bind new routes to a Sails app at load time.  If implemented, `routes` should be an object with either a `before` key, an `after` key, or both.  The values of those keys should in turn be objects whose keys are [route addresses](https://sailsjs.com/documentation/concepts/routes/custom-routes#?route-address), and whose values are route-handling functions with the standard `(req, res, next)` parameters.  Any routes specified in the `before` object will be bound *before* custom user routes (as defined in [sails.config.routes](https://sailsjs.com/documentation/reference/configuration/sails-config-routes)) and [blueprint routes](https://next.sailsjs.com/documentation/reference/blueprint-api#?restful-shortcut-routes-and-actions).  Conversely, routes specified in the `after` object will be bound *after* custom and blueprint routes.  For example, consider the following `count-requests` hook:
+`routes`機能によって、カスタムフックをロードした時に新しいルートをSailsアプリに簡単にバインドすることができます。実装する場合は、`routes`は`before`キーか`after`キー（もしくは両方）を持つオブジェクトである必要があります。それらのキーの値は、キーが[ルートアドレス](https://sailsguides.jp/doc/concepts/routes/custom-routes#?route-address)となり、値がルート処理用の`(req, res, next)`の標準的なパラメータを受け取るような関数となるような、オブジェクトとなる必要があります。`before`オブジェクトで指定されたすべてのルートは、ユーザールート（詳細は[sails.config.routes](https://sailsguides.jp/doc/reference/configuration/sails-config-routes)）と[blueprintルート](https://sailsguides.jp/doc/reference/blueprint-api#?restful-shortcut-routes-and-actions)の前にバインドされます。対して、`after`オブジェクトで指定されたルートは、カスタムルートとblueprintのルートの後にバインドされます。例えば、次に示す`count-requests`フックを考えてみます。
 
 ```javascript
 module.exports = function (sails) {
@@ -40,10 +40,11 @@ module.exports = function (sails) {
 };
 ```
 
-This hook will process all requests via the function provided in the `before` object, and increment its `numRequestsSeen` variable.  It will also process any *unhandled* requests via the function provided in the `after` object&mdash;that is, any routes that aren't bound in the app via a custom route configuration or a blueprint.
+このフックは`before`オブジェクトで設定されている関数をすべてのリクエストに対して適用し、その`numRequestsSeen`変数をインクリメントします。また、`after`オブジェクトで設定されている関数を使ってすべての未処理のリクエスト（つまりアプリケーションでカスタムルートやblueprintが設定されていないすべてのルートへ来たもの）を処理します。
 
-> The two variables set up in the hook will be available to other modules in the Sails app as `sails.hooks["count-requests"].numRequestsSeen` and `sails.hooks["count-requests"].numUnhandledRequestsSeen`
+> フックで設定した2つの変数は、Sailsアプリケーションの他のモジュールで`sails.hooks["count-requests"].numRequestsSeen`と`sails.hooks["count-requests"].numUnhandledRequestsSeen`としてアクセスできます。
 
 
 <docmeta name="displayName" value=".routes">
+<docmeta name="displayName_ja" value=".routes">
 <docmeta name="stabilityIndex" value="3">
