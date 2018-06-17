@@ -1,31 +1,31 @@
-# Application Events
+# アプリケーションイベント
 
-### Overview
+### 概要
 
-Sails app instances inherit Node's [`EventEmitter` interface](https://nodejs.org/api/events.html#events_class_eventemitter), meaning that they can both emit and listen for custom events.  While it is not recommended that you utilize Sails events directly in app code (since your apps should strive to be as stateless as possible to facilitate scalability), events can be very useful when extending Sails (via [hooks](https://sailsjs.com/documentation/concepts/extending-sails/hooks) or [adapters](https://sailsjs.com/documentation/concepts/extending-sails/adapters)) and in a testing environment.
+SailsアプリケーションインスタンスはNodeの[`EventEmitter`インターフェイス](https://nodejs.org/api/events.html#events_class_eventemitter)を継承しています。つまり、カスタムイベントを発行したり監視したりできます。アプリケーションコードでSailsイベントを直接利用することは推奨されませんが（スケーラビリティを実現するために、アプリケーションができるだけステートレスになるようにする必要があるため）、[フック](https://sailsguides.jp/doc/concepts/extending-sails/hooks)や[アダプター](https://sailsguides.jp/doc/concepts/extending-sails/adapters)でSailsを拡張するときや、テスト環境で非常に便利に使うことができます。
 
-### Should I use events?
+### イベントを使うべきですか？
 
-Most Sails developers never have a use case for working with application events. Events emitted by the Sails app instance are designed to be used when building your own custom hooks, and while you _could_ technically use them anywhere, in most cases you _should not_.  Never use events in your controllers, models, services, configuration, or anywhere else in the userland code in your Sails app (unless you are building a custom app-level hook in `api/hooks/`).
+ほとんどのSails開発者は、アプリケーションイベントを処理することはないでしょう。Sailsアプリケーションインスタンスによって生成されたイベントは、独自のカスタムフックを構築するときに使用されるように設計されています。技術的にはどこからでも使用できますが、ほとんどの場合において使用しないでください。コントローラ、モデル、サービス、設定、またはSailsアプリのユーザランドのコード内のどこでもイベントを使わないでください（カスタムアプリケーションフックを`api/hooks/`に作成しない限りにおいて）。
 
-### Events emitted by Sails
+### Sailsによって発行されるイベント
 
-The following are the most commonly used built-in events emitted by Sails instances.  Like any EventEmitter in Node, you can listen for these events with `sails.on()`:
+以下は、Sailsインスタンスによって発行される組み込みイベントです。Nodeの任意のEventEmitterと同様に、次のイベントを`sails.on()`を使って待ち受けることができます。
 
 ```javascript
 sails.on(eventName, eventHandlerFn);
 ```
 
-None of the events are emitted with extra information, so your `eventHandlerFn` should not have any arguments.
+余分な情報を伴って放出されるイベントはないので、`eventHandlerFn`の引数は必要ありません。
 
-| Event name | Emitted when... |
+| イベント名 | いつ発行されるのか |
 |:-----------|:----------------|
-| `ready`    | The app has been loaded and the bootstrap has run, but it is not yet listening for requests |
-| `lifted`   | The app has been lifted and is listening for requests. |
-| `lower`  | The app has is lowering and will stop listening for requests. |
-| `hook:<hook identity>:loaded` | The hook with the specified identity loaded and ran its `initialize()` method successfully.  |
+| `ready`    | アプリケーションがロードされブートストラップが実行されたが、まだリクエストを待ち受けていない。 |
+| `lifted`   | アプリケーションが立ち上がり、リクエストを待ち受けている。 |
+| `lower`  | アプリケーションが終了しようとしていて、リクエストの待ち受けを止めている。 |
+| `hook:<hook identity>:loaded` | 指定されたidentityを持つフックが読み込まれ、`initialize()`メソッドが正常に実行された。 |
 
-
-> In addition to `.on()`, Sails also exposes a useful utility function called `sails.after()`.  See the [inline documentation](https://github.com/balderdashy/sails/blob/fd2f9b6866637143eda8e908775365ca52fab27c/lib/EVENTS.md#usage) in Sails core for more information.
+> `.on()`という関数に加えて、Sailsは`sails.after()`という有用な関数を公開しています。詳細については、Sailsコアの[インラインドキュメント](https://github.com/balderdashy/sails/blob/fd2f9b6866637143eda8e908775365ca52fab27c/lib/EVENTS.md#usage)を参照してください。
 
 <docmeta name="displayName" value="Events">
+<docmeta name="displayName_ja" value="イベント">
