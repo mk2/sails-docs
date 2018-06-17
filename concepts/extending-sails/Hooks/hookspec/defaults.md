@@ -1,6 +1,7 @@
 # `.defaults`
 
-The `defaults` feature can be implemented either as an object or a function which takes a single argument (see &ldquo;using `defaults` as a function&rdquo; below) and returns an object.  The object you specify will be used to provide default configuration values for Sails.  You should use this feature to specify default settings for your hook.  For example, if you were creating a hook that communicates with a remote service, you may want to provide a default domain and timeout length:
+`defaults`機能は、オブジェクト、または単一の引数（後述の「`defaults`関数としての使用」を参照）を受け取りオブジェクトを返す関数、として実装できます。オブジェクトとして実装した場合は、Sailsのデフォルトの設定値を設定するために使用されます。この機能を使用して、フックのデフォルト設定を指定する必要があります。たとえば、リモートサービスと通信するフックを作成する場合は、デフォルトのドメインとタイムアウトの長さを指定することができます。
+
 
 ```
 {
@@ -11,10 +12,12 @@ The `defaults` feature can be implemented either as an object or a function whic
 }
 ```
 
-If a `myapihook.timeout` value is provided via a Sails configuration file, that value will be used; otherwise it will default to `5000`.
+`myapihook.timeout`の値がSailsの設定ファイルを介して設定された場合、その値が使用されます。それ以外の場合はデフォルトの`5000`になります。
 
-##### Namespacing your hook configuration
-For [project hooks](https://sailsjs.com/documentation/concepts/extending-sails/Hooks?q=types-of-hooks), you should namespace your hook&rsquo;s configuration under a key that uniquely identifies that hook (e.g. `myapihook` above).  For [installable hooks](https://sailsjs.com/documentation/concepts/extending-sails/Hooks?q=types-of-hooks), you should use the special `__configKey__` key to allow end-users of your hook to [change the configuration key](https://sailsjs.com/documentation/concepts/extending-sails/hooks/using-hooks?q=changing-the-way-sails-loads-an-installable-hook) if necessary.  The default key for a hook using `__configKey__` is the hook name.  For example, if you create a hook called `sails-hooks-myawesomehook` which includes the following `defaults` object:
+
+##### フック設定の名前空間
+
+[プロジェクトフック](https://sailsguides.jp/doc/concepts/extending-sails/hooks?q=types-of-hooks)のために、フックを識別するためのユニークなキーを使って名前空間を作成し、その下にフックの設定を置く必要があります（先ほどの例でいえば、`myapihook`になります）。[インストール可能なフック](https://sailsguides.jp/doc/concepts/extending-sails/hooks?q=types-of-hooks)の場合は、`__configKey__`という特別なキーを使う必要があります（エンドユーザーが[フックのキーを必要に応じて変更できるようにするためです](https://sailsguides.jp/doc/concepts/extending-sails/hooks/using-hooks?q=changing-the-way-sails-loads-an-installable-hook)）。`__configKey__`を使った場合のデフォルトキーは、フック名になります。たとえば、`sails-hook-myawesomehook`というフックを作成し、そのフックは次の`defaults`オブジェクトを持っているとします。
 
 ```
 {
@@ -24,12 +27,13 @@ For [project hooks](https://sailsjs.com/documentation/concepts/extending-sails/H
 }
 ```
 
-then it will, by default, provide default settings for the `sails.config.myawesomehook.name` value.  If the end-user of the hook overrides the hook name to be `foo`, then the `defaults` object will provide a default value for `sails.config.foo.name`.
+デフォルトでは、`sails.config.myawesomehook.name`の値が設定されます。もしエンドユーザーがフックの名前を`foo`にしたい場合は、`defaults`オブジェクトはデフォルト値を`sails.config.foo.name`として設定するでしょう。
 
-##### Using `defaults` as a function
+##### `defaults`を関数として使う
 
-If you specify a function for the `defaults` feature instead of a plain object, it takes a single argument (`config`) which receives any Sails configuration overrides.  Configuration overrides can be made by passing settings to the command line when lifting Sails (e.g. `sails lift --prod`), by passing an object as the first argument when programmatically lifting or loading Sails (e.g. `Sails.lift({port: 1338}, ...)`) or by using a [`.sailsrc`](https://sailsjs.com/documentation/anatomy/.sailsrc) file.  The `defaults` function should return a plain object representing configuration defaults for your hook.
+普通のオブジェクトではなく関数を`defaults`に指定するのであれば、`config`という単一の引数を受け取り、上書きされるSailsの設定を受け取るような関数にします。設定の上書きはSailsを立ち上げる時のコマンドラインに渡すことや（`sails lift --prod`）、プログラムから起動や読み込みをした場合は最初の引数に渡すことで（`Sailslift({port: 1338}, ...)`）可能です。また[`.sailsrc`](https://sailsguides.jp/doc/anatomy/sailsrc)ファイルを使うこともできます。`defaults`関数は、フックのデフォルト設定値となるようなプレーンオブジェクトを返す必要があります。
 
 
 <docmeta name="displayName" value=".defaults">
+<docmeta name="displayName_ja" value=".defaults">
 <docmeta name="stabilityIndex" value="3">
