@@ -1,16 +1,15 @@
-# File uploads
+# ファイルのアップロード
 
-Uploading files in Sails is similar to how you would upload files for a vanilla Node.js or Express application.  It is, however, probably different than what you're used to if you're coming from a different server-side platform like PHP, .NET, Python, Ruby, or Java.  But fear not: the core team has gone to great lengths to make file uploads easier to accomplish, while still keeping them scalable and secure.
+Sailsでファイルをアップロードする方法は、素のNode.jsやExpressアプリケーションでアップロードする方法と似ています。しかし、PHPや.NET、Python、Ruby、そしてJavaなどの他のサーバーサイドプラットフォームを以前に学んでいた場合は、違和感を感じるでしょう。しかし心配しないでください。コアチームは、拡張性と安全性を維持しながらファイルのアップロードを容易にするために尽力しています。
 
-Sails comes with a powerful "body parser" called [Skipper](https://github.com/balderdashy/skipper) which makes it easy to implement streaming file uploads-- not only to the server's filesystem (i.e. hard disk), but also to Amazon S3, MongoDB's gridfs, or any of its other supported file adapters.
+Sailsには、サーバーのファイルシステム（ハードディスクなど）だけでなく、Amazon S3、MongoDBのグリッド、またはその他のサポートされているファイルアダプターにストリーミングファイルのアップロードを簡単に実装できる[Skipper](https://github.com/balderdashy/skipper)という強力な「ボディパーサー」が付属しています。
 
 
+### ファイルをアップロードする
 
-### Uploading a file
+ファイルは _ファイルパラメータ_ としてHTTP Webサーバーにアップロードされます。同じように、"name"、"email"、"password"のようなテキストパラメータを持つURLにフォームPOSTを送信する場合、ファイルを"avatar"や"newSong"のようなファイルパラメータとして送信します。
 
-Files are uploaded to HTTP web servers as _file parameters_.  In the same way you might send a form POST to a URL with text parameters like "name", "email", and "password", you send files as file parameters, like "avatar" or "newSong".
-
-Take this simple example:
+この簡単な例を見てください。
 
 ```javascript
 req.file('avatar').upload(function (err, uploadedFiles) {
@@ -18,7 +17,7 @@ req.file('avatar').upload(function (err, uploadedFiles) {
 });
 ```
 
-Files should be uploaded inside of an `action` in one of your controllers.  Here's a more in-depth example that demonstrates how you could allow users to upload an avatar image and associate it with their accounts.  It assumes you've already taken care of access control in a policy, and that you're storing the id of the logged-in user in `req.session.userId`.
+ファイルはコントローラーの`action`内部でアップロードする必要があります。ここでは、ユーザーがアバター画像をアップロードして自分のアカウントに関連付ける方法を示す詳細な例を示します。ポリシー内ですでにアクセス制御を行っていること、およびログインしているユーザーのIDを`req.session.userId`へ格納していることを前提としています。
 
 ```javascript
 // api/controllers/UserController.js
@@ -103,15 +102,13 @@ avatar: function (req, res){
 // ...
 ```
 
+#### ファイルはどこへ行くのですか？
 
+デフォるtの`receiver`を使っていた場合、ファイルは`myApp/.tmp/uploads/`ディレクトリへアップロードされて移動します。`dirname`オプションで場所を変更することが可能です。`.upload()`関数を呼び出すときとskipper-diskアダプターを呼び出すとき、両方にこのオプションを指定する必要があることに注意してください（アップロードとダウンロードを同じ場所からできるようにするため）。
 
+#### カスタムフォルダーへのアップロード
 
-#### Where do the files go?
-When using the default `receiver`, file uploads go to the `myApp/.tmp/uploads/` directory.  You can override this using the `dirname` option.  Note that you'll need to provide this option both when you call the `.upload()` function AND when you invoke the skipper-disk adapter (so that you are uploading to and downloading from the same place.)
-
-
-#### Uploading to a custom folder
-In the above example we upload the file to .tmp/uploads. So how do we configure it with a custom folder, say ‘assets/images’. We can achieve this by adding options to upload function as shown below.
+先補dの例ではファイルを.tmp/uploadsへアプロードします。では、どのようにしてカスタムフォルダを設定するのでしょうか？（例えば'assets/images'など）これを実現するには、以下のようにアップロード関数にオプションを追加します。
 
 ```javascript
 req.file('avatar').upload({
@@ -125,14 +122,15 @@ req.file('avatar').upload({
 });
 ```
 
-### Sending text parameters in the same form as a file upload
+### ファイルアップロードと同じ形式で、テキストパラメータを送信する
 
-As mentioned above, you can send text parameters like "name" and "email" to your Sails action along with your file upload field.  However, the text fields _must appear before any file fields_ in your form in order for them to be processed.  This is critical to Sails' ability to run your action code while files are uploading (rather than having to wait for them to finish). See the [Skipper docs](https://github.com/balderdashy/skipper#text-parameters) for more info.
+上で述べたように、"name"や"email"のようなテキストパラメータをファイルアップロードフィールドとともにSailsアクションに送ることができます。ただし、テキストフィールドは、_フォームのファイルフィールドの前に表示され_、処理される必要があります。これは、Sailsがファイルのアップロード中にアクションコードを実行できるようにするために重要です（ファイルアップロードが終了するのを待たずに）。詳細については、[Skipperのドキュメント](https://github.com/balderdashy/skipper#text-parameters)を参照してください。
 
-### Example
+### 例
 
-#### Generate an `api`
-First we need to generate a new `api` for serving/storing files.  Do this using the sails command line tool.
+#### `api`を生成する
+
+最初に、ファイルを提供や保存したりするための`api`を生成します。sailsコマンドラインツールを使います。
 
 ```sh
 $ sails generate api file
@@ -144,9 +142,9 @@ info: REST API generated @ http://localhost:1337/file
 info: and will be available the next time you run `sails lift`.
 ```
 
-#### Write Controller Actions
+#### コントローラーのアクションを作成する
 
-Lets make an `index` action to initiate the file upload and an `upload` action to receive the file.
+ファイルアップロードの初期化の初期化を行う`index`アクションと、ファイルの受け取りを行う`upload`アクションを作成しましょう。
 
 ```javascript
 
@@ -180,12 +178,13 @@ module.exports = {
 };
 ```
 
-## Read more
+## より詳しく
 
-+ [Skipper docs](https://github.com/balderdashy/skipper)
-+ [Uploading to Amazon S3](https://sailsjs.com/documentation/concepts/file-uploads/uploading-to-s-3)
-+ [Uploading to Mongo GridFS](https://sailsjs.com/documentation/concepts/file-uploads/uploading-to-grid-fs)
++ [Skipperドキュメント](https://github.com/balderdashy/skipper)
++ [Amazon S3へのアップロード](https://sailsguides.jp/doc/concepts/file-uploads/uploading-to-s-3)
++ [Mongo GridFSへのアップロード](https://sailsguides.jp/doc/concepts/file-uploads/uploading-to-grid-fs)
 
 
 
 <docmeta name="displayName" value="File uploads">
+<docmeta name="displayName" value="ファイルアップロード">
