@@ -1,17 +1,17 @@
-# Uploading to Amazon S3
+# Amazon S3へのアップロード
 
-> Please note that your Amazon S3 bucket must be created in the 'US East (N. Virginia)' region.
-> If you fail to do so, the uploads will not work and you'll see an 'InvalidRequest' error from AWS.
+> 以下の例では、Amazon S3のバケットを'US East (N. Virginia)'リージョンに作成する必要があります
+> アップロードに失敗した場合、アップロードは動かずAWSからの'InvalidRequest'エラーを見ることになります。
 
-With Sails, you can stream file uploads to Amazon S3 with very little additional configuration.
+Sailsを使用すると、わずかな追加設定でAmazon S3へファイルアップロードをストリーミングできます。
 
+まず[S3 Skipperアダプター](https://github.com/balderdashy/skipper-s3)をインストールします。
 
-First install the [S3 Skipper adapter](https://github.com/balderdashy/skipper-s3):
 ```sh
 npm install skipper-s3 --save
 ```
 
-Then use it in one of your controllers:
+次にコントローラーで使用します。
 
 ```javascript
   uploadFile: function (req, res) {
@@ -31,3 +31,4 @@ Then use it in one of your controllers:
 ```
 
 <docmeta name="displayName" value="Uploading to S3">
+<docmeta name="displayName_ja" value="S3へのアップロード">

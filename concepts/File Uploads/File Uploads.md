@@ -187,4 +187,4 @@ module.exports = {
 
 
 <docmeta name="displayName" value="File uploads">
-<docmeta name="displayName" value="ファイルアップロード">
+<docmeta name="displayName_ja" value="ファイルアップロード">
