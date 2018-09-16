@@ -194,6 +194,7 @@ for the original content of these docs.
 + `sails-hook-organics`（Web Appテンプレートにバンドルされています）には、多くの一般的な使用例に対していくつかの無料のオープンソースおよびMITライセンスヘルパーが付属しています。[見てみましょう！](https://npmjs.com/package/sails-hook-organics)
 + もしヘルパーがよくわからなかったり、チュートリアルやサンプルをもっと見たい場合は、[ここをクリックしてください。](https://sailsjs.com/support)
 
-<docmeta name="displayName" value="ヘルパー">
-<docmeta name="nextUpLink" value="/doc/concepts/deployment">
-<docmeta name="nextUpName" value="配置">
+<docmeta name="displayName" value="Helpers">
+<docmeta name="displayName_ja" value="ヘルパー">
+<docmeta name="nextUpLink" value="/documentation/concepts/deployment">
+<docmeta name="nextUpName" value="Deployment">
