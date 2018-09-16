@@ -1,12 +1,12 @@
-# Helpers
+# ヘルパー
 
-As of version 1.0, all Sails apps come with built-in support for **helpers**, simple utilities that let you share Node.js code in more than one place.  This helps you avoid repeating yourself, and makes development more efficient by reducing bugs and minimizing rewrites.  Like actions2, this also makes it much easier to create documentation for your app.
+バージョン1.0ではすべてのSailsアプリケーションに、Node.jsのコードを複数の場所で共有できる **ヘルパー**というシンプルなユーティリティが組み込まれています。これにより、繰り返しを避けることができ、バグを減らして書き換えを最小限に抑えることで、開発効率を向上させることができます。action2と同様に、これによりアプリケーションのドキュメントを作成するのがより簡単になります。
 
-### Overview
+### 概要
 
-In Sails, helpers are the recommended approach for pulling repeated code into a separate file, then reusing that code in various [actions](https://sailsjs.com/documentation/concepts/actions-and-controllers), [custom responses](https://sailsjs.com/documentation/concepts/extending-sails/custom-responses), [command-line scripts](https://www.npmjs.com/package/machine-as-script), [unit tests](https://sailsjs.com/documentation/concepts/testing), or even other helpers. You don't _have_ to use helpers-- in fact you might not even need them right at first.  But as your code base grows, helpers will become more and more important for your app's maintainability.  (Plus, they're really convenient.)
+Sailsでは、ヘルパーは繰り返しのコードを別のファイルに分離し、様々な[アクション](https://sailsguides.jp/doc/concepts/actions-and-controllers)、[カスタムレスポンス](https://sailsguides.jp/doc/concepts/extending-sails/custom-responses)、[コマンドライン用スクリプト](https://www.npmjs.com/package/machine-as-script), [単体テスト](https://sailsguides.jp/doc/concepts/testing)、さらには他のヘルパーでコードの再利用するためのおすすめの手法です。もしかしたら、ヘルパーを使用する必要はないかもしれません。実際、最初に必要とはならないかもしれません。しかしコードベースが大きくなるにつれ、ヘルパーはアプリケーションの保守性にとってますます重要になります。（さらに付け加えると、とても便利です。）
 
-For example, in the course of creating the actions that your Node.js/Sails app uses to respond to client requests, you will sometimes find yourself repeating code in several places.  That can be pretty bug-prone, of course, not to mention annoying.  Fortunately, there's a neat solution: replace the duplicate code with a call to a custom helper:
+たとえば、Node.js/Sailsアプリケーションがクライアントからの要求に応答するためのアクションを作成する過程で、いくつかの場所でコードを繰り返すことがあります。もちろん、バグの多い傾向にあるかもしれません。幸運にもきちんとした解決策があります。重複したコードをカスタムヘルパーへの呼び出しで置き換えるのです。
 
 ```javascript
 var greeting = await sails.helpers.formatWelcomeMessage('Bubba');
@@ -14,12 +14,11 @@ sails.log(greeting);
 // => "Hello, Bubba!"
 ```
 
-> Helpers can be called from almost anywhere in your code; as long as that place has access to the [`sails` app instance](https://sailsjs.com/documentation/reference/application).
+> ヘルパーは、コード内のどこからでも呼び出すことができます。ただ、[アプリのインスタンス`sails`](https://sailsguides.jp/doc/reference/application)へアクセスできる場所に限られます。
 
+### ヘルパーの定義方法
 
-### How helpers are defined
-
-Here's an example of a simple, well-defined helper:
+シンプルで、良い定義のヘルパーの例を示します。
 
 ```javascript
 // api/helpers/format-welcome-message.js
@@ -51,30 +50,29 @@ module.exports = {
 };
 ```
 
-Though simple, this file displays several characteristics of a good helper: it starts with a friendly name and description that make it immediately clear what the utility does, it describes its inputs so that it&rsquo;s easy to see how the utility is used, and it accomplishes a discrete task in the simplest way possible.
-
-> Look familiar?  Helpers follow the same specification as [shell scripts](https://sailsjs.com/documentation/concepts/shell-scripts) and [actions2](https://sailsjs.com/documentation/concepts/actions-and-controllers#?actions-2).
-
-##### The `fn` function
-
-The core of the helper is the `fn` function, which contains the actual code that the helper will run.  The function takes two arguments: `inputs` (a dictionary of input values, or "argins") and `exits` (a dictionary of callback functions).  The job of `fn` is to utilize and process the argins, and then trigger one of the provided exits to return control back to whatever code called the helper.  Note that, as opposed to a typical Javascript function that uses `return` to provide output to the caller, helpers provide that result value by passing it in to `exits.success()`.
-
-##### Inputs
-
-A helper&rsquo;s declared _inputs_ are analogous to the parameters of a typical Javascript function: they define the values that the code has to work with.  However, unlike standard JavaScript function parameters, inputs are validated automatically.  If a helper is called using argins of the wrong type for their corresponding inputs, missing a value for a required input, it will trigger an error.  Thus, helpers are _self-validating_.
-
-Input for a helper are defined in the `inputs` dictionary.  Each input definition is composed of, at minimum, a `type` property.  Helper inputs support types like:
-
-* `string` - a string value
-* `number` - a number value (both integers and floats are valid)
-* `boolean` - the value `true` or `false`
-* `ref` - a Javascript variable reference.  This can be _any_ value, including dictionaries, arrays, functions, streams, and more.
-
-These are the same data types (and related semantics) that you might already be accustomed to from [defining model attributes](https://sailsjs.com/documentation/concepts/models-and-orm/attributes).
-So as you might expect, you can provide a default value for an input by setting its `defaultsTo` property.  Or make it required by setting `required: true`.  You can even use `allowNull` and almost any of the higher-level validation rules like `isEmail`.
+簡単ですが、このファイルは優れたヘルパーの特徴をいくつか持っています。フレンドリーな名前と説明から始まり、ユーティリティが何をしているのかをすぐに明らかにし、その入力を記述することでユーティリティの使い方をわかりやすくします。さらに、可能な限り最も簡単な方法で個別のタスクを実行します。
 
 
-The arguments you pass in when calling a helper correspond with the order of keys in that helper's declared `inputs`.  Alternatively, if you'd rather pass in argins by name, use `.with()`:
+> 見覚えがありますか？ヘルパーは[シェルスクリプト](https://sailsguides.jp/doc/concepts/shell-scripts)と[actions2](https://sailsguides.jp/doc/concepts/actions-and-controllers#?actions-2)と同じ仕様に従います。
+
+##### `fn`関数 
+
+ヘルパーのコアは、`fn`関数です。その関数はヘルパーが実行する実際のコードを含む関数です。関数は2つの引数を取ります。`inputs`は入力値の辞書、つまり入力引数です。`exists`はコールバック関数の辞書です。`fn`の仕事は入力引数を利用して処理を行い、提供されたexitsの一つをトリガーし、ヘルパーのコードに制御を戻すことです。`return`を使って呼び出しもとに出力を返す典型的なJavascript関数に対して、ヘルパーは`exits.success()`に結果の値を渡すことに注してください。
+
+##### 入力
+
+ヘルパーで宣言された入力は、典型的なJavascript関数のパラメータに似ています。それらは、コードが処理すべき値を定義します。ただし、標準のJavaScript関数のパラメータとは異なり、入力は自動的に検証されます。ヘルパーが、対応する入力に対して誤った型の入力引数を使用して呼び出されたり、必要な入力の値が欠けているとエラーが発生します。したがって、ヘルパーは自己検証を行うといえます。
+
+ヘルパーへの入力は、`inputs`辞書に定義されます。それぞれの入力定義は、少なくとも`type`プロパティから構成されています。ヘルパーのインプットは次のような型をサポートしています。
+
+* `string` - 文字列
+* `number` - 数値（整数も浮動小数点も両方大丈夫）
+* `boolean` - `true`もしくは`false`
+* `ref` - Javascriptの変数への参照。辞書や配列、関数、ストリームなど、任意の値を指定できます。
+
+これらは、あなたが[モデル属性の定義](https://sailsguides.jp/doc/concepts/models-and-orm/attributes)ですでに慣れているかもしれないデータの型（そして関連する文法）と同じです。もし慣れているのであれば、期待通り、`defaultsTo`プロパティを設定することで、入力のデフォルト値を設定することができます。また、`required: true`を設定することで必須にできたり、`allowNull`を使ったり、より高レベルのバリデーションである`isEmail`のようなルールも使うことができます。
+
+ヘルパーを呼び出すときに渡す引数は、そのヘルパーが宣言した`inputs`のキーの順序に対応します。また、入力引数を名前で渡す場合は、次のように`.with()`を使用します。
 
 ```javascript
 var greeting = await sails.helpers.formatWelcomeMessage.with({ name: 'Bubba' });
@@ -82,25 +80,22 @@ var greeting = await sails.helpers.formatWelcomeMessage.with({ name: 'Bubba' });
 
 ##### Exits
 
-Exits describe all the different possible outcomes a helper can have, good or bad.  Every helper automatically supports the `error` and `success` exits.
-When calling a helper, if its `fn` triggers `success`, then it will return normally.  But if its `fn` triggers some exit _other than_ `success`, then it will throw an Error (unless [`.tolerate()`](https://sailsjs.com/documentation/reference/waterline-orm/queries/tolerate) was used.)
+Exitsは、ヘルパーが持つことができる、様々な可能性のある結果すべてを説明します。すべてのヘルパーが自動的に`error`と`success`というexitsをサポートします。ヘルパーを呼び出すとき、正常に終了すれば`fn`は`success`をトリガーします。しかし、[`.tolerate()`](https://sailsguides.jp/doc/reference/waterline-orm/queries/tolerate)が使われずにエラーが投げられた場合、`fn`は`success`以外のexitをトリガーします。
 
-When necessary, you can also expose other custom exits (known as "exceptions"), allowing the userland code that calls your helper to handle specific, exceptional cases.
-This helps guarantee your code&rsquo;s transparency and maintainability by making it painless and easy to declare and negotiate errors.
+必要に応じて、他のカスタムexits（「例外」と呼ばれます）を公開し、ヘルパーを呼び出すユーザーのコードが特定の例外的なケースを処理できるようにすることもできます。これにより、エラーを宣言してネゴシエートするのが簡単になり、コードの透過性とメンテナス性が保証されます。
 
-> Exceptions (custom exits) for a helper are defined in the `exits` dictionary.  It is a good practice to provide all custom exceptions with an explicit `description` property.
+> ヘルパーの例外（カスタムexits）は、`exits`辞書に定義されます。すべてのカスタム例外に`description`プロパティを指定するのが良いプラクティスです。
 
+カスタムExit`emailAddressInUse`を公開するヘルパー、「Invite new user」を想像してみてください。提供されたemailがすでに存在する場合、ヘルパーの`fn`はこのカスタムexitをトリガーし、ユーザーのコードがこの特定のシナリオを処理できるようにします。結果の値を混乱させたり、余計な`try/catch`ブロックに頼ったりすることはありません。
 
-Imagine a helper called &ldquo;Invite new user&rdquo; which exposes a custom `emailAddressInUse` exit.  The helper's `fn` might trigger this custom exit if the provided email already exists, allowing your userland code to handle this specific scenario-- without muddying up your result values or resorting to extra `try/catch` blocks.
-
-For example, if this helper was called from within an action that has its own "badRequest" exit:
+例として、このヘルパーが独自の「badRequest」exitを持つアクション内から呼び出された場合を示します。
 
 ```javascript
 var newUserId = sails.helpers.inviteNewUser('bubba@hawtmail.com')
 .intercept('emailAddressInUse', 'badRequest');
 ```
 
-> The fancy-looking shorthand above is just a quicker way to write:
+> 上記のより簡潔なものを書くとこうなります。
 >
 > ```javascript
 > .intercept('emailAddressInUse', (err)=>{
@@ -108,25 +103,23 @@ var newUserId = sails.helpers.inviteNewUser('bubba@hawtmail.com')
 > });
 > ```
 >
-> As for [.intercept()](https://sailsjs.com/documentation/reference/waterline-orm/queries/intercept)?  It's just another shortcut so you're not forced to write custom try/catch blocks and negotiate these errors by hand all the time.
+> [.intercept()](https://sailsguides.jp/doc/reference/waterline-orm/queries/intercept)とは？それは単なるショートカットであり、独自のtry/catchブロックを作成し、エラーを手作業で管理する必要は全くありません。
 
-Internally, your helper's `fn` is responsible for triggering one of its exits-- either by throwing a [special exit signal]() or by invoking an exit callback (e.g. `exits.success('foo')`).  If your helper sends back a result through the success exit (e.g. `'foo'`), then that will be the return value of the helper.
+内部的には、[special exit signal]()を投げたり、exitコールバック（例:`exits.success('foo')`）を呼び出すなどして、ヘルパーの`fn`がexitsの一つをトリガーする責任を負います。もしヘルパーがサクセスexitを通して結果（例：`'foo'`）を返すのであれば、それはヘルパーの戻り値となります。
 
-> Note: For non-success exits, Sails will use the exit's predefined description to create an appropriate JavaScript Error instance automatically, if needed.
+> 非成功exitsについては、Sailsは必要に応じてexitの定義済みのdescriptionを使用して、適切なJavascriptのエラーインスタンスを自動的に作成します。
 
-##### Synchronous helpers
+##### 同期型ヘルパー
 
-By default, all helpers are considered _asynchronous_.  While this is a safe default assumption, it's not always true-- and when you know for certain that's the case, you can optimize performance by telling Sails that's the case using the `sync: true` property.
+デフォルトでは、すべてのヘルパーを非同期とみなされます。これはデフォルトの安全な前提ですが、いつもそうであるとは限りません。特定のケースにおいては、パフォーマンスを最適化するために、`sync: true`プロパティを使うことでSailsに伝えることができます。
 
-If you know all of the code inside your helper's `fn` is definitely synchronous, you can set the top-level `sync` property to `true`, which allows userland code to [call the helper without `await`](https://sailsjs.com/documentation/concepts/helpers#?synchronous-usage).
-(You must also remember to change `fn: async function` to `fn: function`.)
+ヘルパーの`fn`内のコードがすべて同期していることがわかっている場合は、トップレベルの`sync`プロパティを`true`に設定することができます。これにより、ユーザーのコードは[`await`無しでヘルパーを呼び出す](https//sailsguides.jp/doc/concepts/helpers#?synchronous-usage)ことができるようになります。（`fn: async function`を`fn: function`に変更することを覚えておいてください。）
 
-> Note: Calling an asynchronous helper without `await` _will not work_.
+> 注意点として、非同期ヘルパーを`await`無しで呼び出すと、動かないです。
 
+##### `req`にヘルパーでアクセスする
 
-##### Accessing `req` in a helper
-
-If you&rsquo;re designing a helper that parses request headers, specifically for use from within actions, then you'll want to take advantage of pre-existing methods and/or properties of the [request object](https://sailsjs.com/documentation/reference/request-req).  The simplest way to allow the code in your action to pass along `req` to your helper is to define a `type: 'ref'` input:
+リクエストヘッダーをパースするようなヘルパーを設計する場合、特にアクション内での使用のために、既存のメソッドや[リクエストオブジェクト](https://sailsguides.jp/doc/reference/request-req)のプロパティを利用したいと思うでしょう。アクション内のコードで、`req`をヘルパーに渡すための最も簡単な方法は`type: 'ref'`入力を定義することです。
 
 ```javascript
 inputs: {
@@ -140,69 +133,67 @@ inputs: {
 }
 ```
 
-
-Then, to use your helper in your actions, you might write code like this:
+次に、アクション内でヘルパーを使うために、次のようなコードを書きます。
 
 ```javascript
 var headers = await sails.helpers.parseMyHeaders(req);
 ```
 
-### Generating a helper
+### ヘルパーの生成
 
-Sails provides a built-in generator that you can use to create a new helper automatically:
+Sailsには、自動的に新しいヘルパーを作成するための組み込みジェネレーターが用意されています。
 
 ```bash
 sails generate helper foo-bar
 ```
 
-This will create a file `api/helpers/foo-bar.js` that can be accessed in your code as `sails.helpers.fooBar`.  The file that is initially created will be a generic helper with no inputs and just the default exits (`success` and `error`), which immediately triggers its `success` exit when executed.
+これにより、`sails.helpers.fooBar`としてコード内からアクセスできるファイルが`api/helpers/foo-bar.js`に作成されます。作成されるファイルは、入力がなく、デフォルトexits（`success`と`error`）があり、実行時に即座に`success`exitをトリガーするだけの一般的なヘルパーになります。
 
-### Calling a helper
+### ヘルパーを呼び出す
 
-Whenever a Sails app loads, it finds all of the files in `api/helpers/`, compiles them into functions, and stores them in the `sails.helpers` dictionary using the camel-cased version of the filename.  Any helper can then be invoked from your code, simply by calling it with `await`, and providing some argin values:
+Sailsアプリケーションが読み込まれるたびに、`api/helpers`にあるすべてのファイルが検索され、関数としてコンパイルされ、`sails.helpers`辞書に、ファイル名のキャメルケースバージョンを利用して格納されます。`await`を使って入力引数を渡して呼び出すだけで、コードからどのヘルパーも起動できます。
 
 ```javascript
 var result = await sails.helpers.formatWelcomeMessage('Dolly');
 sails.log('Ok it worked!  The result is:', result);
 ```
 
-> This is roughly the same usage you might already be familiar with from [model methods](sailsjs.com/documentation/concepts/models-and-orm/models) like `.create()`.
+> これは、すでにあなたがご存知かもしれない`.create()`のような[モデルメソッド](https://sailsguides.jp/doc/concepts/models-and-orm/models)とほぼ同じ使い方になります。
 
-##### Synchronous usage
+##### 同期型の使い方
 
-If a helper declares the `sync` property, you can also call it like this (without `await`):
+ヘルパーが`sync`プロパティを宣言した場合は、次のように`await`無しで呼び出すことができます。
 
 ```javascript
 var greeting = sails.helpers.formatWelcomeMessage('Timothy');
 ```
 
-But before you remove `await`, just make sure the helper is actually synchronous.  (Otherwise, without `await`, it'll never actually execute!)
+しかし、`await`を削除する前に、ヘルパーが実際に同期していることを確認してください。（そうでないと、`await`無しの場合には決してヘルパーが実行されません！）
 
+### 例外処理
 
-### Handling exceptions
+よりきめ細かなエラー処理（あまり大したエラーではない場合でも）、エラーコードをいくつか設定し、それを盗み見ることができます。この方法はうまくいきますが、時間がかかり追跡が難しい場合があります。
 
-For more granular error handling (and for those exceptional cases that aren't _quite_ errors, even) you may be used to setting some kind of error code, then sniffing it out.  This approach works fine, but it can be time consuming and hard to keep track of.
-
-Fortunately, Sails helpers take things a couple of steps further.  See the pages on [.tolerate()](), [.intercept()](), and [special exit signals]() for more information.
-
+幸運なことに、Sailsのヘルパーはそれらを2つのステップとして捉えています。より詳しい情報は、[.tolerate()]()や[.intercept()]()、[special exit signals]()を参照してください。
 
 <!--
 For future reference, see https://github.com/balderdashy/sails-docs/commit/61f0039d26021c8abf4873aa675c409372dc2f8f
 for the original content of these docs.
 -->
 
-##### As much or as little as you need
+##### 多かれ少なかれ、必要になること
 
-While this example usage is kind of trumped-up, it's easy to see a scenario where it's very helpful to rely on custom exits like `notUnique`.  Still, you don't want to have to handle _every_ custom exit _every_ time.  Ideally, you'd only have to mess with handling a custom exit in your userland code if you actually needed it: whether that's to implement a feature of some kind, or even just to improve the user experience or provide a better internal error message.
+この例の使用法は一例ですが、`notUnique`のようなカスタムexitsに頼るの非常に役に立ち、かつ簡単なシナリオです。それでも、すべてのカスタムexitを毎回扱いたくはないはずです。理想的には、実際に必要な場合は、ユーザーコード内のカスタムexitを処理するだけで済みます。何らかの機能を実装するかどうか、ユーザーエクスペリエンスを向上させるか、より良い内部エラーメッセージを提供するかどうかに関係なく。
 
-Luckily, Sails helpers support "automatic exit forwarding".  That means userland code can choose to integrate with _as few or as many custom exits as you like_, on a case by case basis.  In other words, when you're calling a helper, it's OK to completely ignore its custom `notUnique` exit if you don't need it.  That way, your code remains as concise and intuitive as possible.  And if things change, you can always come back and hook some code up to handle the custom exit later.
+幸いなことに、Sailsのヘルパーは「自動exit転送」をサポートしています。つまり、ユーザーのコードは場合に応じて好きなだけカスタムexitをいくつでも、あるいは多くのものに統合を選択できることを意味します。言い換えると、ヘルパーを呼び出すときに`notUnique`が必要ない場合は、カスタムexitを完全に無視しても問題ありません。そうすれば、コードは可能な限り簡潔かつ直感的になります。事情が変わった場合には、いつでもカスタムExitを処理するためにコードを戻すことができます。
 
+### 次のステップ
 ### Next steps
 
-+ [Explore a practical example](https://sailsjs.com/documentation/concepts/helpers/example-helper) of a helper in a Node.js/Sails app.
-+ `sails-hook-organics` (which is bundled in the "Web App" template) comes with several free, open-source, and MIT-licensed helpers for many common use cases.  [Have a look!](https://npmjs.com/package/sails-hook-organics)
-+ [Click here](https://sailsjs.com/support) if you're unsure about helpers, or if you want to see more tutorials and examples.
++ Node.js/Sailsアプリケーションのヘルパーの[実践的な例をみる](https://sailsguides.jp/doc/concepts/helpers/example-helper)
++ `sails-hook-organics`（Web Appテンプレートにバンドルされています）には、多くの一般的な使用例に対していくつかの無料のオープンソースおよびMITライセンスヘルパーが付属しています。[見てみましょう！](https://npmjs.com/package/sails-hook-organics)
++ もしヘルパーがよくわからなかったり、チュートリアルやサンプルをもっと見たい場合は、[ここをクリックしてください。](https://sailsjs.com/support)
 
-<docmeta name="displayName" value="Helpers">
-<docmeta name="nextUpLink" value="/documentation/concepts/deployment">
-<docmeta name="nextUpName" value="Deployment">
+<docmeta name="displayName" value="ヘルパー">
+<docmeta name="nextUpLink" value="/doc/concepts/deployment">
+<docmeta name="nextUpName" value="配置">
