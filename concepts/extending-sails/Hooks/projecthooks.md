@@ -5,7 +5,7 @@
 新しくプロジェクトフックを作成する方法です。
 
 1. 新しいフックの名前を選択します。[コアのフック名](https://github.com/balderdashy/sails/blob/master/lib/app/configuration/default-hooks.js)と衝突してはいけません。
-2. その名前の`api/hooks`フォルダをアプリケーションのフォルダに作成します。
+2. その名前のフォルダをアプリケーションの`api/hooks`フォルダに作成します。
 3. そのフォルダに`index.js`ファイルを追加します。
 4. [フックの仕様](https://sailsguides.jp/doc/concepts/extending-sails/hooks/hook-specification)に従ってフックのコードを`index.js`に記述してください。
 
